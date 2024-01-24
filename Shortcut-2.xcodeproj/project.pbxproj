@@ -157,6 +157,7 @@
 			children = (
 				377D2D4B2A77E31C00A2D613 /* Shortcut_2_App.swift */,
 				377D2D4D2A77E31C00A2D613 /* ContentView.swift */,
+				BBEADA2F2B61CB3300E974DF /* Quiz */,
 				850A1B482A98BABF0096FDC7 /* Progress View(s) */,
 				85A67FC72A98D04C006A1DF7 /* SwiperScreen View(s) */,
 				855416AA2A99124A006DBC47 /* Dictionary View(s) */,
@@ -371,6 +372,13 @@
 				BBD930002B477643008AB3BC /* AlmostLearnedBadge.swift */,
 			);
 			path = AlmostLearned;
+			sourceTree = "<group>";
+		};
+		BBEADA2F2B61CB3300E974DF /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Quiz;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
