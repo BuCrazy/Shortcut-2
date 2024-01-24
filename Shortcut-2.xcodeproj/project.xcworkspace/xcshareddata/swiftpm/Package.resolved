@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "shiny",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maustinstar/shiny",
+      "state" : {
+        "branch" : "master",
+        "revision" : "862360b8ab6b9ea9eb1156569a30f154b22625a5"
+      }
+    },
+    {
+      "identity" : "wrappinghstack",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ksemianov/WrappingHStack",
+      "state" : {
+        "revision" : "2638bc5258607e8a32f2e5675d075896c2401678",
+        "version" : "0.1.3"
+      }
+    }
+  ],
+  "version" : 2
+}
