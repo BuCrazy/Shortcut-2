@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct ActivityLogDataPoint: Identifiable, Equatable {
     
@@ -93,26 +94,25 @@ class ActivityCalendar: ObservableObject {
         numberOfActionsPerDay.values.max() ?? 0
     }
     
-    func saveDataToJSON() {
-        do {
-            let data = try JSONSerialization.data(withJSONObject: numberOfActionsPerDay, options: .prettyPrinted)
-            let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("activityLog.json")
-            try data.write(to: url)
-        } catch {
-            print("Error saving data:", error)
-        }
+    private var documentDirectory: URL {
+      try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
     
-    func loadDataFromJSON() {
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("activityLog.json")
-        do {
-            let data = try Data(contentsOf: url)
-            if let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Int] {
-                numberOfActionsPerDay = dictionary
-            }
-        } catch {
-            print("Error loading data:", error)
-        }
+    private var activityLogFile: URL {
+        documentDirectory
+            .appendingPathComponent("activityLogFile")
+            .appendingPathExtension(for: .json)
+    }
+
+    func saveDataToJSON() throws {
+        let data = try JSONEncoder().encode(numberOfActionsPerDay)
+        try data.write(to: activityLogFile)
+    }
+
+    func loadDataFromJSON() throws {
+      guard FileManager.default.isReadableFile(atPath: activityLogFile.path) else { return }
+      let data = try Data(contentsOf: activityLogFile)
+        numberOfActionsPerDay = try JSONDecoder().decode([String: Int].self, from: data)
     }
     
 }
