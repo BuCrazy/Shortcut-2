@@ -111,7 +111,7 @@ struct ContentView: View {
         }
         .onAppear{
             storedNewWordItemsDataLayer.initialWordDataLoader()
-         
+            try! activityLogDataLayer.loadDataFromJSON()
         }
         
     }

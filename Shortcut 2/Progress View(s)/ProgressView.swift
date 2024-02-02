@@ -90,7 +90,7 @@ struct ProgressView: View {
                                 action: {
                                     activityLogDataLayer.activityLog.removeAll()
                                     activityLogDataLayer.numberOfActionsPerDay.removeAll()
-                                    activityLogDataLayer.saveDataToJSON()
+                                    try! activityLogDataLayer.saveDataToJSON()
                                 }, label: {
                                     Text("Purge All History")
                                 }
@@ -101,10 +101,10 @@ struct ProgressView: View {
                        
                     }
                     .onAppear{
-                        activityLogDataLayer.loadDataFromJSON()
+                        try! activityLogDataLayer.loadDataFromJSON()
                     }
                     .onChange(of: activityLogDataLayer.activityLog) {/* _ in*/
-                        activityLogDataLayer.saveDataToJSON()
+                        try! activityLogDataLayer.saveDataToJSON()
                     }
                     .padding(.top, 20)
                 }

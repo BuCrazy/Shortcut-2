@@ -190,7 +190,7 @@ struct SwiperSection: View {
                 topWords.insert(newItem, at: 0)
                 wordsDiscoveredDuringTheCurrentDiscoverySession += 1
                 activityLogDataLayer.logEachAction()
-                activityLogDataLayer.saveDataToJSON()
+                try! activityLogDataLayer.saveDataToJSON()
                 
                 switch currentLevelSelected {
                     case "elementary":
@@ -283,7 +283,7 @@ struct SwiperSection: View {
                 bottomWords.insert(newItem, at: 0)
                 wordsDiscoveredDuringTheCurrentDiscoverySession += 1
                 activityLogDataLayer.logEachAction()
-                activityLogDataLayer.saveDataToJSON()
+                try! activityLogDataLayer.saveDataToJSON()
                 
                 let wordToAdd = wordItemNew(
                         id: newItem.id,
