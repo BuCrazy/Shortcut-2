@@ -47,6 +47,72 @@ struct WordItemStruct: Hashable, Identifiable, Codable, Equatable {
     
 }
 
+extension WordItemStruct {
+    func translationForLanguage(_ language: String) -> String {
+        switch language.lowercased() {
+        case "ukrainian":
+            return self.ukranian
+        case "russian":
+            return self.russian
+        case "bulgarian":
+            return self.bulgarian
+        case "chinese":
+            return self.chinese
+        case "czech":
+            return self.czech
+        case "danish":
+            return self.danish
+        case "dutch":
+            return self.dutch
+        case "estonian":
+            return self.estonian
+        case "finnish":
+            return self.finnish
+        case "french":
+            return self.french
+        case "german":
+            return self.german
+        case "greek":
+            return self.greek
+        case "hungarian":
+            return self.hungarian
+        case "indonesian":
+            return self.indonesian
+        case "italian":
+            return self.italian
+        case "japanese":
+            return self.japanese
+        case "korean":
+            return self.korean
+        case "latvian":
+            return self.latvian
+        case "lithuanian":
+            return self.lithuanian
+        case "norwegian":
+            return self.norwegian
+        case "polish":
+            return self.polish
+        case "portuguese":
+            return self.portuguese
+        case "romanian":
+            return self.romanian
+        case "slovak":
+            return self.slovak
+        case "slovenian":
+            return self.slovenian
+        case "spanish":
+            return self.spanish
+        case "swedish":
+            return self.swedish
+        case "turkish":
+            return self.turkish
+        default:
+            return self.ukranian
+        }
+    }
+}
+
+
 // Эта структура – для сохранения по ней любых слов в новые массивы слов Знаю и Не знаю для каждого уровня после манипуляций со словами из массивов для Discovery:
 
 struct wordItemNew: Hashable, Identifiable, Codable, Equatable {
@@ -76,6 +142,49 @@ extension String {
 class storedNewWordItems: ObservableObject {
     
     static let shared = storedNewWordItems()
+    
+    func arrayForLevel(_ level: String) -> [wordItemNew] {
+            switch level {
+            case "elementary":
+                return elementaryBeingLearned
+            case "beginner":
+                return beginnerBeingLearned
+            case "intermediate":
+                return intermediateBeingLearned
+//            case "advanced":
+//                return advancedBeingLearned
+//            case "nativelike":
+//                return nativelikeBeingLearned
+//            case "borninengland":
+//                return borninenglandBeingLearned
+            default:
+                return []
+            }
+        }
+    
+    func storageForLevel(_ level: String) -> [WordItemStruct] {
+            switch level {
+            case "elementary":
+                return elementaryWordsStorageSource
+            case "beginner":
+                return beginnerWordsStorageSource
+            case "intermediate":
+                return intermediateWordsStorageSource
+//            case "advanced":
+//                return advancedWordsStorage
+//            case "nativelike":
+//                return nativelikeWordsStorage
+//            case "borninengland":
+//                return borninenglandWordsStorage
+            default:
+                return []
+            }
+        
+        }
+    
+    
+    
+    
     
     // Объявляем вообще сами массивы слов для начала с соответстующими названиями, пока они пустые и в них ничего не записывается, а также объявляем, что данные в них будут сохраняться по структуре WordItemStruct:
     

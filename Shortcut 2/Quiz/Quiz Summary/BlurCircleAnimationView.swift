@@ -1,13 +1,13 @@
 //
-//  CircleAnimation.swift
-//  Shortcut 2
+//  BlurCircleAnimationView.swift
+//  Shortcut-2
 //
-//  Created by Pavlo Bilashchuk on 8/11/23.
+//  Created by Pavlo Bilashchuk on 2/23/24.
 //
 
 import SwiftUI
 
-public struct P171_CircleAnimation: View {
+public struct BCircleAnimation: View {
     var feedbackColor: Color
     public init(feedbackColor: Color) {
         self.feedbackColor = feedbackColor
@@ -24,9 +24,8 @@ public struct P171_CircleAnimation: View {
     }
 }
 
-struct CircleAnimationView: View {
+struct BlurCircleAnimationView: View {
     var feedbackColor: Color
-    
     @State private var value1: CGFloat = -1
     @State private var value2: CGFloat = -1
     @State private var value3: CGFloat = 1
@@ -37,17 +36,25 @@ struct CircleAnimationView: View {
             ZStack {
                 Color.clear
                 let scale2 = 1 + value2 * 0.3
-                CircleView(size: min, scale: scale2, radius: min * 0.2, color: feedbackColor == .clear ? Color(.red) : feedbackColor, value: $value2)
+                CircleView(size: min, scale: scale2, radius: min * 0.2, color: feedbackColor == .clear ? Color.red : feedbackColor, value: $value2)
                     .offset(x: sin(min * scale2), y: cos(min * scale2))
+                    .transition(.opacity)
+
                 
                 let scale1 = 1 + value1 * 0.3
                 CircleView(size: min, scale: scale1, radius: min * 0.2, color: feedbackColor == .clear ? Color.blue : feedbackColor, value: $value1)
                     .offset(x: cos(min * scale1), y: sin(min * scale1))
+                    .transition(.opacity)
+ 
                 
                 let scale3 = 1 + value3 * 0.3
                 CircleView(size: min, scale: scale3, radius: min * 0.2, color: feedbackColor == .clear ? Color.yellow : feedbackColor, value: $value3)
                     .offset(x: sin(min * scale3), y: cos(min * scale3))
+                    .transition(.opacity)
+
+                
             }
+            
             .onAppear {
                 DispatchQueue.main.async {
                     withAnimation(Animation.easeInOut(duration: 12.0).repeatForever(autoreverses: true)) {
@@ -62,11 +69,11 @@ struct CircleAnimationView: View {
                 }
             }
         }
+        .frame(height: 200)
     }
 }
 
-
-struct CircleView: View {
+struct BlurCircleView: View {
     
     let size: CGFloat
     let scale: CGFloat
@@ -83,7 +90,7 @@ struct CircleView: View {
     }
 }
 
-struct CircleAnimation: AnimatableModifier {
+struct BlurCircleAnimation: AnimatableModifier {
     
     let radius: CGFloat
     var value: CGFloat = 0
@@ -104,7 +111,8 @@ struct CircleAnimation: AnimatableModifier {
     }
 }
 
-struct P171_CircleAnimation_Previews: PreviewProvider {
+
+struct BCircleAnimationn_Previews: PreviewProvider {
     static var previews: some View {
         P171_CircleAnimation(feedbackColor: .green)
     }
