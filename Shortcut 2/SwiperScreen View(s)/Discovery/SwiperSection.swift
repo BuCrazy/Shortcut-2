@@ -200,8 +200,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -213,8 +213,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -226,8 +226,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -239,8 +239,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -252,8 +252,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -265,8 +265,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -290,7 +290,7 @@ struct SwiperSection: View {
                         position_now: newItem.position_now,
                         word: newItem.word,
                         dateAdded: storedStatesDataLayer.currentDate,
-                        timesReviewed: 0,
+                        timesReviewed: 1,
                         consecutiveCorrectRecalls: 0,
                         progress: 0.0
                     )

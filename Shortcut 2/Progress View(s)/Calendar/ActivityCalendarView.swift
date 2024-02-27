@@ -105,7 +105,6 @@ struct ActivityCalendarView_Previews: PreviewProvider {
     static var previews: some View {
         let activityCalendar = ActivityCalendar()
         return ActivityCalendarView(activityLogDataLayer: activityCalendar)
-
     }
 }
 

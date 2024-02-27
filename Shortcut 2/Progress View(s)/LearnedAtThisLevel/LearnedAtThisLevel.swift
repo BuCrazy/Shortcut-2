@@ -80,4 +80,3 @@ struct LearnedAtThisLevel_Previews: PreviewProvider {
         LearnedAtThisLevel()
     }
 }
-

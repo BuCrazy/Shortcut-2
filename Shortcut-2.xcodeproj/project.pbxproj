@@ -35,9 +35,12 @@
 		855416A62A99004C006DBC47 /* beginner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855416A52A99004C006DBC47 /* beginner.swift */; };
 		855416A92A990128006DBC47 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855416A82A990128006DBC47 /* SettingsView.swift */; };
 		855416AC2A991268006DBC47 /* DictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855416AB2A991268006DBC47 /* DictionaryView.swift */; };
+		85A608242B7FAC210076F9AA /* LevelSwitcherSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A608232B7FAC210076F9AA /* LevelSwitcherSheet.swift */; };
 		85A67FCA2A98D145006A1DF7 /* SwiperScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A67FC92A98D145006A1DF7 /* SwiperScreen.swift */; };
 		85A67FCC2A98D271006A1DF7 /* RevisionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A67FCB2A98D271006A1DF7 /* RevisionScreen.swift */; };
+		85DFB8122B743230003AB8A4 /* iPages in Frameworks */ = {isa = PBXBuildFile; productRef = 85DFB8112B743230003AB8A4 /* iPages */; };
 		85E811CE2ABF035100DF5800 /* intermediate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E811CD2ABF035100DF5800 /* intermediate.swift */; };
+		85F4AA6F2B714C2100EFFA7B /* KnowledgeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F4AA6E2B714C2100EFFA7B /* KnowledgeMapView.swift */; };
 		BB0149212B1FE89C009C1CF9 /* AlmostLearnedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149202B1FE89C009C1CF9 /* AlmostLearnedChart.swift */; };
 		BB0149232B201D8B009C1CF9 /* DictionaryAlmostLearned.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149222B201D8B009C1CF9 /* DictionaryAlmostLearned.swift */; };
 		BB0149252B201FEA009C1CF9 /* DictionaryTotalWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149242B201FEA009C1CF9 /* DictionaryTotalWords.swift */; };
@@ -93,9 +96,11 @@
 		855416A52A99004C006DBC47 /* beginner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = beginner.swift; sourceTree = "<group>"; };
 		855416A82A990128006DBC47 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		855416AB2A991268006DBC47 /* DictionaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryView.swift; sourceTree = "<group>"; };
+		85A608232B7FAC210076F9AA /* LevelSwitcherSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSwitcherSheet.swift; sourceTree = "<group>"; };
 		85A67FC92A98D145006A1DF7 /* SwiperScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiperScreen.swift; sourceTree = "<group>"; };
 		85A67FCB2A98D271006A1DF7 /* RevisionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionScreen.swift; sourceTree = "<group>"; };
 		85E811CD2ABF035100DF5800 /* intermediate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = intermediate.swift; sourceTree = "<group>"; };
+		85F4AA6E2B714C2100EFFA7B /* KnowledgeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeMapView.swift; sourceTree = "<group>"; };
 		BB0149202B1FE89C009C1CF9 /* AlmostLearnedChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlmostLearnedChart.swift; sourceTree = "<group>"; };
 		BB0149222B201D8B009C1CF9 /* DictionaryAlmostLearned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryAlmostLearned.swift; sourceTree = "<group>"; };
 		BB0149242B201FEA009C1CF9 /* DictionaryTotalWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTotalWords.swift; sourceTree = "<group>"; };
@@ -130,6 +135,7 @@
 			files = (
 				850A1B6C2A98BC9F0096FDC7 /* Shiny in Frameworks */,
 				376D1E942A89636B006385C2 /* WrappingHStack in Frameworks */,
+				85DFB8122B743230003AB8A4 /* iPages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +214,8 @@
 				BB0FD8F92B44CCE100D62B25 /* LearnedAtThisLevel */,
 				BB16A2452AE80BF600B43FC0 /* DailyConsistency */,
 				BB7A03802AE0AC00009EFDD5 /* Calendar */,
+				85F4AA6D2B714BE400EFFA7B /* KnowledgeMap */,
+				85A608222B7FABF80076F9AA /* LevelSwitcherSheet */,
 			);
 			path = "Progress View(s)";
 			sourceTree = "<group>";
@@ -287,6 +295,14 @@
 			path = "Dictionary View(s)";
 			sourceTree = "<group>";
 		};
+		85A608222B7FABF80076F9AA /* LevelSwitcherSheet */ = {
+			isa = PBXGroup;
+			children = (
+				85A608232B7FAC210076F9AA /* LevelSwitcherSheet.swift */,
+			);
+			path = LevelSwitcherSheet;
+			sourceTree = "<group>";
+		};
 		85A67FC72A98D04C006A1DF7 /* SwiperScreen View(s) */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +319,14 @@
 				85A67FCB2A98D271006A1DF7 /* RevisionScreen.swift */,
 			);
 			path = Revision;
+			sourceTree = "<group>";
+		};
+		85F4AA6D2B714BE400EFFA7B /* KnowledgeMap */ = {
+			isa = PBXGroup;
+			children = (
+				85F4AA6E2B714C2100EFFA7B /* KnowledgeMapView.swift */,
+			);
+			path = KnowledgeMap;
 			sourceTree = "<group>";
 		};
 		BB0FD8F92B44CCE100D62B25 /* LearnedAtThisLevel */ = {
@@ -392,6 +416,7 @@
 			packageProductDependencies = (
 				376D1E932A89636B006385C2 /* WrappingHStack */,
 				850A1B6B2A98BC9F0096FDC7 /* Shiny */,
+				85DFB8112B743230003AB8A4 /* iPages */,
 			);
 			productName = "Shortcut 2";
 			productReference = 377D2D482A77E31C00A2D613 /* Shortcut-2.app */;
@@ -424,6 +449,7 @@
 			packageReferences = (
 				376D1E922A89636B006385C2 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 				850A1B6A2A98BC9F0096FDC7 /* XCRemoteSwiftPackageReference "shiny" */,
+				85DFB8102B743230003AB8A4 /* XCRemoteSwiftPackageReference "iPages" */,
 			);
 			productRefGroup = 377D2D492A77E31C00A2D613 /* Products */;
 			projectDirPath = "";
@@ -470,6 +496,7 @@
 				BB0FD8FD2B44CED100D62B25 /* LearnedAtThisLvlModal.swift in Sources */,
 				377D2D5B2A77E38B00A2D613 /* elementary.swift in Sources */,
 				BB4255152B46F4AB008370AB /* DailyConsistencyBadge.swift in Sources */,
+				85A608242B7FAC210076F9AA /* LevelSwitcherSheet.swift in Sources */,
 				BB56C72C2B1596ED00B9C8F4 /* LexCardView.swift in Sources */,
 				BB16A2472AEA92F200B43FC0 /* ActivityCalendarViewModel.swift in Sources */,
 				BB7A03732ADE31A2009EFDD5 /* DiscoveredThisWeek.swift in Sources */,
@@ -496,6 +523,7 @@
 				8527F13B2A98C27800620A45 /* DontKnowSection.swift in Sources */,
 				BB0149292B210590009C1CF9 /* DictionaryHeaderView.swift in Sources */,
 				8527F13D2A98C28400620A45 /* DontKnowSectionLabel.swift in Sources */,
+				85F4AA6F2B714C2100EFFA7B /* KnowledgeMapView.swift in Sources */,
 				BB7A03752ADE33E8009EFDD5 /* AlmostLearned.swift in Sources */,
 				BB4255172B46F674008370AB /* DailyConsistencyModal.swift in Sources */,
 				BB7A037D2AE08724009EFDD5 /* CalendarLegendView.swift in Sources */,
@@ -731,6 +759,14 @@
 				kind = branch;
 			};
 		};
+		85DFB8102B743230003AB8A4 /* XCRemoteSwiftPackageReference "iPages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/benjaminsage/iPages.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.13;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -743,6 +779,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 850A1B6A2A98BC9F0096FDC7 /* XCRemoteSwiftPackageReference "shiny" */;
 			productName = Shiny;
+		};
+		85DFB8112B743230003AB8A4 /* iPages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85DFB8102B743230003AB8A4 /* XCRemoteSwiftPackageReference "iPages" */;
+			productName = iPages;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
