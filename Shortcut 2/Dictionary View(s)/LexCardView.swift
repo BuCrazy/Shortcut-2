@@ -32,7 +32,6 @@ struct LexCardView: View {
                             .foregroundStyle(Color("secondaryFontColor"))
                     }
                     Spacer()
-                    
                    MemoryChartView(progress: $progress, consecutiveCorrectRecalls: $consecutiveCorrectRecalls)
                 }
                 .padding(.horizontal, 16)

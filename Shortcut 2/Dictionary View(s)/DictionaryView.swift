@@ -33,14 +33,24 @@ struct DictionaryView: View {
 //                            Text("Unknown words:")
 //                            Spacer()
 //                                .frame(height:10)
-                            ForEach(storedNewWordItemsDataLayer.elementaryBeingLearned) { word in
-                                LexCardView(
-                                    consecutiveCorrectRecalls: $consecutiveCorrectRecalls,
-                                    progress: $progress,
-                                    word: word.word,
-                                    transcription: elementaryWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
-                                )
+                        ForEach(storedNewWordItemsDataLayer.elementaryBeingLearned) { word in
+                            LexCardView(
+                                consecutiveCorrectRecalls: $consecutiveCorrectRecalls,
+                                progress: $progress,
+                                word: word.word,
+                                transcription: elementaryWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
+                            )
+                            // Это потом удалить - сейчас оно для отладки экрана прогресса
+                            .onTapGesture {
+                                print("tapped!")
+                                if let matchingItemIndex = storedNewWordItemsDataLayer.elementaryBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
+                                    var matchingItem = storedNewWordItemsDataLayer.elementaryBeingLearned[matchingItemIndex]
+                                    matchingItem.consecutiveCorrectRecalls += 1
+                                    matchingItem.timesReviewed += 1
+                                    storedNewWordItemsDataLayer.elementaryBeingLearned[matchingItemIndex] = matchingItem
+                                }
                             }
+                        }
                         case "beginner":
                             ForEach(storedNewWordItemsDataLayer.beginnerBeingLearned) { word in
                                 LexCardView(
@@ -49,8 +59,17 @@ struct DictionaryView: View {
                                     word: word.word,
                                     transcription: beginnerWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
                                 )
+                                // Это потом удалить - сейчас оно для отладки экрана прогресса
+                                .onTapGesture {
+                                    print("tapped!")
+                                    if let matchingItemIndex = storedNewWordItemsDataLayer.beginnerBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
+                                        var matchingItem = storedNewWordItemsDataLayer.beginnerBeingLearned[matchingItemIndex]
+                                        matchingItem.consecutiveCorrectRecalls += 1
+                                        matchingItem.timesReviewed += 1
+                                        storedNewWordItemsDataLayer.beginnerBeingLearned[matchingItemIndex] = matchingItem
+                                    }
+                                }
                             }
-                            
                         case "intermediate":
                             ForEach(storedNewWordItemsDataLayer.intermediateBeingLearned) { word in
                                 LexCardView(
@@ -59,6 +78,16 @@ struct DictionaryView: View {
                                     word: word.word,
                                     transcription: intermediateWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
                                 )
+                                // Это потом удалить - сейчас оно для отладки экрана прогресса
+                                .onTapGesture {
+                                    print("tapped!")
+                                    if let matchingItemIndex = storedNewWordItemsDataLayer.intermediateBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
+                                        var matchingItem = storedNewWordItemsDataLayer.intermediateBeingLearned[matchingItemIndex]
+                                        matchingItem.consecutiveCorrectRecalls += 1
+                                        matchingItem.timesReviewed += 1
+                                        storedNewWordItemsDataLayer.intermediateBeingLearned[matchingItemIndex] = matchingItem
+                                    }
+                                }
                             }
                         default:
                             Text("No data to display")

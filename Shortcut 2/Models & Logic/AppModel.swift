@@ -297,7 +297,7 @@ class storedNewWordItems: ObservableObject {
         }
     }
     
- 
+    
 //    func generateLast7DaysData(for level: String) -> [TotalWords] {
 ////        print("generateLast7DaysData called for level: \(level)")
 //        print("Array address in generateLast7DaysData: \(Unmanaged.passUnretained(intermediateBeingLearned as AnyObject).toOpaque())")
