@@ -1,7 +1,9 @@
 import SwiftUI
 import WrappingHStack
+import iPages
 
 struct ProgressView: View {
+    
     // Принимаем класс ActivityCalendar из файла ProgressLogs.swift, чтобы обращаться к массивам и переменным внутри этого класса:
     
     @EnvironmentObject var activityLogDataLayer: ActivityCalendar
@@ -9,7 +11,12 @@ struct ProgressView: View {
     
     @AppStorage("dailyGoal_key") var dailyGoal: Int = 100
     @AppStorage("currentLevel_key") var currentLevel: String = "elementary"
-    @AppStorage("weeklySwipeCount") var weeklySwipeCount: Int = 0
+    @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
+    @AppStorage("weeklySwipeCount") var weeklySwipeCount: Int = 1
+    
+    @State private var isPickerVisible = false
+    @State private var selectedOption = "Option 1"
+    @State var levelSwitchSheetShown: Bool = false
     
     //NOTE: The original code
     //private lazy var viewModel = DailyConsistencyViewModel(activityLogDataLayer: activityLogDataLayer)
@@ -77,47 +84,54 @@ struct ProgressView: View {
                             
                         ActivityCalendarView(activityLogDataLayer: activityLogDataLayer)
                    
-                              
+                        KnowledgeMapView()
+                        
                     }
                     .padding(.horizontal, 16)
                    
                     Spacer()
                         .frame(height: 16)
-
-                VStack(spacing:0) {
-    
-                            Button(
-                                action: {
-                                    activityLogDataLayer.activityLog.removeAll()
-                                    activityLogDataLayer.numberOfActionsPerDay.removeAll()
-                                    activityLogDataLayer.saveDataToJSON()
-                                }, label: {
-                                    Text("Purge All History")
-                                }
-                            )
-                          
-                        }
-                        .padding(.bottom, 20)
-                       
+                    }
+                    // Панель переключения уровней
+                    .sheet(isPresented: $levelSwitchSheetShown) {
+                        LevelSwitcherSheet()
                     }
                     .onAppear{
-                        activityLogDataLayer.loadDataFromJSON()
+                        try! activityLogDataLayer.loadDataFromJSON()
                     }
                     .onChange(of: activityLogDataLayer.activityLog) {/* _ in*/
-                        activityLogDataLayer.saveDataToJSON()
+                        try! activityLogDataLayer.saveDataToJSON()
                     }
                     .padding(.top, 20)
                 }
                 .background(Color("BackgroundColor"))
-               // .edgesIgnoringSafeArea(.all)
                 .navigationTitle(Text ("Progress")).navigationBarBackButtonHidden(false)
-                
+                .toolbar {
+                    Menu(
+                        content: {
+                            Button(
+                                action: {
+                                    levelSwitchSheetShown.toggle()
+                                },
+                                label: {
+                                    Text("Switch Level")
+                                }
+                            )
+                        },
+                        label: {
+                            Button(
+                                action: {},
+                                label: {
+                                        Image("more")
+                                }
+                            )
+                        }
+                    )
+                }
             }
 
     }
 }
-
-
 
 //NOTE: Test Preview Provider
 struct ProgressView_Previews: PreviewProvider {

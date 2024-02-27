@@ -30,7 +30,6 @@ struct MemoryChartView: View {
                 .onChange(of: progress) { /*_ in */
                     trimEnd = progress
                 }
-            
             Text("\(consecutiveCorrectRecalls)/\(targetNumberOfRecalls)")
                 .fontWeight(.bold)
                 .font(.system(size: 12))

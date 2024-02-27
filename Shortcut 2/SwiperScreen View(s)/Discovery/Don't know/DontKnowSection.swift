@@ -109,8 +109,8 @@ struct Don_tKnowSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0
                         ))
                     case "beginner":
@@ -122,8 +122,8 @@ struct Don_tKnowSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0
                         ))
                     case "intermediate":
@@ -135,8 +135,8 @@ struct Don_tKnowSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0
                         ))
                     case "advanced":
@@ -148,8 +148,8 @@ struct Don_tKnowSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0
                         ))
                     case "nativelike":
@@ -161,8 +161,8 @@ struct Don_tKnowSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0
                         ))
                     case "borninengland":
@@ -174,8 +174,8 @@ struct Don_tKnowSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0
                         ))
                     default:

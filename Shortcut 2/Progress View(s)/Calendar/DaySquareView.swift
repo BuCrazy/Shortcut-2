@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DaySquareView: View {
+    
     var fillColor: Color
     
     var body: some View {

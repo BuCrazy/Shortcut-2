@@ -25,7 +25,7 @@ struct ContentView: View {
         ZStack{
             TabView(selection: $selectedTab) {
                 NavigationView {
-                    ProgressView(activeModal: $activeModal ,activityLogDataLayer: activityLogDataLayer)
+                    ProgressView(activeModal: $activeModal, activityLogDataLayer: activityLogDataLayer)
                 }
                 .tabItem{
                     TabIconView(selectedImageName: "progress.fill", unselectedImageName: "progress", isSelected: selectedTab == 0)
@@ -111,7 +111,7 @@ struct ContentView: View {
         }
         .onAppear{
             storedNewWordItemsDataLayer.initialWordDataLoader()
-         
+            try! activityLogDataLayer.loadDataFromJSON()
         }
         
     }

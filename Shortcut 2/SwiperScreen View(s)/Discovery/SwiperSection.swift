@@ -25,7 +25,6 @@ struct SwiperSection: View {
     @Binding var discoveryWordsStorageToWorkOn: [WordItemStruct]
     @Binding var topWords: [NewWordItem]
     @Binding var bottomWords: [NewWordItem]
-    @State var feedbackColor: Color = Color.clear
     
     var body: some View {
         
@@ -35,7 +34,7 @@ struct SwiperSection: View {
             
             Color("BackgroundColor").ignoresSafeArea()
             
-            P171_CircleAnimation(feedbackColor: feedbackColor)
+            P171_CircleAnimation()
                 .blendMode(.screen)
                 .blur(radius: 28)
             
@@ -191,7 +190,7 @@ struct SwiperSection: View {
                 topWords.insert(newItem, at: 0)
                 wordsDiscoveredDuringTheCurrentDiscoverySession += 1
                 activityLogDataLayer.logEachAction()
-                activityLogDataLayer.saveDataToJSON()
+                try! activityLogDataLayer.saveDataToJSON()
                 
                 switch currentLevelSelected {
                     case "elementary":
@@ -201,8 +200,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -214,8 +213,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -227,8 +226,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -240,8 +239,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -253,8 +252,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -266,8 +265,8 @@ struct SwiperSection: View {
                             position_now: newItem.position_now,
                             word: newItem.word,
                             dateAdded: storedStatesDataLayer.currentDate,
-                            timesReviewed: 0,
-                            consecutiveCorrectRecalls: 0,
+                            timesReviewed: 1,
+                            consecutiveCorrectRecalls: 10,
                             progress: 0.0
                         )
                         , at: 0
@@ -284,14 +283,14 @@ struct SwiperSection: View {
                 bottomWords.insert(newItem, at: 0)
                 wordsDiscoveredDuringTheCurrentDiscoverySession += 1
                 activityLogDataLayer.logEachAction()
-                activityLogDataLayer.saveDataToJSON()
+                try! activityLogDataLayer.saveDataToJSON()
                 
                 let wordToAdd = wordItemNew(
                         id: newItem.id,
                         position_now: newItem.position_now,
                         word: newItem.word,
                         dateAdded: storedStatesDataLayer.currentDate,
-                        timesReviewed: 0,
+                        timesReviewed: 1,
                         consecutiveCorrectRecalls: 0,
                         progress: 0.0
                     )
