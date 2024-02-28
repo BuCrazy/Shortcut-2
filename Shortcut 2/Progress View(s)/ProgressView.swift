@@ -16,7 +16,7 @@ struct ProgressView: View {
     
     @State private var isPickerVisible = false
     @State private var selectedOption = "Option 1"
-    @State var levelSwitchSheetShown: Bool = false
+    @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
     
     //NOTE: The original code
     //private lazy var viewModel = DailyConsistencyViewModel(activityLogDataLayer: activityLogDataLayer)
@@ -95,6 +95,8 @@ struct ProgressView: View {
                     // Панель переключения уровней
                     .sheet(isPresented: $levelSwitchSheetShown) {
                         LevelSwitcherSheet()
+                            .navigationBarHidden(true)
+                            .presentationDetents([.medium])
                     }
                     .onAppear{
                         try! activityLogDataLayer.loadDataFromJSON()

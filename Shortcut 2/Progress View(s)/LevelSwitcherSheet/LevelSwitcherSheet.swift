@@ -2,6 +2,7 @@ import SwiftUI
 struct LevelSwitcherSheet: View {
     @State var levelSwitchSheetLevelSelected = 1
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
+    @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
     var body: some View {
         VStack{
             TabView(selection: $levelSwitchSheetLevelSelected){
@@ -163,6 +164,7 @@ struct LevelSwitcherSheet: View {
                 Button(
                     action: {
                         currentLevelSelected = "elementary"
+                        levelSwitchSheetShown = false
                     },
                     label: {
                         Text("Switch to Elementary")
@@ -177,6 +179,7 @@ struct LevelSwitcherSheet: View {
                 Button(
                     action: {
                         currentLevelSelected = "beginner"
+                        levelSwitchSheetShown = false
                     },
                     label: {
                         Text("Switch to Beginner")
@@ -191,6 +194,7 @@ struct LevelSwitcherSheet: View {
                 Button(
                     action: {
                         currentLevelSelected = "intermediate"
+                        levelSwitchSheetShown = false
                     },
                     label: {
                         Text("Switch to Intermediate")
@@ -204,7 +208,8 @@ struct LevelSwitcherSheet: View {
             case 4:
                 Button(
                     action: {
-                        currentLevelSelected = "advanced"
+//                        currentLevelSelected = "advanced"
+                        levelSwitchSheetShown = false
                     },
                     label: {
                         Text("Switch to Advanced")
@@ -218,7 +223,8 @@ struct LevelSwitcherSheet: View {
             case 5:
                 Button(
                     action: {
-                        currentLevelSelected = "nativelike"
+//                        currentLevelSelected = "nativelike"
+                        levelSwitchSheetShown = false
                     },
                     label: {
                         Text("Switch to Native-like")
@@ -232,10 +238,11 @@ struct LevelSwitcherSheet: View {
             case 6:
                 Button(
                     action: {
-                        currentLevelSelected = "beginner"
+//                        currentLevelSelected = "borninengland"
+                        levelSwitchSheetShown = false
                     },
                     label: {
-                        Text("Switch to Beginner")
+                        Text("Switch to Shakespeare")
                             .frame(width: 358, height: 52)
                             .foregroundColor(.white)
                             .background(Color("switchLevelButtonColor"))
@@ -246,10 +253,10 @@ struct LevelSwitcherSheet: View {
             default:
                 Button(
                     action: {
-                        currentLevelSelected = "borininengland"
+                        currentLevelSelected = "elementary"
                     },
                     label: {
-                        Text("Switch to Shakespeare")
+                        Text("Switch to Elementary")
                             .frame(width: 358, height: 52)
                             .foregroundColor(.white)
                             .background(Color("switchLevelButtonColor"))
