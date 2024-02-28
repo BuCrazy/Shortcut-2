@@ -3,11 +3,11 @@ struct SettingsView: View {
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("currentLanguageSelected_key") var currentLanguageSelected: String = "ukranian"
     @AppStorage("nativeLanguageSelectedID_key") var languageCodeForUse: String = ""
-    @State var levelSwitchSheetShown: Bool = false
     var nativeLanguageSelectedID: String {
         return languageNamesAndTheirIDs[currentLanguageSelected] ?? "not defined yet"
     }
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
+    @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
     var body: some View {
         Form{
             Group{
@@ -40,6 +40,8 @@ struct SettingsView: View {
             }
             .sheet(isPresented: $levelSwitchSheetShown) {
                 LevelSwitcherSheet()
+                    .presentationDetents([.medium])
+                    .navigationBarHidden(true)
             }
         }
     }
