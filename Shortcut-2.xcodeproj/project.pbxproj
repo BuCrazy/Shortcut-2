@@ -49,7 +49,7 @@
 		BB0FD8FB2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FD8FA2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift */; };
 		BB0FD8FD2B44CED100D62B25 /* LearnedAtThisLvlModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FD8FC2B44CED100D62B25 /* LearnedAtThisLvlModal.swift */; };
 		BB16A2472AEA92F200B43FC0 /* ActivityCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB16A2462AEA92F200B43FC0 /* ActivityCalendarViewModel.swift */; };
-		BB3D19F72B8E965C00027DC4 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D19F62B8E965C00027DC4 /* SwiftUIView.swift */; };
+		BB3D19F72B8E965C00027DC4 /* Quiz File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D19F62B8E965C00027DC4 /* Quiz File.swift */; };
 		BB4255152B46F4AB008370AB /* DailyConsistencyBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4255142B46F4AB008370AB /* DailyConsistencyBadge.swift */; };
 		BB4255172B46F674008370AB /* DailyConsistencyModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4255162B46F674008370AB /* DailyConsistencyModal.swift */; };
 		BB56C72C2B1596ED00B9C8F4 /* LexCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB56C72B2B1596ED00B9C8F4 /* LexCardView.swift */; };
@@ -110,7 +110,7 @@
 		BB0FD8FA2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedAtThisLvlBadge.swift; sourceTree = "<group>"; };
 		BB0FD8FC2B44CED100D62B25 /* LearnedAtThisLvlModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedAtThisLvlModal.swift; sourceTree = "<group>"; };
 		BB16A2462AEA92F200B43FC0 /* ActivityCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCalendarViewModel.swift; sourceTree = "<group>"; };
-		BB3D19F62B8E965C00027DC4 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		BB3D19F62B8E965C00027DC4 /* Quiz File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quiz File.swift"; sourceTree = "<group>"; };
 		BB4255142B46F4AB008370AB /* DailyConsistencyBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyConsistencyBadge.swift; sourceTree = "<group>"; };
 		BB4255162B46F674008370AB /* DailyConsistencyModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyConsistencyModal.swift; sourceTree = "<group>"; };
 		BB56C72B2B1596ED00B9C8F4 /* LexCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexCardView.swift; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 		BB3D19F52B8E964C00027DC4 /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
-				BB3D19F62B8E965C00027DC4 /* SwiftUIView.swift */,
+				BB3D19F62B8E965C00027DC4 /* Quiz File.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -512,7 +512,7 @@
 				BB16A2472AEA92F200B43FC0 /* ActivityCalendarViewModel.swift in Sources */,
 				BB7A03732ADE31A2009EFDD5 /* DiscoveredThisWeek.swift in Sources */,
 				BBD92FFA2B47717A008AB3BC /* DiscoveredThisWeekModal.swift in Sources */,
-				BB3D19F72B8E965C00027DC4 /* SwiftUIView.swift in Sources */,
+				BB3D19F72B8E965C00027DC4 /* Quiz File.swift in Sources */,
 				377D2D4C2A77E31C00A2D613 /* Shortcut_2_App.swift in Sources */,
 				8527F1372A98C23200620A45 /* KnowSection.swift in Sources */,
 				377D2D5E2A77E3E500A2D613 /* AppModel.swift in Sources */,
