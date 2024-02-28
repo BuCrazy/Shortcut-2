@@ -18,16 +18,18 @@ struct QuizSummaryView: View {
             ZStack {
                 Color.black.ignoresSafeArea()
                 
-                BCircleAnimation(feedbackColor: feedbackColor)
-                    .blendMode(.screen)
-                    .blur(radius: 40)
-                
-                Spacer()
-               SummaryMessage()
-                    .padding(.bottom, 16)
-                
-               BottomPart(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber)
-                    .frame(maxHeight: 362)
+                VStack {
+                    BCircleAnimation(feedbackColor: feedbackColor)
+                        .blendMode(.screen)
+                        .blur(radius: 40)
+                    
+                    Spacer()
+                    SummaryMessage()
+                        .padding(.bottom, 16)
+                    
+                    BottomPart(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber)
+                        .frame(maxHeight: 362)
+                }
             }
             .navigationTitle(Text ("Quiz Summary"))
         }
