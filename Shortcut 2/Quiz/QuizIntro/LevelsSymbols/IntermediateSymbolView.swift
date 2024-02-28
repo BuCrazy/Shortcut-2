@@ -9,7 +9,11 @@ import SwiftUI
 
 struct IntermediateSymbolView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Image("intermediateSymbol")
+                .resizable()
+                .frame(width: 50, height: 50)
+        }
     }
 }
 

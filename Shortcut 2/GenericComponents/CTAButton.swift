@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct CTAButton: View {
+    var buttonText: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text(buttonText)
+                .foregroundColor(.white)
+                .font(.system(size: 16))
+                .fontWeight(.medium)
+                .padding(.vertical, 16)
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color("mainCardBG"))
+        .cornerRadius(48)
     }
 }
 
 #Preview {
-    CTAButton()
+    CTAButton(buttonText: "Button Name")
 }

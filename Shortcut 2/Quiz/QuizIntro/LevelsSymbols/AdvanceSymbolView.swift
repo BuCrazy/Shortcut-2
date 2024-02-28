@@ -9,7 +9,11 @@ import SwiftUI
 
 struct AdvanceSymbolView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Image("advanceSymbol")
+                .resizable()
+                .frame(width: 50, height: 50)
+        }
     }
 }
 

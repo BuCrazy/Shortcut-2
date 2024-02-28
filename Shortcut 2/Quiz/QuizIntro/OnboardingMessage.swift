@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct OnboardingMessage: View {
+    var headline: String = "You’ve completed your word-discovery session for now!"
+    var bodyText: String = "Now we are going to practice some of the words you previously marked as unknown."
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .center) {
+            Text(headline)
+                .font(.system(size: 24))
+                .foregroundColor(.white)
+                .fontWeight(.medium)
+                .padding(.bottom,8)
+                .multilineTextAlignment(.center)
+            
+            Text(bodyText)
+                .font(.system(size: 14))
+                .foregroundColor(Color("weakSecondaryDark"))
+                .multilineTextAlignment(.center)
+        }
+        .padding(.horizontal, 16)
     }
 }
 
