@@ -26,6 +26,8 @@ struct SwiperSection: View {
     @Binding var topWords: [NewWordItem]
     @Binding var bottomWords: [NewWordItem]
     
+    @State var feedbackColor: Color = Color.clear
+    
     var body: some View {
         
         let displayedWords = Array(discoveryWordsStorageToWorkOn.prefix(2)).reversed()
@@ -34,7 +36,7 @@ struct SwiperSection: View {
             
             Color("BackgroundColor").ignoresSafeArea()
             
-            P171_CircleAnimation()
+            P171_CircleAnimation(feedbackColor: feedbackColor)
                 .blendMode(.screen)
                 .blur(radius: 28)
             

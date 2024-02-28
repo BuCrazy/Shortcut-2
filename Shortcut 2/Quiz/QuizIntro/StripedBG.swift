@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct StripedBG: View {
+    @State private var appeared: Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color("BackgroundColor").ignoresSafeArea()
+            Image("stripedBG")
+                .resizable()
+                .scaledToFill()
+        }
     }
 }
 

@@ -9,7 +9,46 @@ import SwiftUI
 
 struct IndicatorBar: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 12) {
+            HStack(spacing: 15.3) {
+                Indicator(status: .correct)
+                Indicator(status: .incorrect)
+                Indicator(status: .correct)
+                Indicator(status: .correct)
+                Indicator(status: .incorrect)
+                Indicator(status: .incorrect)
+                Indicator(status: .correct)
+                Indicator(status: .incorrect)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 20)
+            
+            HStack(spacing: 15.3) {
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+                Indicator(status: .neutral)
+            }
+        }
     }
 }
 

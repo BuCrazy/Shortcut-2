@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct DiscoverUpdateView: View {
+    @State var discoverNumberUpdate: Int = 63
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Text("+ \(discoverNumberUpdate)")
+                .font(.system(size: 16))
+                .fontWeight(.medium)
+                .foregroundColor(.green)
+                .padding(.bottom, 24)
+        }
     }
 }
 
