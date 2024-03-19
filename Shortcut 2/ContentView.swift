@@ -14,44 +14,89 @@ struct ContentView: View {
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var storedStatesDataLayer: storedStates
         
-    @State private var selectedTab = 1
+//    @State private var selectedTab = 1
     
     @State var screenRefresher: Bool = false
     @State private var activeModal: ActiveModal = .none
+    
+    @State private var selectedTab: Tab = .second
+
+    enum Tab {
+        case first, second, third, fourth
+    }
 
    // @State private var showModal = false
     var body: some View {
         
         ZStack{
-            TabView(selection: $selectedTab) {
-                NavigationView {
-                    ProgressView(activeModal: $activeModal, activityLogDataLayer: activityLogDataLayer)
+//            TabView(selection: $selectedTab) {
+//                NavigationView {
+//                    ProgressView(activeModal: $activeModal, activityLogDataLayer: activityLogDataLayer)
+//                }
+//                .tabItem{
+//                    TabIconView(selectedImageName: "progress.fill", unselectedImageName: "progress", isSelected: selectedTab == 0)
+//                }
+//                .tag(0)
+//                NavigationView{
+//                    SwiperScreen()
+//                }
+//                .tabItem {
+//                    TabIconView(selectedImageName: "discovery.fill", unselectedImageName: "discovery", isSelected: selectedTab == 1)
+//                }
+//                .tag(1)
+//                NavigationView{
+//                    DictionaryView(consecutiveCorrectRecalls: 0, progress: 0.0)
+//                }
+//                .tabItem {
+//                    TabIconView(selectedImageName: "library.fill", unselectedImageName: "library", isSelected: selectedTab == 2)
+//                }
+//                .tag(2)
+//                NavigationView{
+//                    SettingsView()
+//                }
+//                .tabItem {
+//                    TabIconView(selectedImageName: "account.fill", unselectedImageName: "account", isSelected: selectedTab == 3)
+//                }
+//                .tag(3)
+//            }
+            
+            ZStack(alignment: .bottomLeading) {
+                VStack{
+                    // Content area
+                    switch selectedTab {
+                    case .first:
+                        ProgressView(activeModal: $activeModal, activityLogDataLayer: activityLogDataLayer)
+                    case .second:
+                        SwiperScreen()
+                            .environmentObject(storedNewWordItemsDataLayer)
+                    case .third:
+                        DictionaryView(consecutiveCorrectRecalls: 0, progress: 0.0)
+                    case .fourth:
+                        SettingsView()
+                    }
                 }
-                .tabItem{
-                    TabIconView(selectedImageName: "progress.fill", unselectedImageName: "progress", isSelected: selectedTab == 0)
+                Spacer()
+                    .frame(height: 0)
+                // Tab bar
+                VStack{
+                    Spacer()
+                        .frame(height: 5)
+                    HStack {
+                        TabBarItem(image: "progress", selectedImage: "progress.fill", isSelected: selectedTab == .first) {
+                            selectedTab = .first
+                        }
+                        TabBarItem(image: "discovery", selectedImage: "discovery.fill", isSelected: selectedTab == .second) {
+                            selectedTab = .second
+                        }
+                        TabBarItem(image: "library", selectedImage: "library.fill", isSelected: selectedTab == .third) {
+                            selectedTab = .third
+                        }
+                        TabBarItem(image: "account", selectedImage: "account.fill", isSelected: selectedTab == .fourth) {
+                            selectedTab = .fourth
+                        }
+                    }
                 }
-                .tag(0)
-                NavigationView{
-                    SwiperScreen()
-                }
-                .tabItem {
-                    TabIconView(selectedImageName: "discovery.fill", unselectedImageName: "discovery", isSelected: selectedTab == 1)
-                }
-                .tag(1)
-                NavigationView{
-                    DictionaryView(consecutiveCorrectRecalls: 0, progress: 0.0)
-                }
-                .tabItem {
-                    TabIconView(selectedImageName: "library.fill", unselectedImageName: "library", isSelected: selectedTab == 2)
-                }
-                .tag(2)
-                NavigationView{
-                    SettingsView()
-                }
-                .tabItem {
-                    TabIconView(selectedImageName: "account.fill", unselectedImageName: "account", isSelected: selectedTab == 3)
-                }
-                .tag(3)
+                .background(.ultraThinMaterial)
             }
             
             // NOTE: Conditional logic using enum to understand what modal window to show
@@ -136,6 +181,29 @@ struct TabIconView: View {
             .aspectRatio(contentMode: .fit)
     }
     
+}
+
+struct TabBarItem: View {
+    let image: String
+    let selectedImage: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack {
+                switch isSelected {
+                case false:
+                    Image(image)
+                case true:
+                    Image(selectedImage)
+                default:
+                    Image(image)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
 }
 
 #Preview {

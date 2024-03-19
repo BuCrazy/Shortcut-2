@@ -13,7 +13,7 @@ struct SwiperView: View {
     @State private var bottomWords: [NewWordItem] = []
     @State private var know = false
     @State private var selectedWordItem: NewWordItem?
-    @State var discoveryWordsStorageToWorkOn: [WordItemStruct]
+    @State var discoveryWordsStorageToWorkOn: [WordItemStruct] = []
     
     var body: some View {
         ZStack {
@@ -111,12 +111,21 @@ struct SwiperView: View {
                         turkish: slovo.turkish
                     )
                     .presentationDetents([.fraction(0.25), .medium, .large])
-                }
-                
+                }   
             }
-            
         }
-        
+        .onAppear{
+            switch currentLevelSelected {
+            case "elementary":
+                discoveryWordsStorageToWorkOn = storedNewWordItemsDataLayer.elementaryWordsStorage
+            case "beginner":
+                discoveryWordsStorageToWorkOn = storedNewWordItemsDataLayer.beginnerWordsStorage
+            case "intermediate":
+                discoveryWordsStorageToWorkOn = storedNewWordItemsDataLayer.intermediateWordsStorage
+            default:
+                discoveryWordsStorageToWorkOn = storedNewWordItemsDataLayer.elementaryWordsStorage
+            }
+        }
     }
     
 }

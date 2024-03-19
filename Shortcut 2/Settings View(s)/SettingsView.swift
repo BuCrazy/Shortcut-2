@@ -12,16 +12,16 @@ struct SettingsView: View {
         Form{
             Group{
                 Section(header: Text("SETTINGS"), content: {
-                    HStack{
-                        Button(
-                            action: {
-                                levelSwitchSheetShown.toggle()
-                            }
-                            ,label: {
-                                Text("Change your level")
-                            }
-                        )
-                    }
+//                    HStack{
+//                        Button(
+//                            action: {
+//                                levelSwitchSheetShown.toggle()
+//                            }
+//                            ,label: {
+//                                Text("Change your level")
+//                            }
+//                        )
+//                    }
                     HStack{
                         Picker("Native language:", selection: $currentLanguageSelected) {
                             ForEach(0..<languageOptionsAsTheySound.count, id: \.self) { index in

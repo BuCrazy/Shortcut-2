@@ -11,18 +11,12 @@ struct SwiperMainView: View {
     var body: some View {
         
         VStack{
-            switch currentLevelSelected {
-            case "elementary":
-                SwiperView(discoveryWordsStorageToWorkOn: storedNewWordItemsDataLayer.elementaryWordsStorage)
-            case "beginner":
-                SwiperView(discoveryWordsStorageToWorkOn: storedNewWordItemsDataLayer.beginnerWordsStorage)
-            case "intermediate":
-                SwiperView(discoveryWordsStorageToWorkOn: storedNewWordItemsDataLayer.intermediateWordsStorage)
-            default:
-                SwiperView(discoveryWordsStorageToWorkOn: storedNewWordItemsDataLayer.elementaryWordsStorage)
-            }
+            SwiperView()
         }
-        
+        .onAppear{
+            storedNewWordItemsDataLayer.initialWordDataLoader()
+            try! activityLogDataLayer.loadDataFromJSON()
+        }
     }
 }
 
