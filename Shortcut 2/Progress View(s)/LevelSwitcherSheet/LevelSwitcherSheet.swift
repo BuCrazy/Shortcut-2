@@ -1,6 +1,6 @@
 import SwiftUI
 struct LevelSwitcherSheet: View {
-    @State var levelSwitchSheetLevelSelected = 1
+    @AppStorage("levelSwitchSheetLevelSelected_key") var levelSwitchSheetLevelSelected = 1
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
     var body: some View {

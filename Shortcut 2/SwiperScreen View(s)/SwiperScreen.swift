@@ -26,6 +26,10 @@ struct SwiperScreen: View {
                 QuizView(storedWords: storedNewWordItemsDataLayer)
             }
         }
+        .onAppear{
+            storedNewWordItemsDataLayer.initialWordDataLoader()
+            try! activityLogDataLayer.loadDataFromJSON()
+        }
     }
     
 }

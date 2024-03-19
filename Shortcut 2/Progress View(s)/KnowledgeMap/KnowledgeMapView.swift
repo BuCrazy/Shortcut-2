@@ -15,6 +15,7 @@ struct KnowledgeMapView: View {
                 return (storedNewWordItemsDataLayer.elementaryKnewAlready + storedNewWordItemsDataLayer.elementaryBeingLearned).sorted { $0.position_now < $1.position_now }
         }
     }
+    @State private var isLoading = true
     var body: some View {
         VStack(alignment: .leading) {
             VStack(spacing: 10) {
@@ -46,50 +47,56 @@ struct KnowledgeMapView: View {
                         .frame(width: 32, height: 32)
                 }
                 VStack{
-                    VStack {
-                        WrappingHStack(alignment: .topLeading, horizontalSpacing: 2, verticalSpacing: 2) {
-                            ForEach(currentLevelNewItemsMergedSorted) { index in
-                                if index.timesReviewed == 1 && index.consecutiveCorrectRecalls == 0 {
-                                    Circle()
-                                        .fill(Color("KnowledgeMapCircleRed"))
-                                        .frame(width:4, height: 4)
-                                } else if index.timesReviewed >= 1 && index.consecutiveCorrectRecalls < 10 {
-                                    Circle()
-                                        .fill(Color("KnowledgeMapCircleYellow"))
-                                        .frame(width:4, height: 4)
-                                } else if index.timesReviewed >= 1 && index.consecutiveCorrectRecalls >= 10 {
-                                    Circle()
-                                        .fill(Color("KnowledgeMapCircleGreen"))
-                                        .frame(width:4, height: 4)
-                                }
-                            }
-                            switch currentLevelSelected {
-                                case "elementary":
-                                    ForEach(storedNewWordItemsDataLayer.elementaryWordsStorage) { index in
-                                        Circle()
-                                            .fill(Color("KnowledgeMapCircleGrey"))
-                                            .frame(width:4, height: 4)
-                                    }
-                                case "beginner":
-                                    ForEach(storedNewWordItemsDataLayer.beginnerWordsStorage) { index in
-                                        Circle()
-                                            .fill(Color("KnowledgeMapCircleGrey"))
-                                            .frame(width:4, height: 4)
-                                        }
-                                case "intermediate":
-                                    ForEach(storedNewWordItemsDataLayer.intermediateWordsStorage) { index in
-                                        Circle()
-                                            .fill(Color("KnowledgeMapCircleGrey"))
-                                            .frame(width:4, height: 4)
-                                    }
-                                default:
-                                    ForEach(storedNewWordItemsDataLayer.elementaryWordsStorage) { index in
-                                        Circle()
-                                            .fill(Color("KnowledgeMapCircleGrey"))
-                                            .frame(width:4, height: 4)
-                                }
-                            }
-                        }
+                    VStack{
+                        if isLoading {
+                            Text("Loading...")
+                                .foregroundColor(Color("secondaryFontColor"))
+                                .font(.system(size: 12))
+                       } else {
+                           WrappingHStack(alignment: .topLeading, horizontalSpacing: 2, verticalSpacing: 2) {
+                               ForEach(currentLevelNewItemsMergedSorted) { index in
+                                   if index.timesReviewed == 1 && index.consecutiveCorrectRecalls == 0 {
+                                       Circle()
+                                           .fill(Color("KnowledgeMapCircleRed"))
+                                           .frame(width:4, height: 4)
+                                   } else if index.timesReviewed >= 1 && index.consecutiveCorrectRecalls < 10 {
+                                       Circle()
+                                           .fill(Color("KnowledgeMapCircleYellow"))
+                                           .frame(width:4, height: 4)
+                                   } else if index.timesReviewed >= 1 && index.consecutiveCorrectRecalls >= 10 {
+                                       Circle()
+                                           .fill(Color("KnowledgeMapCircleGreen"))
+                                           .frame(width:4, height: 4)
+                                   }
+                               }
+                               switch currentLevelSelected {
+                                   case "elementary":
+                                       ForEach(storedNewWordItemsDataLayer.elementaryWordsStorage) { index in
+                                           Circle()
+                                               .fill(Color("KnowledgeMapCircleGrey"))
+                                               .frame(width:4, height: 4)
+                                       }
+                                   case "beginner":
+                                       ForEach(storedNewWordItemsDataLayer.beginnerWordsStorage) { index in
+                                           Circle()
+                                               .fill(Color("KnowledgeMapCircleGrey"))
+                                               .frame(width:4, height: 4)
+                                           }
+                                   case "intermediate":
+                                       ForEach(storedNewWordItemsDataLayer.intermediateWordsStorage) { index in
+                                           Circle()
+                                               .fill(Color("KnowledgeMapCircleGrey"))
+                                               .frame(width:4, height: 4)
+                                       }
+                                   default:
+                                       ForEach(storedNewWordItemsDataLayer.elementaryWordsStorage) { index in
+                                           Circle()
+                                               .fill(Color("KnowledgeMapCircleGrey"))
+                                               .frame(width:4, height: 4)
+                                   }
+                               }
+                           }
+                       }
                     }
                     .background(Color("mainCardBG"))
                 }
@@ -98,6 +105,13 @@ struct KnowledgeMapView: View {
             .padding(.horizontal, 16)
             .background(Color("mainCardBG"))
             .cornerRadius(8)
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    isLoading = false
+                }
+            }
         }
     }
 }
