@@ -74,13 +74,14 @@ struct ContentView: View {
                     case .fourth:
                         SettingsView()
                     }
+                    Spacer()
+                        .frame(height:44)
                 }
-                Spacer()
-                    .frame(height: 0)
+
                 // Tab bar
                 VStack{
                     Spacer()
-                        .frame(height: 5)
+                        .frame(height: 0)
                     HStack {
                         TabBarItem(image: "progress", selectedImage: "progress.fill", isSelected: selectedTab == .first) {
                             selectedTab = .first

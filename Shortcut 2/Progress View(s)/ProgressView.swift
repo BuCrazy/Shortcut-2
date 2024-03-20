@@ -88,9 +88,6 @@ struct ProgressView: View {
                         
                     }
                     .padding(.horizontal, 16)
-                   
-                    Spacer()
-                        .frame(height: 76)
                     }
                     // Панель переключения уровней
                     .sheet(isPresented: $levelSwitchSheetShown) {
