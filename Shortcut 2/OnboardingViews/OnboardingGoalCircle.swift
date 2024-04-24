@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ConsistencyCircle: View {
+struct OnboardingGoalCircle: View {
     
     var progress: Double // A value between 0 and 1 representing the progress
-    var dayLetter: String
-    var isCurrentDay: Bool
+    var progressText: Double
+    var isCurrentGoal: Bool
     
     var letterFillColor: Color {
-        if isCurrentDay == true {
+        if isCurrentGoal == true {
             return Color("consistencyCircleWhite")
         } else {
             return Color("consistencyCircleGrey")
@@ -41,18 +41,18 @@ struct ConsistencyCircle: View {
                         trimEnd = progress
                     }
                     
-                Text("\(dayLetter)")
-                    .font(.system(size: 16))
+                Text(String(format: "%.f%%", progressText * 100))
+                    .font(.system(size: 17))
                     .fontWeight(.bold)
                     .foregroundColor(letterFillColor)
             }
-            .frame(width: 36, height: 36)
+            .frame(width: 56, height: 56)
             
         }
 }
 
-struct ConsistencyCircle_Previews: PreviewProvider {
+struct OnboardingGoalCircle_Previews: PreviewProvider {
     static var previews: some View {
-        ConsistencyCircle(progress: 0.5, dayLetter: "M", isCurrentDay: false)
+        OnboardingGoalCircle(progress: 0.5, progressText: 0.5, isCurrentGoal: false)
     }
 }

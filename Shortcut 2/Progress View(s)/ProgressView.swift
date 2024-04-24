@@ -39,6 +39,9 @@ struct ProgressView: View {
             ScrollView {
                 VStack {
                     VStack(spacing: 16) {
+                       
+                    OnboardingGoals()
+                    LevelProgressView()
                         
                     Button(action: {
                         withAnimation(.spring()) {
