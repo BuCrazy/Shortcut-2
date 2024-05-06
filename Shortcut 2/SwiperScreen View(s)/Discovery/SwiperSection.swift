@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SwiperSection: View {
     
-    @AppStorage("wordsPerDiscoverySetting_key") var wordsPerDiscoverySetting: Int = 100
+    @AppStorage("wordsPerDiscoverySetting_key") var wordsPerDiscoverySetting: Int = 30
     @AppStorage("wordsPerRevisionSetting_key") var wordsPerRevisionSetting: Int = 30
     
     @EnvironmentObject var activityLogDataLayer: ActivityCalendar

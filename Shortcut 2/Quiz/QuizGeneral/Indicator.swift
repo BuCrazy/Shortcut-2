@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum AnswerStatus {
+enum AnswerStatus: Codable {
     case neutral, correct, incorrect
 }
 

@@ -10,15 +10,9 @@ import SwiftUI
 struct SummaryMessage: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Well Done!")
-                .font(.system(size: 24))
-                .foregroundColor(.white)
-                .fontWeight(.medium)
-                .padding(.bottom, 8)
-            
-            Text("You’ve completed overview of unknown words. You can find your results below. Once you’re ready we’ll continue to mine new words.")
+            Text("You’ve completed a quiz of unknown words. You can find your results below. \n \nOnce you’re ready we’ll continue to the next learning mode which is practicing words from your dictionary in familiar swiper form.")
                 .font(.system(size: 14))
-                .foregroundColor(Color("SecondaryTextColor"))
+                .foregroundColor(Color.white).opacity(0.88)
         }
         .padding(.horizontal, 16)
     }
