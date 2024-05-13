@@ -14,21 +14,24 @@ struct ContentView: View {
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var storedStatesDataLayer: storedStates
         
-//    @State private var selectedTab = 1
+    //@State private var selectedTab = 1
     
     @State var screenRefresher: Bool = false
     @State private var activeModal: ActiveModal = .none
-    
     @State private var selectedTab: Tab = .second
 
     enum Tab {
         case first, second, third, fourth
     }
 
-   // @State private var showModal = false
+    @State private var showModal = false
     var body: some View {
         
         ZStack{
+
+            
+            // Standard Tab Bar
+            
 //            TabView(selection: $selectedTab) {
 //                NavigationView {
 //                    ProgressView(activeModal: $activeModal, activityLogDataLayer: activityLogDataLayer)
@@ -59,6 +62,8 @@ struct ContentView: View {
 //                }
 //                .tag(3)
 //            }
+            // Standard Tab Bar ends
+            
             
             ZStack(alignment: .bottomLeading) {
                 VStack{
@@ -75,12 +80,11 @@ struct ContentView: View {
                         SettingsView()
                     }
                 }
-                Spacer()
-                    .frame(height: 0)
-                // Tab bar
-                VStack{
-                    Spacer()
-                        .frame(height: 5)
+                
+    //             Tab bar
+  //              VStack {
+                  //  Spacer()
+                    
                     HStack {
                         TabBarItem(image: "progress", selectedImage: "progress.fill", isSelected: selectedTab == .first) {
                             selectedTab = .first
@@ -95,8 +99,9 @@ struct ContentView: View {
                             selectedTab = .fourth
                         }
                     }
-                }
-                .background(.ultraThinMaterial)
+                    
+         //       }
+             //  .background(.ultraThinMaterial)
             }
             
             // NOTE: Conditional logic using enum to understand what modal window to show
@@ -197,8 +202,8 @@ struct TabBarItem: View {
                     Image(image)
                 case true:
                     Image(selectedImage)
-                default:
-                    Image(image)
+//                default:
+//                    Image(image)
                 }
             }
         }

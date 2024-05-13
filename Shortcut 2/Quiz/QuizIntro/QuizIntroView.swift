@@ -42,16 +42,17 @@ struct QuizIntroView: View {
                     
                     //NOTE: Counter
                     VStack {
-                        Spacer()
+                        //Spacer()
                         HStack(alignment: .center) {
                             DiscoveryCounter()
                         }
-                        Spacer()
+                       // Spacer()
                     }
                     .padding(.bottom, 16)
                     
                     //NOTE: Button
                     VStack {
+                        Spacer()
                         NavigationLink(destination:  QuizView(storedWords: storedNewWordItemsDataLayer)) {
                             CTAButton(buttonText: "Let's Go!")
                                 .padding(.horizontal, 16)
@@ -63,6 +64,7 @@ struct QuizIntroView: View {
                     Spacer()
                 }
                 .navigationTitle(Text ("Discovery")).navigationBarBackButtonHidden(false)
+              
             }
         }
     }

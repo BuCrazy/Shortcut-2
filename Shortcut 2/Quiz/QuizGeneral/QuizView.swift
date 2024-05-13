@@ -177,7 +177,7 @@ struct QuizView: View {
                     .opacity(showAnswerOptions ? 1 : 0)
                     .offset(y: showAnswerOptions ? 0 : 15)
                     .animation(.easeInOut(duration: 0.5).delay(0.0), value: showAnswerOptions)
-                        
+                        Spacer().frame(height: 44)
                     }
                 }
             }
