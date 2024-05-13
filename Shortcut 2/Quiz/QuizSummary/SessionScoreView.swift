@@ -1,65 +1,61 @@
 //
-//  CorrectAnswersNumber.swift
+//  SessionScoreView.swift
 //  Shortcut-2
 //
-//  Created by Pavlo Bilashchuk on 2/28/24.
+//  Created by Pavlo Bilashchuk on 5/6/24.
 //
 
 import SwiftUI
 
-struct CorrectAnswersNumber: View {
+struct SessionScoreView: View {
     @Binding var correctAnswerNumber: Int
-    @State var animatedNumber: Int = 0
+    @Binding var incorrectAnswerNumber: Int
+    var sessionScore: Double
+    @State var animatedNumber: Double = 0.0
     
     var body: some View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Correct")
+                Text("Score")
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
-                    .foregroundColor(Color.green)
+                    .foregroundColor(Color.blue)
                     .padding(.bottom, 4)
                 
                 HStack(spacing: 4) {
-                    Text("\(animatedNumber)")
+                    Text(String(format: "%.1f%%", animatedNumber))
                         .font(.system(size: 24))
                         .bold()
                         .foregroundColor(Color.white)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                incrementCorrectNumber()
+                                incrementScoreNumber()
                             }
                         }
-                    Text("ans")
-                        .font(.system(size: 13))
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color("secondaryFontColor"))
-                        .padding(.top, 7)
-                    
                 }
             }
-            Rectangle()
-                .frame(width: 0.5, height: 50)
-                .background(Color.white).opacity(0.3)
         }
     }
-    func incrementCorrectNumber() {
+    
+    func incrementScoreNumber() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) {
-            if animatedNumber < correctAnswerNumber {
+            if animatedNumber < sessionScore {
                 withAnimation(.linear(duration: 0.01)) {
                     animatedNumber += 1
                     let impact = UIImpactFeedbackGenerator(style: .light)
                     impact.impactOccurred()
                 }
-                incrementCorrectNumber()
+                incrementScoreNumber()
             }
         }
     }
 }
 
-struct CorrectAnswer_Previews: PreviewProvider {
+struct SessionScoreView_Previews: PreviewProvider {
     @State static var correctAnswerNumber: Int = 3
+    @State static var incorrectAnswerNumber: Int = 7
+    
     static var previews: some View {
-        CorrectAnswersNumber(correctAnswerNumber: $correctAnswerNumber)
+        SessionScoreView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, sessionScore: 42.1)
     }
 }

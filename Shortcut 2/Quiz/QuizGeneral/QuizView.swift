@@ -36,6 +36,16 @@ struct QuizView: View {
     
     @State var hasNavigatedAway = false
     
+    // --- Code for Saving Quiz Historical Data ---
+    var sessionScore: Double {
+        let totalQuestions = correctAnswerNumber + incorrectAnswerNumber
+        return totalQuestions > 0 ? (Double(correctAnswerNumber) / Double(totalQuestions)) * 100 : 0.0
+    }
+    @State private var quizHistory = QuizHistory()
+    @State private var isQuizAlreadyStarted: Bool = false
+    
+    // --- Code for Saving Quiz Historical Data ends ---
+    
     //NOTE: Computed property for taking possibleAnswers as a source of the answer options
     var currentPossibleAnswers: [String] {
         if currentQuizIndex < quizItems.count {
@@ -85,8 +95,8 @@ struct QuizView: View {
                 
                 //NOTE: Initial logic for switching views
                 if isQuizFinished {
-                    //   SwiperScreen()
-                      QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber)
+                  
+                    QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, isQuizAlreadyStarted: $isQuizAlreadyStarted)
                            .opacity(isQuizFinished ? 1 : 0)
                            .animation(.easeIn, value: isQuizFinished)
                 } else {
@@ -167,7 +177,7 @@ struct QuizView: View {
                     .opacity(showAnswerOptions ? 1 : 0)
                     .offset(y: showAnswerOptions ? 0 : 15)
                     .animation(.easeInOut(duration: 0.5).delay(0.0), value: showAnswerOptions)
-                        
+                        Spacer().frame(height: 44)
                     }
                 }
             }
@@ -175,6 +185,43 @@ struct QuizView: View {
             .navigationTitle(Text ("Quiz"))
         }
         .onAppear {
+            print(" A dictionary of the quiz historical results: \(quizHistory.quizHistoricalData)")
+            print("QuizView appearing. Current question statuses count: \(questionStatuses.count)")
+            
+            // --- Code for saving Quiz progress ---
+            if UserDefaults.standard.bool(forKey: "justReset") {
+                    UserDefaults.standard.set(false, forKey: "justReset")
+                    questionStatuses = Array(repeating: .neutral, count: quizItems.count)
+                    print("Reset flag found, starting fresh...")
+                } else {
+                    loadQuizState()
+                    print("Loading existing quiz state...")
+                }
+            print("Initialized questionStatuses with \(questionStatuses.count) items.")
+            // --- Code for saving Quiz progress ends---
+            // --- Test for saving Quiz historical data ---
+            if !isQuizAlreadyStarted {
+                
+                let startTime = Date()
+                // Format the start date as a string
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let dateKey = dateFormatter.string(from: startTime)
+                // Initialize the quiz session with the start date
+                quizHistory.quizHistoricalData[dateKey] = 0.0 // Use nil or a placeholder score
+                isQuizAlreadyStarted = true // Set this flag to true to indicate the quiz has started
+                
+                do {
+                    let jsonData = try quizHistory.encodeToJson()
+                    // Persist jsonData to a file
+                } catch {
+                    print("Error encoding quiz history: \(error)")
+                }
+                print (startTime)
+            }
+            // --- Test for saving Quiz historical data ---
+            
+            
             if !hasNavigatedAway {
                 
                 //NOTE: Only reset and animate if the user did not navigate away
@@ -201,6 +248,23 @@ struct QuizView: View {
         }
     }
     
+    // ---Code for saving Quiz progress ---
+    func loadQuizState() {
+        do {
+            if let loadedState = try storedNewWordItems.shared.loadQuizState() {
+                self.currentQuizIndex = loadedState.currentQuizIndex
+                self.questionStatuses = loadedState.questionStatuses
+                //test
+                self.correctAnswerNumber = loadedState.correctAnswerCount
+                self.incorrectAnswerNumber = loadedState.incorrectAnswerCount
+                // Load any other necessary state components
+            }
+        } catch {
+            print("Could not load quiz state: \(error)")
+        }
+    }
+    // ---Code for saving Quiz progress ends ---
+
     //NOTE: Function the holds ansver validation logic
     func validateAnswer(word: String) {
         hasAnswered = true
@@ -222,6 +286,14 @@ struct QuizView: View {
         } else {
             incorrectAnswerNumber += 1
         }
+        
+        if currentQuizIndex >= 0 && currentQuizIndex < questionStatuses.count {
+            questionStatuses[currentQuizIndex] = isCorrect ? .correct : .incorrect
+            print("Updated questionStatuses at index \(currentQuizIndex) to \(isCorrect ? "correct" : "incorrect").")
+        } else {
+            print("Error: Tried to access questionStatuses at out-of-range index \(currentQuizIndex).")
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             withAnimation(Animation.easeInOut(duration: 0.5)) {
                 showCircleAnimation = false
@@ -238,8 +310,9 @@ struct QuizView: View {
                     }
                     hasAnswered = false
                 } else {
+                    print("Reached the end of the quizItems.")
                     isQuizFinished = true
-             //       shouldStopVideo = true
+                    finishQuiz()
                     showQuizSummary = true
                     
                 }
@@ -250,7 +323,31 @@ struct QuizView: View {
         }
         //NOTE: Update the status for the current question
             questionStatuses[currentQuizIndex] = isCorrect ? .correct : .incorrect
+        print("Updated questionStatuses at index \(currentQuizIndex) to \(isCorrect ? "correct" : "incorrect").")
+        
+        // --- Code for saving Quiz progress ---
+        saveCurrentQuizState()
+        // ---Code for saving Quiz progress ends---
     }
+    
+    // ---Code for saving Quiz progress ---
+    func saveCurrentQuizState() {
+        let state = storedNewWordItems.QuizState(
+            currentQuizIndex: currentQuizIndex,
+            questionStatuses: questionStatuses,
+            //test
+            correctAnswerCount: correctAnswerNumber,
+            incorrectAnswerCount: incorrectAnswerNumber
+        )
+        do {
+            try storedNewWordItems.shared.saveQuizState(state)
+        } catch {
+            print("Could not save quiz state: \(error)")
+        }
+    }
+    
+    // ---Code for saving Quiz progress ends---
+    
     
     func resetAndAnimateUIComponents() {
         // Reset visibility states
@@ -270,6 +367,18 @@ struct QuizView: View {
             }
         }
     }
+    
+    // Code for updating historical chart with current quiz
+    private func finishQuiz() {
+           let finalScore = sessionScore  // Utilizing the computed property for the score
+           let currentDate = Date()
+           storedNewWordItems.shared.quizHistory.saveQuizData(date: currentDate, score: finalScore)
+           storedNewWordItems.shared.quizHistory.saveToPersistentStorage()
+           
+           // Trigger navigation to Summary View
+           self.isQuizFinished = true
+       }
+    // Code for updating historical chart with current quiz ends
 }
 
 struct QuizView_Previews: PreviewProvider {

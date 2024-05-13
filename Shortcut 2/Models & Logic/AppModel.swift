@@ -136,11 +136,79 @@ extension String {
     }
 }
 
+// --- Code for saving Quiz historical data ---
+
+struct QuizHistory: Codable {
+    var quizHistoricalData: [String: Double]
+    
+    var totalAverage: Double {
+        let totalScore = quizHistoricalData.values.reduce(0, +)
+        return totalScore / Double(quizHistoricalData.count)
+    }
+    init() {
+            // Try to load existing data when initializing
+            let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("quizHistory.json")
+            do {
+                let data = try Data(contentsOf: fileURL)
+                self = try JSONDecoder().decode(QuizHistory.self, from: data)
+            } catch {
+                self.quizHistoricalData = [:]  // Initialize with empty data if loading fails
+                print("Failed to load quiz history: \(error)")
+            }
+        }
+    
+    mutating func saveQuizData(date: Date, score: Double) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateKey = dateFormatter.string(from: date)
+        
+        quizHistoricalData[dateKey] = score
+    }
+    
+    func encodeToJson() throws -> Data {
+        return try JSONEncoder().encode(self)
+    }
+    
+    static func decodeFromJson(data: Data) throws -> QuizHistory {
+        return try JSONDecoder().decode(QuizHistory.self, from: data)
+    }
+}
+extension QuizHistory {
+    mutating func loadFromPersistentStorage() {
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("quizHistory.json")
+        do {
+            let data = try Data(contentsOf: fileURL)
+            self = try JSONDecoder().decode(QuizHistory.self, from: data)
+        } catch {
+            print("Failed to load quiz history: \(error)")
+        }
+    }
+
+    func saveToPersistentStorage() {
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("quizHistory.json")
+        do {
+            let data = try JSONEncoder().encode(self)
+            try data.write(to: fileURL, options: [.atomicWrite])
+        } catch {
+            print("Failed to save quiz history: \(error)")
+        }
+    }
+}
+
+// --- Code for saving Quiz historical data ends ---
+
+
+
 // Тут будем хранить два массива слов, "Знаю" и "Не знаю", теперь для всех уровней. Слова в них будут сохраняться по структуре wordItemNew:
 
 class storedNewWordItems: ObservableObject {
     
     static let shared = storedNewWordItems()
+    
+    // Code for quiz History persistence //
+    var quizHistory = QuizHistory()
+    init(){}
+    // Code for quiz History persistence ends //
     
     func arrayForLevel(_ level: String) -> [wordItemNew] {
             switch level {
@@ -851,7 +919,65 @@ extension storedNewWordItems {
         return count
 
     }
+    
+    // ---Code for saving Quiz progress ---
+
+    private var quizStateFile: URL {
+           documentDirectory
+               .appendingPathComponent("quizState")
+               .appendingPathExtension(for: .json)
+       }
+
+    func saveQuizState(_ state: QuizState) throws {
+           let data = try JSONEncoder().encode(state)
+           try data.write(to: quizStateFile)
+    }
+
+    func loadQuizState() throws -> QuizState? {
+         guard FileManager.default.isReadableFile(atPath: quizStateFile.path) else { return nil }
+         let data = try Data(contentsOf: quizStateFile)
+           return try JSONDecoder().decode(QuizState.self, from: data)
+       }
+
+    func resetQuizStateForNewSession(completion: @escaping () -> Void) throws {
+        let initialState = QuizState(
+            currentQuizIndex: 0,
+            questionStatuses: [],
+            //test
+            correctAnswerCount: 0,
+            incorrectAnswerCount: 0
+        )
+        let data = try JSONEncoder().encode(initialState)
+        try data.write(to: quizStateFile)
+        UserDefaults.standard.set(true, forKey: "justReset")
+        completion()
+        print("Quiz state has been reset.")
+    }
+
+    struct QuizState: Codable {
+        var currentQuizIndex: Int
+        var questionStatuses: [AnswerStatus]
+        //Test
+        var correctAnswerCount: Int
+        var incorrectAnswerCount: Int
+    }
+
+    func isQuizInProgress() -> Bool {
+        do {
+            if let loadedState = try loadQuizState() {
+                return loadedState.currentQuizIndex > 0
+            }
+        } catch {
+            print("Could not determine quiz progress: \(error)")
+        }
+        return false
+    }
+
+    // ---Code for saving Quiz progress ends ---
 }
+
+
+
 
 // Отсюда будут браться всякие универсальные вещи типа текущей даты:
 
