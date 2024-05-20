@@ -14,10 +14,10 @@ struct ContentView: View {
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var storedStatesDataLayer: storedStates
         
-    //@State private var selectedTab = 1
+   // @State private var selectedTab = 1
     
     @State var screenRefresher: Bool = false
-    @State private var activeModal: ActiveModal = .none
+   
     @State private var selectedTab: Tab = .second
 
     enum Tab {
@@ -25,6 +25,8 @@ struct ContentView: View {
     }
 
     @State private var showModal = false
+    @State var activeModal: ActiveModal = .none
+    
     var body: some View {
         
         ZStack{
@@ -63,48 +65,49 @@ struct ContentView: View {
 //                .tag(3)
 //            }
             // Standard Tab Bar ends
+       
             
+//            ZStack(alignment: .bottomLeading) {
+//                VStack{
+//                    // Content area
+//                    switch selectedTab {
+//                    case .first:
+//                        ProgressView(activeModal: $activeModal, activityLogDataLayer: activityLogDataLayer)
+//                    case .second:
+//                        SwiperScreen()
+//                            .environmentObject(storedNewWordItemsDataLayer)
+//                    case .third:
+//                        DictionaryView(consecutiveCorrectRecalls: 0, progress: 0.0)
+//                    case .fourth:
+//                        SettingsView()
+//                    }
+//                }
+//                
+//    //             Tab bar
+//  //              VStack {
+//                  //  Spacer()
+//                    
+//                    HStack {
+//                        TabBarItem(image: "progress", selectedImage: "progress.fill", isSelected: selectedTab == .first) {
+//                            selectedTab = .first
+//                        }
+//                        TabBarItem(image: "discovery", selectedImage: "discovery.fill", isSelected: selectedTab == .second) {
+//                            selectedTab = .second
+//                        }
+//                        TabBarItem(image: "library", selectedImage: "library.fill", isSelected: selectedTab == .third) {
+//                            selectedTab = .third
+//                        }
+//                        TabBarItem(image: "account", selectedImage: "account.fill", isSelected: selectedTab == .fourth) {
+//                            selectedTab = .fourth
+//                        }
+//                    }
+//                    
+//         //       }
+//              // .background(tabBarGradient)
+//            }
+            TabBar(selectedTab: $selectedTab, activeModal: $activeModal)
             
-            ZStack(alignment: .bottomLeading) {
-                VStack{
-                    // Content area
-                    switch selectedTab {
-                    case .first:
-                        ProgressView(activeModal: $activeModal, activityLogDataLayer: activityLogDataLayer)
-                    case .second:
-                        SwiperScreen()
-                            .environmentObject(storedNewWordItemsDataLayer)
-                    case .third:
-                        DictionaryView(consecutiveCorrectRecalls: 0, progress: 0.0)
-                    case .fourth:
-                        SettingsView()
-                    }
-                }
-                
-    //             Tab bar
-  //              VStack {
-                  //  Spacer()
-                    
-                    HStack {
-                        TabBarItem(image: "progress", selectedImage: "progress.fill", isSelected: selectedTab == .first) {
-                            selectedTab = .first
-                        }
-                        TabBarItem(image: "discovery", selectedImage: "discovery.fill", isSelected: selectedTab == .second) {
-                            selectedTab = .second
-                        }
-                        TabBarItem(image: "library", selectedImage: "library.fill", isSelected: selectedTab == .third) {
-                            selectedTab = .third
-                        }
-                        TabBarItem(image: "account", selectedImage: "account.fill", isSelected: selectedTab == .fourth) {
-                            selectedTab = .fourth
-                        }
-                    }
-                    
-         //       }
-             //  .background(.ultraThinMaterial)
-            }
-            
-            // NOTE: Conditional logic using enum to understand what modal window to show
+//            // NOTE: Conditional logic using enum to understand what modal window to show
             if activeModal == .learnedAtThisLevel {
                   Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
@@ -156,9 +159,17 @@ struct ContentView: View {
                         AlmostLearnedModal(activeModal: $activeModal)
                     }
                 }
+//                .safeAreaInset(edge: .bottom) {
+//                    Color.clear.frame(height: 56)
+//                    
+//                }
                 .modalStyle()
             }
+            
+               // .frame(height: 45)
         }
+       .edgesIgnoringSafeArea(.bottom)
+        
         .onAppear{
             storedNewWordItemsDataLayer.initialWordDataLoader()
             try! activityLogDataLayer.loadDataFromJSON()

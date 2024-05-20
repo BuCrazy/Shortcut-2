@@ -95,6 +95,7 @@ struct DictionaryView: View {
                         
                
                     }
+                    Spacer().frame(height: 50)
                 }
                 .navigationTitle(Text ("Dictionary")).navigationBarBackButtonHidden(false)
                 .toolbarBackground(.visible, for: .navigationBar)

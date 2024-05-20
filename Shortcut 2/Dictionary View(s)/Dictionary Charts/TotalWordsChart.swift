@@ -27,6 +27,7 @@ struct TotalWordsChart: View {
         startPoint: UnitPoint(x: 0.5, y: -1.42),
         endPoint: UnitPoint(x: 0.5, y: 1)
         )
+    
     let chartGradientLine = LinearGradient(
         stops: [
             Gradient.Stop(color: Color(red: 1, green: 0.57, blue: 0), location: 0.00),

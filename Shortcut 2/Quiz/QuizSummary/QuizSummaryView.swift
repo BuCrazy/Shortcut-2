@@ -66,6 +66,7 @@ struct QuizSummaryView: View {
                         
                         
                     }
+                    Spacer().frame(height: 50)
                 }
                 
                 ZStack {
