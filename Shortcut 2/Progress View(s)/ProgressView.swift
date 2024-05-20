@@ -34,6 +34,7 @@ struct ProgressView: View {
     }
     //NOTE: Test Solution Ends
     
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -133,8 +134,13 @@ struct ProgressView: View {
                         }
                     )
                 }
+             //   .toolbarBackground(toolBarGradient.opacity(0.9), for: .navigationBar)
+              //  .foregroundStyle(toolBarGradient)
+              //  .toolbarColorScheme(.dark, for: .navigationBar)
+             //   .toolbarBackground(.visible, for: .navigationBar)
             }
-
+        
+        
     }
 }
 
