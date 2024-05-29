@@ -8,6 +8,8 @@ enum ActiveModal {
     case almostLearned
 }
 
+// commit attempt
+
 struct ContentView: View {
     
     @EnvironmentObject var activityLogDataLayer: ActivityCalendar
