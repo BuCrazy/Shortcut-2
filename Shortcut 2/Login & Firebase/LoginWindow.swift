@@ -63,9 +63,11 @@ struct LoginWindow: View {
     func showError(_ message: String) {
         errorMessage = message
         showAlert.toggle()
+        isLoading = false
     }
     func loginWithFirebase(_ authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            isLoading = true
           guard let nonce else {
             fatalError("Invalid state: A login callback was received, but no login request was sent.")
           }
