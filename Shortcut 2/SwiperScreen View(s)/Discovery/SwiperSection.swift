@@ -276,11 +276,12 @@ struct SwiperSection: View {
                     default:
                         print("Nothing added nowhere")
                 }
+                checkAndTransitionToRevision()
+//                if wordsDiscoveredDuringTheCurrentDiscoverySession >= wordsPerDiscoverySetting {
+//                    currentLearningMode = "revision"
+//                    wordsDiscoveredDuringTheCurrentDiscoverySession = 0
+//                }
                 
-                if wordsDiscoveredDuringTheCurrentDiscoverySession >= wordsPerDiscoverySetting {
-                    currentLearningMode = "revision"
-                    wordsDiscoveredDuringTheCurrentDiscoverySession = 0
-                }
             } else if direction == .down {
                 bottomWords.insert(newItem, at: 0)
                 wordsDiscoveredDuringTheCurrentDiscoverySession += 1
@@ -322,11 +323,12 @@ struct SwiperSection: View {
                         print("Nothing added anywhere")
                     
                 }
+                checkAndTransitionToRevision()
                 
-                if wordsDiscoveredDuringTheCurrentDiscoverySession >= wordsPerDiscoverySetting {
-                    currentLearningMode = "revision"
-                    wordsDiscoveredDuringTheCurrentDiscoverySession = 0
-                }
+//                if wordsDiscoveredDuringTheCurrentDiscoverySession >= wordsPerDiscoverySetting {
+//                    currentLearningMode = "revision"
+//                    wordsDiscoveredDuringTheCurrentDiscoverySession = 0
+//                }
             }
         }
         
@@ -343,6 +345,17 @@ struct SwiperSection: View {
         weeklySwipeCount += 1
     }
     
+    // Function for checking if dictionary contains enough words to generate a quiz
+    func checkAndTransitionToRevision() {
+            let currentLevel = currentLevelSelected
+            let wordsBeingLearnedCount = storedNewWordItemsDataLayer.totalWordCount(for: currentLevel)
+            if wordsDiscoveredDuringTheCurrentDiscoverySession >= wordsPerDiscoverySetting &&
+                wordsBeingLearnedCount >= wordsPerRevisionSetting /*&&
+                weeklySwipeCount >= 100*/ {
+                currentLearningMode = "revision"
+                wordsDiscoveredDuringTheCurrentDiscoverySession = 0
+            }
+        }
     
     //NOTE: Getting current Week
     func getCurrentWeek() -> String {
