@@ -35,7 +35,7 @@ struct SwiperScreen: View {
               }
         }
         .onAppear{
-            storedNewWordItemsDataLayer.initialWordDataLoader()
+//            storedNewWordItemsDataLayer.initialWordDataLoader()
             try! activityLogDataLayer.loadDataFromJSON()
         }
     }
