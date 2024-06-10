@@ -84,11 +84,11 @@ struct ContentView: View {
 //                        SettingsView()
 //                    }
 //                }
-//                
+//
 //    //             Tab bar
 //  //              VStack {
 //                  //  Spacer()
-//                    
+//
 //                    HStack {
 //                        TabBarItem(image: "progress", selectedImage: "progress.fill", isSelected: selectedTab == .first) {
 //                            selectedTab = .first
@@ -103,7 +103,7 @@ struct ContentView: View {
 //                            selectedTab = .fourth
 //                        }
 //                    }
-//                    
+//
 //         //       }
 //              // .background(tabBarGradient)
 //            }
@@ -163,7 +163,7 @@ struct ContentView: View {
                 }
 //                .safeAreaInset(edge: .bottom) {
 //                    Color.clear.frame(height: 56)
-//                    
+//
 //                }
                 .modalStyle()
             }
@@ -230,3 +230,4 @@ struct TabBarItem: View {
         .environmentObject(storedNewWordItems())
         .environmentObject(storedStates())
 }
+

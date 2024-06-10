@@ -1,4 +1,5 @@
 import SwiftUI
+import Firebase
 struct SettingsView: View {
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("currentLanguageSelected_key") var currentLanguageSelected: String = "ukranian"
@@ -8,6 +9,7 @@ struct SettingsView: View {
     }
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
+    @AppStorage("loginStatus_key") private var userIsLoggedIn: Bool = false
     var body: some View {
         Form{
             Group{
@@ -30,7 +32,10 @@ struct SettingsView: View {
                             }
                         }
                         .pickerStyle(MenuPickerStyle())
-
+                    }
+                    Button("Log out") {
+                        try? Auth.auth().signOut()
+                        userIsLoggedIn = false
                     }
                 })
             }
