@@ -14,7 +14,7 @@ struct SwiperMainView: View {
             SwiperView()
         }
         .onAppear{
-            storedNewWordItemsDataLayer.initialWordDataLoader()
+//            storedNewWordItemsDataLayer.initialWordDataLoader()
             try! activityLogDataLayer.loadDataFromJSON()
         }
     }
