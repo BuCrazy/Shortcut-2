@@ -11,6 +11,7 @@ import Firebase
 import CryptoKit
 
 struct LoginWindow: View {
+    @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @State private var errorMessage: String = ""
     @State private var showAlert: Bool = false
     @State private var isLoading: Bool = false

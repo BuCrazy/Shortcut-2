@@ -15,6 +15,10 @@ struct SwiperScreen: View {
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     
+    @AppStorage("isFirstAppLaunch") var isFirstAppLaunch: Bool = true
+    
+    @State private var refreshID = UUID()
+    
     var body: some View {
         VStack{
             if currentLearningMode == "discovery" {
@@ -34,9 +38,24 @@ struct SwiperScreen: View {
                   ReinforcementView()
               }
         }
+        .id(refreshID)
         .onAppear{
-//            storedNewWordItemsDataLayer.initialWordDataLoader()
-            try! activityLogDataLayer.loadDataFromJSON()
+//          try! activityLogDataLayer.loadDataFromJSON()
+            if isFirstAppLaunch {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    if let user = storedNewWordItemsDataLayer.authManager.user {
+                        storedNewWordItemsDataLayer.loadData(for: user.uid)
+                        isFirstAppLaunch = false
+                        print("Database download run with a 2 second delay")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            refreshID = UUID()
+                            print("Screen refreshed")
+                        }
+                    }
+                }
+            } else {
+                storedNewWordItemsDataLayer.saveData()
+            }
         }
     }
     

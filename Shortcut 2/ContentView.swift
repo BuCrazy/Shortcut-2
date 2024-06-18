@@ -29,8 +29,6 @@ struct ContentView: View {
     @State private var showModal = false
     @State var activeModal: ActiveModal = .none
     
-    @AppStorage("isFirstAppLaunch") var isFirstAppLaunch: Bool = true
-    
     var body: some View {
         
         ZStack{
@@ -177,13 +175,6 @@ struct ContentView: View {
         .onAppear{
             storedNewWordItemsDataLayer.initialWordDataLoader()
             try! activityLogDataLayer.loadDataFromJSON()
-            if isFirstAppLaunch {
-                if let user = storedNewWordItemsDataLayer.authManager.user {
-                    storedNewWordItemsDataLayer.loadData(for: user.uid)
-                }
-            } else {
-                storedNewWordItemsDataLayer.saveData()
-            }
         }
         
     }
