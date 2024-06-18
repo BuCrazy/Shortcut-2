@@ -1,5 +1,10 @@
+import FirebaseAuth
 import Foundation
 import SwiftUI
+import Combine
+import FirebaseFirestore
+import Firebase
+import FirebaseAuthCombineSwift
 
 // Эта структура, по которой для каждого уровня будет считываться читаться JSON-файл с базой слов и по которой слова для Discovery будут записываться в промежуточные массивы каждого соответствующего уровня:
 
@@ -197,17 +202,60 @@ extension QuizHistory {
 
 // --- Code for saving Quiz historical data ends ---
 
-
+class AuthManager: ObservableObject {
+    @Published var user: User? = nil
+    
+    private var auth = Auth.auth()
+    
+    init() {
+        self.user = auth.currentUser
+        auth.addStateDidChangeListener { (auth, user) in
+            self.user = user
+        }
+    }
+    
+//    func signUp(email: String, password: String, completion: @escaping (Error?) -> Void) {
+//        auth.createUser(withEmail: email, password: password) { authResult, error in
+//            if let error = error {
+//                completion(error)
+//            } else {
+//                self.user = authResult?.user
+//                completion(nil)
+//            }
+//        }
+//    }
+//    
+//    func signIn(email: String, password: String, completion: @escaping (Error?) -> Void) {
+//        auth.signIn(withEmail: email, password: password) { authResult, error in
+//            if let error = error {
+//                completion(error)
+//            } else {
+//                self.user = authResult?.user
+//                completion(nil)
+//            }
+//        }
+//    }
+//    
+//    func signOut(completion: @escaping (Error?) -> Void) {
+//        do {
+//            try auth.signOut()
+//            self.user = nil
+//            completion(nil)
+//        } catch let signOutError as NSError {
+//            completion(signOutError)
+//        }
+//    }
+}
 
 // Тут будем хранить два массива слов, "Знаю" и "Не знаю", теперь для всех уровней. Слова в них будут сохраняться по структуре wordItemNew:
 
 class storedNewWordItems: ObservableObject {
     
     static let shared = storedNewWordItems()
-    
+        
     // Code for quiz History persistence //
     var quizHistory = QuizHistory()
-    init(){}
+
     // Code for quiz History persistence ends //
     
     func arrayForLevel(_ level: String) -> [wordItemNew] {
@@ -248,6 +296,127 @@ class storedNewWordItems: ObservableObject {
             }
         
         }
+    
+    private var db = Firestore.firestore()
+
+    @Published var authManager = AuthManager()
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(){
+//        authManager.$user
+//            .sink { [weak self] user in
+//                if let user = user {
+//                    self?.loadData(for: user.uid)
+//                }
+//            }
+//            .store(in: &cancellables)
+    }
+    
+    var elementaryWordsStorageWordProgress: Int {
+        return elementaryWordsStorageSource.count - elementaryWordsStorage.count
+    }
+    
+    var beginnerWordsStorageWordProgress: Int {
+        return beginnerWordsStorageSource.count - beginnerWordsStorage.count
+    }
+    
+    var intermediateWordsStorageWordProgress: Int {
+        return intermediateWordsStorageSource.count - intermediateWordsStorage.count
+    }
+    
+    func saveData() {
+        guard let user = authManager.user else { return }
+        do {
+            let elementaryKnewAlreadyData = try JSONEncoder().encode(elementaryKnewAlready)
+            let elementaryKnewAlreadyDict = try JSONSerialization.jsonObject(with: elementaryKnewAlreadyData, options: []) as! [[String: Any]]
+            let elementaryBeingLearnedData = try JSONEncoder().encode(elementaryBeingLearned)
+            let elementaryBeingLearnedDict = try JSONSerialization.jsonObject(with: elementaryBeingLearnedData, options: []) as! [[String: Any]]
+            let beginnerKnewAlreadyData = try JSONEncoder().encode(beginnerKnewAlready)
+            let beginnerKnewAlreadyDict = try JSONSerialization.jsonObject(with: beginnerKnewAlreadyData, options: []) as! [[String: Any]]
+            let beginnerBeingLearnedData = try JSONEncoder().encode(beginnerBeingLearned)
+            let beginnerBeingLearnedDict = try JSONSerialization.jsonObject(with: beginnerBeingLearnedData, options: []) as! [[String: Any]]
+            let intermediateKnewAlreadyData = try JSONEncoder().encode(intermediateKnewAlready)
+            let intermediateKnewAlreadyDict = try JSONSerialization.jsonObject(with: intermediateKnewAlreadyData, options: []) as! [[String: Any]]
+            let intermediateBeingLearnedData = try JSONEncoder().encode(intermediateBeingLearned)
+            let intermediateBeingLearnedDict = try JSONSerialization.jsonObject(with: intermediateBeingLearnedData, options: []) as! [[String: Any]]
+            db.collection("users").document(user.uid).setData([
+                "elementaryKnewAlready": elementaryKnewAlreadyDict,
+                "elementaryBeingLearned": elementaryBeingLearnedDict,
+                "beginnerKnewAlready": beginnerKnewAlreadyDict,
+                "beginnerBeingLearned": beginnerBeingLearnedDict,
+                "intermediateKnewAlready": intermediateKnewAlreadyDict,
+                "intermediateBeingLearned": intermediateBeingLearnedDict,
+                "elementaryWordsStorageWordProgress": elementaryWordsStorageWordProgress,
+                "beginnerWordsStorageWordProgress": beginnerWordsStorageWordProgress,
+                "intermediateWordsStorageWordProgress": intermediateWordsStorageWordProgress
+            ]) { error in
+                if let error = error {
+                    print("Error saving data: \(error.localizedDescription)")
+                }
+            }
+        } catch {
+            print("Error encoding data: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadData(for userID: String) {
+        db.collection("users").document(userID).getDocument { [weak self] (document, error) in
+            guard let self = self else { return }
+            if let document = document, document.exists {
+                do {
+                    if let data = document.data() {
+                        if let elementaryKnewAlreadyData = data["elementaryKnewAlready"] as? [[String: Any]] {
+                            let jsonData = try JSONSerialization.data(withJSONObject: elementaryKnewAlreadyData, options: [])
+                            self.elementaryKnewAlready = try JSONDecoder().decode([wordItemNew].self, from: jsonData)
+                        }
+                        if let elementaryBeingLearnedData = data["elementaryBeingLearned"] as? [[String: Any]] {
+                            let jsonData = try JSONSerialization.data(withJSONObject: elementaryBeingLearnedData, options: [])
+                            self.elementaryBeingLearned = try JSONDecoder().decode([wordItemNew].self, from: jsonData)
+                        }
+                        
+                        if let beginnerKnewAlreadyData = data["beginnerKnewAlready"] as? [[String: Any]] {
+                            let jsonData = try JSONSerialization.data(withJSONObject: beginnerKnewAlreadyData, options: [])
+                            self.beginnerKnewAlready = try JSONDecoder().decode([wordItemNew].self, from: jsonData)
+                        }
+                        if let beginnerBeingLearnedData = data["beginnerBeingLearned"] as? [[String: Any]] {
+                            let jsonData = try JSONSerialization.data(withJSONObject: beginnerBeingLearnedData, options: [])
+                            self.beginnerBeingLearned = try JSONDecoder().decode([wordItemNew].self, from: jsonData)
+                        }
+                        
+                        if let intermediateKnewAlreadyData = data["intermediateKnewAlready"] as? [[String: Any]] {
+                            let jsonData = try JSONSerialization.data(withJSONObject: intermediateKnewAlreadyData, options: [])
+                            self.intermediateKnewAlready = try JSONDecoder().decode([wordItemNew].self, from: jsonData)
+                        }
+                        if let intermediateBeingLearnedData = data["intermediateBeingLearned"] as? [[String: Any]] {
+                            let jsonData = try JSONSerialization.data(withJSONObject: intermediateBeingLearnedData, options: [])
+                            self.intermediateBeingLearned = try JSONDecoder().decode([wordItemNew].self, from: jsonData)
+                        }
+                        
+                        if !elementaryWordsStorage.isEmpty{
+                            if let elementaryWordsStorageWordsToDelete = data["elementaryWordsStorageWordProgress"] as? Int {
+                                elementaryWordsStorage.removeFirst(elementaryWordsStorageWordsToDelete)
+                            }
+                        }
+                        if !beginnerWordsStorage.isEmpty{
+                            if let beginnerWordsStorageWordsToDelete = data["beginnerWordsStorageWordProgress"] as? Int {
+                                beginnerWordsStorage.removeFirst(beginnerWordsStorageWordsToDelete)
+                            }
+                        }
+                        if !intermediateWordsStorage.isEmpty{
+                            if let intermediateWordsStorageWordsToDelete = data["intermediateWordsStorageWordProgress"] as? Int {
+                                intermediateWordsStorage.removeFirst(intermediateWordsStorageWordsToDelete)
+                            }
+                        }
+                    }
+                } catch {
+                    print("Error decoding data: \(error.localizedDescription)")
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
     // Объявляем вообще сами массивы слов для начала с соответстующими названиями, пока они пустые и в них ничего не записывается, а также объявляем, что данные в них будут сохраняться по структуре WordItemStruct:
     
@@ -544,6 +713,7 @@ class storedNewWordItems: ObservableObject {
         
         if elementaryWordsStorage.isEmpty {
             elementaryWordsStorage = elementaryWordsStorageSource
+            
         }
         if beginnerWordsStorage.isEmpty {
             beginnerWordsStorage = beginnerWordsStorageSource

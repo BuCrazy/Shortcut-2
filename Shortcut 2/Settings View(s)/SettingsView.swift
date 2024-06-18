@@ -1,5 +1,6 @@
 import SwiftUI
 import Firebase
+import FirebaseAuth
 struct SettingsView: View {
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("currentLanguageSelected_key") var currentLanguageSelected: String = "ukranian"
@@ -36,6 +37,22 @@ struct SettingsView: View {
                     Button("Log out") {
                         try? Auth.auth().signOut()
                         userIsLoggedIn = false
+                    }
+//                    Button("Save data") {
+//                        storedNewWordItemsDataLayer.saveData()
+//                    }
+//                    Button("Load data") {
+//                        if let user = storedNewWordItemsDataLayer.authManager.user {
+//                            storedNewWordItemsDataLayer.loadData(for: user.uid)
+//                        }
+//                    }
+                    Button("Clear local data") {
+                        storedNewWordItemsDataLayer.elementaryBeingLearned.removeAll()
+                        storedNewWordItemsDataLayer.elementaryKnewAlready.removeAll()
+                        storedNewWordItemsDataLayer.elementaryWordsStorage.removeAll()
+                        storedNewWordItemsDataLayer.elementaryWordsStorage = elementaryWordsStorageSource
+                        try! storedNewWordItemsDataLayer.elementaryKnewAlreadySave()
+                        try! storedNewWordItemsDataLayer.elementaryBeingLearnedSave()
                     }
                 })
             }
