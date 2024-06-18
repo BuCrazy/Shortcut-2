@@ -320,6 +320,7 @@ struct QuizView: View {
                     resetAndAnimateUIComponents()
                 }
             }
+            saveCurrentQuizState()
         }
         //NOTE: Update the status for the current question
             questionStatuses[currentQuizIndex] = isCorrect ? .correct : .incorrect
