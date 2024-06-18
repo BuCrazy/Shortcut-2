@@ -1,5 +1,5 @@
 {
-  "originHash" : "d68228759653ebb2a33367b68b4f41c8622b97b73424c009f315f354c63fb85c",
+  "originHash" : "073cbf610517a28bf486d961ac48ede2c210d38c3f327f08974bc38868f0259d",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -80,15 +80,6 @@
       "state" : {
         "revision" : "2d12673670417654f08f5f90fdd62926dc3a2648",
         "version" : "100.0.0"
-      }
-    },
-    {
-      "identity" : "ipages",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/benjaminsage/iPages.git",
-      "state" : {
-        "revision" : "f57e3cba2cf4bd0a689236254cde361e54315720",
-        "version" : "0.0.13"
       }
     },
     {

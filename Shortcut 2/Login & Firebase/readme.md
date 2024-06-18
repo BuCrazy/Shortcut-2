@@ -9,3 +9,7 @@ https://www.youtube.com/watch?v=HyiNbqLOCQ8
 (Тут также есть способ вытягивания имени пользователя из Apple ID)
 
 Были также изменены файлы ContentView и Shortcut_2_App.swift
+
+Надо потом доработать определение, залогинен ли пользователь по-нормальному:
+
+https://youtu.be/6b2WAePdiqA?si=ts-e7lJXths-hiOq&t=902

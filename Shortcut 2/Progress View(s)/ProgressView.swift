@@ -1,6 +1,5 @@
 import SwiftUI
 import WrappingHStack
-import iPages
 
 struct ProgressView: View {
     
