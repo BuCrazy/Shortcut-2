@@ -3,6 +3,7 @@ struct LevelSwitcherSheet: View {
     @AppStorage("levelSwitchSheetLevelSelected_key") var levelSwitchSheetLevelSelected = 1
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
+    @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
     var body: some View {
         VStack{
             TabView(selection: $levelSwitchSheetLevelSelected){
@@ -163,8 +164,9 @@ struct LevelSwitcherSheet: View {
             case 1:
                 Button(
                     action: {
-                        currentLevelSelected = "elementary"
-                        levelSwitchSheetShown = false
+                        switchToLevel(level: "elementary")
+//                        currentLevelSelected = "elementary"
+//                        levelSwitchSheetShown = false
                     },
                     label: {
                         Text("Switch to Elementary")
@@ -178,8 +180,9 @@ struct LevelSwitcherSheet: View {
             case 2:
                 Button(
                     action: {
-                        currentLevelSelected = "beginner"
-                        levelSwitchSheetShown = false
+                        switchToLevel(level: "beginner")
+//                        currentLevelSelected = "beginner"
+//                        levelSwitchSheetShown = false
                     },
                     label: {
                         Text("Switch to Beginner")
@@ -193,8 +196,10 @@ struct LevelSwitcherSheet: View {
             case 3:
                 Button(
                     action: {
-                        currentLevelSelected = "intermediate"
-                        levelSwitchSheetShown = false
+                        switchToLevel(level: "intermediate")
+//                            currentLevelSelected = "intermediate"
+//                            levelSwitchSheetShown = false
+                       
                     },
                     label: {
                         Text("Switch to Intermediate")
@@ -253,7 +258,8 @@ struct LevelSwitcherSheet: View {
             default:
                 Button(
                     action: {
-                        currentLevelSelected = "elementary"
+                        switchToLevel(level: "elementary")
+                       // currentLevelSelected = "elementary"
                     },
                     label: {
                         Text("Switch to Elementary")
@@ -269,6 +275,13 @@ struct LevelSwitcherSheet: View {
         }
         .background(Color("sheetColor"))
     }
+    private func switchToLevel(level: String) {
+            if currentLearningMode != "discovery" {
+                currentLearningMode = "discovery"
+            }
+            currentLevelSelected = level
+            levelSwitchSheetShown = false
+        }
 }
 #Preview {
     LevelSwitcherSheet()
