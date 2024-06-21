@@ -422,9 +422,9 @@ class storedNewWordItems: ObservableObject {
     
     var elementaryWordsStorage = [WordItemStruct]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.elementaryWordsStorageSave()
+                    try self?.elementaryWordsStorageSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -434,9 +434,9 @@ class storedNewWordItems: ObservableObject {
     
     var beginnerWordsStorage = [WordItemStruct]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.beginnerWordsStorageSave()
+                    try self?.beginnerWordsStorageSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -446,9 +446,9 @@ class storedNewWordItems: ObservableObject {
     
     var intermediateWordsStorage = [WordItemStruct](){
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.intermediateWordsStorageSave()
+                    try self?.intermediateWordsStorageSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -458,9 +458,9 @@ class storedNewWordItems: ObservableObject {
     
     var advancedWordsStorage = [WordItemStruct](){
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.advancedWordsStorageSave()
+                    try self?.advancedWordsStorageSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -470,9 +470,9 @@ class storedNewWordItems: ObservableObject {
     
     var nativelikeWordsStorage = [WordItemStruct](){
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.nativelikeWordsStorageSave()
+                    try self?.nativelikeWordsStorageSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -482,9 +482,9 @@ class storedNewWordItems: ObservableObject {
     
     var borninenglandWordsStorage = [WordItemStruct]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.borninenglandWordsStorageSave()
+                    try self?.borninenglandWordsStorageSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -508,9 +508,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var elementaryBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.elementaryBeingLearnedSave()
+                    try self?.elementaryBeingLearnedSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -520,9 +520,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var beginnerKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.beginnerKnewAlreadySave()
+                    try self?.beginnerKnewAlreadySave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -532,9 +532,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var beginnerBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.beginnerBeingLearnedSave()
+                    try self?.beginnerBeingLearnedSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -544,9 +544,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var intermediateKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.intermediateKnewAlreadySave()
+                    try self?.intermediateKnewAlreadySave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -556,9 +556,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var intermediateBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.intermediateBeingLearnedSave()
+                    try self?.intermediateBeingLearnedSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -568,9 +568,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var advancedKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.advancedKnewAlreadySave()
+                    try self?.advancedKnewAlreadySave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -580,9 +580,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var advancedBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.advancedBeingLearnedSave()
+                    try self?.advancedBeingLearnedSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -592,9 +592,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var nativelikeKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.nativelikeKnewAlreadySave()
+                    try self?.nativelikeKnewAlreadySave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -604,9 +604,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var nativelikeBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.nativelikeBeingLearnedSave()
+                    try self?.nativelikeBeingLearnedSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -616,9 +616,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var borninenglandKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.borninenglandKnewAlreadySave()
+                    try self?.borninenglandKnewAlreadySave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
@@ -628,9 +628,9 @@ class storedNewWordItems: ObservableObject {
     
     @Published var borninenglandBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 do {
-                    try self.borninenglandBeingLearnedSave()
+                    try self?.borninenglandBeingLearnedSave()
                 } catch {
                     print("Error saving data: \(error)")
                 }
