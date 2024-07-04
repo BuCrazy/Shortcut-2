@@ -33,6 +33,7 @@ struct ProgressView: View {
     }
     //NOTE: Test Solution Ends
     
+    @State static var resetAnimationTrigger = false
     
     var body: some View {
         NavigationStack {
@@ -97,9 +98,9 @@ struct ProgressView: View {
                     }
                     // Панель переключения уровней
                     .sheet(isPresented: $levelSwitchSheetShown) {
-                        LevelSwitcherSheet()
+                        LevelSwitcherSheetNew(resetAnimationTrigger: ProgressView.$resetAnimationTrigger)
                             .navigationBarHidden(true)
-                            .presentationDetents([.medium])
+                            .presentationDetents([.large])
                     }
                     .onAppear{
                         try! activityLogDataLayer.loadDataFromJSON()
@@ -114,14 +115,13 @@ struct ProgressView: View {
                 .toolbar {
                     Menu(
                         content: {
-                            Button(
-                                action: {
-                                    levelSwitchSheetShown.toggle()
-                                },
-                                label: {
-                                    Text("Switch Level")
+                            NavigationLink(destination: LevelSwitcherSheetNew( resetAnimationTrigger: ProgressView.$resetAnimationTrigger)) {
+                                    Text("Go to Detail View")
+                                        .padding()
+                                        .background(Color.blue)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
                                 }
-                            )
                         },
                         label: {
                             Button(

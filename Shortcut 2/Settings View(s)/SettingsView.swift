@@ -11,6 +11,7 @@ struct SettingsView: View {
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
     @AppStorage("loginStatus_key") private var userIsLoggedIn: Bool = false
+    @State static var resetAnimationTrigger = false
     var body: some View {
         Form{
             Group{
@@ -61,7 +62,7 @@ struct SettingsView: View {
                 UserDefaults.standard.set(nativeLanguageSelectedID, forKey: "nativeLanguageSelectedID_key")
             }
             .sheet(isPresented: $levelSwitchSheetShown) {
-                LevelSwitcherSheet()
+                LevelSwitcherSheetNew(resetAnimationTrigger: SettingsView.$resetAnimationTrigger)
                     .presentationDetents([.medium])
                     .navigationBarHidden(true)
             }
