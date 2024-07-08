@@ -98,7 +98,7 @@ struct ProgressView: View {
                     }
                     // Панель переключения уровней
                     .sheet(isPresented: $levelSwitchSheetShown) {
-                        LevelSwitcherSheetNew(resetAnimationTrigger: ProgressView.$resetAnimationTrigger)
+                        LevelSwitcherSheet(resetAnimationTrigger: ProgressView.$resetAnimationTrigger)
                             .navigationBarHidden(true)
                             .presentationDetents([.large])
                     }
@@ -115,8 +115,8 @@ struct ProgressView: View {
                 .toolbar {
                     Menu(
                         content: {
-                            NavigationLink(destination: LevelSwitcherSheetNew( resetAnimationTrigger: ProgressView.$resetAnimationTrigger)) {
-                                    Text("Go to Detail View")
+                            NavigationLink(destination: LevelSwitcherSheet( resetAnimationTrigger: ProgressView.$resetAnimationTrigger)) {
+                                    Text("Change level")
                                         .padding()
                                         .background(Color.blue)
                                         .foregroundColor(.white)

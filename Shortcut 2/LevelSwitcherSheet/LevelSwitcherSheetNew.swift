@@ -283,7 +283,7 @@ var shakespeareExamples2 = [
     "spatula",
     "skid"
 ]
-struct LevelSwitcherSheetNew: View {
+struct LevelSwitcherSheet: View {
     @AppStorage("levelSwitchSheetLevelSelected_key") var levelSwitchSheetLevelSelected = 1
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
@@ -434,7 +434,7 @@ struct LevelSwitcherSheetNew: View {
                     // Заголовок и подзаголовок
                     VStack(alignment: .leading){
                         Spacer()
-                            .frame(height:12)
+                            .frame(height:43)
                         Text("Select Target Level")
                             .font(.system(size: 32))
                             .fontWeight(.bold)
@@ -733,161 +733,168 @@ struct LevelSwitcherSheetNew: View {
                             .foregroundStyle(Color("secondaryFontColor"))
                             .offset(y: 7)
                     }
+                    Spacer()
+                        .frame(height:32)
                     TabView(selection: $levelSwitchSheetLevelSelected){
-                        VStack(alignment: .leading){
+                        VStack{
                             VStack{
                                 Image("levelicons_elementary")
-                                    .frame(width: 120)
+                                    .frame(width: 42, height: 42)
                                 Spacer()
-                                    .frame(height: 16)
-                                Text("ELEMENTARY")
+                                    .frame(height: 12)
+                                Text("Elementary")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
                                     .foregroundStyle(Color("MainFontColor"))
                                 Spacer()
-                                    .frame(height: 3)
+                                    .frame(height: 4)
                                 Text("First 500 words")
                                     .foregroundStyle(Color("secondaryFontColor"))
                                     .font(.system(size: 12))
                                 Spacer()
-                                    .frame(height: 11)
-                                Text("Absolute basics to start with. Not enough to start speaking.")
+                                    .frame(height: 12)
+                                Text("Absolute basics. Not enough to start speaking.")
                                     .font(.system(size: 14))
                                     .foregroundStyle(Color("MainFontColor"))
                                     .multilineTextAlignment(.center)
-                                Spacer()
-                                    .frame(height: 11)
                             }.padding([.leading, .trailing], 16)
                         }.tag(1)
                         VStack{
                             VStack{
                                 Image("levelicons_beginner")
-                                    .frame(width: 120)
+                                    .frame(width: 42, height: 42)
                                 Spacer()
-                                    .frame(height: 16)
-                                Text("BEGINNER")
+                                    .frame(height: 12)
+                                Text("Beginner")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
                                     .foregroundStyle(Color("MainFontColor"))
                                 Spacer()
-                                    .frame(height: 3)
+                                    .frame(height: 4)
                                 Text("Top 501 - 2 000 words")
                                     .foregroundStyle(Color("secondaryFontColor"))
                                     .font(.system(size: 12))
                                 Spacer()
-                                    .frame(height: 11)
+                                    .frame(height: 12)
                                 Text("Enough to be able to express 80 % of your ideas.")
                                     .font(.system(size: 14))
                                     .foregroundStyle(Color("MainFontColor"))
                                     .multilineTextAlignment(.center)
-                                Spacer()
-                                    .frame(height: 11)
                             }.padding([.leading, .trailing], 16)
                         }.tag(2)
                         VStack{
                             VStack{
                                 Image("levelicons_intermediate")
-                                    .frame(width: 120)
+                                    .frame(width: 42, height: 42)
                                 Spacer()
-                                    .frame(height: 16)
-                                Text("INTERMEDIATE")
+                                    .frame(height: 12)
+                                Text("Intermediate")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
                                     .foregroundStyle(Color("MainFontColor"))
                                 Spacer()
-                                    .frame(height: 3)
+                                    .frame(height: 4)
                                 Text("Top 2 001 - 5 000 words")
                                     .foregroundStyle(Color("secondaryFontColor"))
                                     .font(.system(size: 12))
                                 Spacer()
-                                    .frame(height: 11)
+                                    .frame(height: 12)
                                 Text("Enough to work in an English-speaking country")
                                     .font(.system(size: 14))
                                     .foregroundStyle(Color("MainFontColor"))
                                     .multilineTextAlignment(.center)
-                                Spacer()
-                                    .frame(height: 11)
                             }.padding([.leading, .trailing], 16)
                         }.tag(3)
                         VStack{
                             VStack{
                                 Image("levelicons_advanced")
-                                    .frame(width: 120)
+                                    .frame(width: 42, height: 42)
                                 Spacer()
-                                    .frame(height: 16)
-                                Text("ADVANCED")
+                                    .frame(height: 12)
+                                Text("Advanced")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
                                     .foregroundStyle(Color("MainFontColor"))
                                 Spacer()
-                                    .frame(height: 3)
+                                    .frame(height: 4)
                                 Text("Top 5 001 - 8 500 words")
                                     .foregroundStyle(Color("secondaryFontColor"))
                                     .font(.system(size: 12))
                                 Spacer()
-                                    .frame(height: 11)
+                                    .frame(height: 12)
                                 Text("Enough to make an excellent impression on a date.")
                                     .font(.system(size: 14))
                                     .foregroundStyle(Color("MainFontColor"))
                                     .multilineTextAlignment(.center)
-                                Spacer()
-                                    .frame(height: 11)
                             }.padding([.leading, .trailing], 16)
                         }.tag(4)
                         VStack{
                             VStack{
                                 Image("levelicons_nativelike")
-                                    .frame(width: 120)
+                                    .frame(width: 42, height: 42)
                                 Spacer()
-                                    .frame(height: 16)
-                                Text("NATIVE-LIKE")
+                                    .frame(height: 12)
+                                Text("Native-like")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
                                     .foregroundStyle(Color("MainFontColor"))
                                 Spacer()
-                                    .frame(height: 3)
+                                    .frame(height: 4)
                                 Text("Top 8 501 - 12 500 words")
                                     .foregroundStyle(Color("secondaryFontColor"))
                                     .font(.system(size: 12))
                                 Spacer()
-                                    .frame(height: 11)
-                                Text("Be able to communicate up to 99 % of your ideas with ease.")
+                                    .frame(height: 12)
+                                Text("Enough to communicate up to 99 % of your ideas.")
                                     .font(.system(size: 14))
                                     .foregroundStyle(Color("MainFontColor"))
                                     .multilineTextAlignment(.center)
-                                Spacer()
-                                    .frame(height: 11)
                             }.padding([.leading, .trailing], 16)
                         }.tag(5)
                         VStack{
                             VStack{
-                                Image("levelicons_borninengland")
-                                    .frame(width: 120)
+                                ZStack {}
+                                .frame(width: 42, height: 42)
+                                .background(
+                                LinearGradient(
+                                stops: [
+                                Gradient.Stop(color: Color(red: 0.76, green: 0.99, blue: 0.96), location: 0.00),
+                                Gradient.Stop(color: Color(red: 0.71, green: 0.97, blue: 0.9), location: 0.60),
+                                Gradient.Stop(color: Color(red: 0.57, green: 0.92, blue: 0.78), location: 1.00),
+                                ],
+                                startPoint: UnitPoint(x: 0.5, y: 0),
+                                endPoint: UnitPoint(x: 0.5, y: 1)
+                                )
+                                )
+                                .cornerRadius(60)
+                                .shadow(color: .black.opacity(0.11), radius: 21.86598, x: 9.71821, y: 9.71821)
+                                .shadow(color: .black.opacity(0.09), radius: 8.50344, x: 4.85911, y: 4.85911)
+                                .shadow(color: Color(red: 0.58, green: 0.89, blue: 0.76).opacity(0.5), radius: 11, x: 0, y: 0)
                                 Spacer()
-                                    .frame(height: 16)
-                                Text("SHAKESPEARE")
+                                    .frame(height: 12)
+                                Text("Shakespeare")
                                     .font(.system(size: 24))
                                     .fontWeight(.bold)
                                     .foregroundStyle(Color("MainFontColor"))
                                 Spacer()
-                                    .frame(height: 3)
+                                    .frame(height: 4)
                                 Text("Top 12 501 - 20 000 words")
                                     .foregroundStyle(Color("secondaryFontColor"))
                                     .font(.system(size: 12))
                                 Spacer()
-                                    .frame(height: 11)
-                                Text("Not worth spending your time on it. All the previous level are just enough.")
+                                    .frame(height: 12)
+                                Text("Words that aren't really useful in conversations.")
                                     .font(.system(size: 14))
                                     .foregroundStyle(Color("MainFontColor"))
                                     .multilineTextAlignment(.center)
-                                Spacer()
-                                    .frame(height: 11)
                             }.padding([.leading, .trailing], 16)
                         }.tag(6)
                     }
+                    .frame(height: 150)
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-                    .presentationDetents([.medium, .large])
+                    Spacer()
+                        .frame(height:32)
                     VStack{
                         switch levelSwitchSheetLevelSelected {
                         case 1:
@@ -899,7 +906,7 @@ struct LevelSwitcherSheetNew: View {
                                     presentationMode.wrappedValue.dismiss()
                                 },
                                 label: {
-                                    Text("Switch to Elementary")
+                                    Text("Choose Elementary")
                                         .frame(width: 358, height: 52)
                                         .foregroundColor(.white)
                                         .background(Color("switchLevelButtonColor"))
@@ -913,9 +920,10 @@ struct LevelSwitcherSheetNew: View {
                                     switchToLevel(level: "beginner")
                                     //                        currentLevelSelected = "beginner"
                                     //                        levelSwitchSheetShown = false
+                                    presentationMode.wrappedValue.dismiss()
                                 },
                                 label: {
-                                    Text("Switch to Beginner")
+                                    Text("Choose Beginner")
                                         .frame(width: 358, height: 52)
                                         .foregroundColor(.white)
                                         .background(Color("switchLevelButtonColor"))
@@ -929,10 +937,10 @@ struct LevelSwitcherSheetNew: View {
                                     switchToLevel(level: "intermediate")
                                     //                            currentLevelSelected = "intermediate"
                                     //                            levelSwitchSheetShown = false
-                                    
+                                    presentationMode.wrappedValue.dismiss()
                                 },
                                 label: {
-                                    Text("Switch to Intermediate")
+                                    Text("Choose Intermediate")
                                         .frame(width: 358, height: 52)
                                         .foregroundColor(.white)
                                         .background(Color("switchLevelButtonColor"))
@@ -944,10 +952,10 @@ struct LevelSwitcherSheetNew: View {
                             Button(
                                 action: {
                                     //                        currentLevelSelected = "advanced"
-                                    levelSwitchSheetShown = false
+                                    presentationMode.wrappedValue.dismiss()
                                 },
                                 label: {
-                                    Text("Switch to Advanced")
+                                    Text("Choose Advanced")
                                         .frame(width: 358, height: 52)
                                         .foregroundColor(.white)
                                         .background(Color("switchLevelButtonColor"))
@@ -959,10 +967,10 @@ struct LevelSwitcherSheetNew: View {
                             Button(
                                 action: {
                                     //                        currentLevelSelected = "nativelike"
-                                    levelSwitchSheetShown = false
+                                    presentationMode.wrappedValue.dismiss()
                                 },
                                 label: {
-                                    Text("Switch to Native-like")
+                                    Text("Choose Native-like")
                                         .frame(width: 358, height: 52)
                                         .foregroundColor(.white)
                                         .background(Color("switchLevelButtonColor"))
@@ -974,10 +982,10 @@ struct LevelSwitcherSheetNew: View {
                             Button(
                                 action: {
                                     //                        currentLevelSelected = "borninengland"
-                                    levelSwitchSheetShown = false
+                                    presentationMode.wrappedValue.dismiss()
                                 },
                                 label: {
-                                    Text("Switch to Shakespeare")
+                                    Text("Choose Shakespeare")
                                         .frame(width: 358, height: 52)
                                         .foregroundColor(.white)
                                         .background(Color("switchLevelButtonColor"))
@@ -1002,6 +1010,8 @@ struct LevelSwitcherSheetNew: View {
                             )
                         }
                     }
+                    Spacer()
+                        .frame(height:24)
                     VStack{
                         HStack{
                             // Отдельно по кружочку для каждого слайда
@@ -1065,7 +1075,7 @@ struct LevelSwitcherSheetNew: View {
                 .onAppear {
                     switch levelSwitchSheetLevelSelected {
                     case 1:
-                        withAnimation(.easeIn(duration: 0.5)) {
+                        withAnimation(.easeIn(duration: 0.8)) {
                             opacity1 = 1
                             opacity2 = 0
                             opacity3 = 0
@@ -1074,7 +1084,7 @@ struct LevelSwitcherSheetNew: View {
                             opacity6 = 0
                         }
                     case 2:
-                        withAnimation(.easeIn(duration: 0.5)) {
+                        withAnimation(.easeIn(duration: 0.8)) {
                             opacity1 = 0
                             opacity2 = 1
                             opacity3 = 0
@@ -1083,7 +1093,7 @@ struct LevelSwitcherSheetNew: View {
                             opacity6 = 0
                         }
                     case 3:
-                        withAnimation(.easeIn(duration: 0.5)) {
+                        withAnimation(.easeIn(duration: 0.8)) {
                             opacity1 = 0
                             opacity2 = 0
                             opacity3 = 1
@@ -1092,7 +1102,7 @@ struct LevelSwitcherSheetNew: View {
                             opacity6 = 0
                         }
                     case 4:
-                        withAnimation(.easeIn(duration: 0.5)) {
+                        withAnimation(.easeIn(duration: 0.8)) {
                             opacity1 = 0
                             opacity2 = 0
                             opacity3 = 0
@@ -1101,7 +1111,7 @@ struct LevelSwitcherSheetNew: View {
                             opacity6 = 0
                         }
                     case 5:
-                        withAnimation(.easeIn(duration: 0.5)) {
+                        withAnimation(.easeIn(duration: 0.8)) {
                             opacity1 = 0
                             opacity2 = 0
                             opacity3 = 0
@@ -1110,7 +1120,7 @@ struct LevelSwitcherSheetNew: View {
                             opacity6 = 0
                         }
                     case 6:
-                        withAnimation(.easeIn(duration: 0.5)) {
+                        withAnimation(.easeIn(duration: 0.8)) {
                             opacity1 = 0
                             opacity2 = 0
                             opacity3 = 0
@@ -1119,7 +1129,7 @@ struct LevelSwitcherSheetNew: View {
                             opacity6 = 1
                         }
                     default:
-                        withAnimation(.easeIn(duration: 0.5)) {
+                        withAnimation(.easeIn(duration: 0.8)) {
                             opacity1 = 1
                             opacity2 = 0
                             opacity3 = 0
@@ -1291,9 +1301,9 @@ struct SimpleMarquee: View {
     }
 }
 
-struct LevelSwitcherSheetNew_Preview: PreviewProvider {
+struct LevelSwitcherSheet_Preview: PreviewProvider {
     @State static var resetAnimationTrigger = false
     static var previews: some View {
-        LevelSwitcherSheetNew(resetAnimationTrigger: $resetAnimationTrigger)
+        LevelSwitcherSheet(resetAnimationTrigger: $resetAnimationTrigger)
     }
 }

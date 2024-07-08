@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "borninengland.png",
+      "filename" : "shakespeare.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "borninengland 1.png",
+      "filename" : "shakespeare 1.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "borninengland 2.png",
+      "filename" : "shakespeare 2.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }

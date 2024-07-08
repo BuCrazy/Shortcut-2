@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "nativelike.png",
+      "filename" : "nativelike.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "nativelike 1.png",
+      "filename" : "nativelike 1.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "nativelike 2.png",
+      "filename" : "nativelike 2.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }
