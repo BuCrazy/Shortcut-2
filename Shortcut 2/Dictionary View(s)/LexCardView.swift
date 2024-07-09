@@ -25,7 +25,6 @@ struct LexCardView: View {
                             .fontWeight(.bold)
                             .font(.system(size: 20))
                             .foregroundStyle(.white)
-                        
                         Text("[\(transcription)]")
                             .fontWeight(.regular)
                             .font(.system(size: 14))
