@@ -15,7 +15,7 @@ struct Shortcut_2_App: App {
     }
     var body: some Scene {
         WindowGroup {
-            SignInView()
+            RootView()
                 .environmentObject(ActivityCalendar())
                 .environmentObject(storedNewWordItems())
                 .environment(\.colorScheme, .dark)

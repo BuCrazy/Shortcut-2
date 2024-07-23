@@ -9,30 +9,33 @@ struct SettingsView: View {
         return languageNamesAndTheirIDs[currentLanguageSelected] ?? "not defined yet"
     }
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
-    @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
+    @State var levelSwitchSheetShown: Bool = false
+    @AppStorage("languageSwitchSheetShown_key") var languageSwitchSheetShown: Bool = false
     @AppStorage("loginStatus_key") private var userIsLoggedIn: Bool = false
+    @State static var resetAnimationTrigger = false
     var body: some View {
         Form{
             Group{
                 Section(header: Text("SETTINGS"), content: {
-//                    HStack{
-//                        Button(
-//                            action: {
-//                                levelSwitchSheetShown.toggle()
-//                            }
-//                            ,label: {
-//                                Text("Change your level")
-//                            }
-//                        )
-//                    }
                     HStack{
-                        Picker("Native language:", selection: $currentLanguageSelected) {
-                            ForEach(0..<languageOptionsAsTheySound.count, id: \.self) { index in
-                                Text(languageOptionsAsTheySound[index])
-                                    .tag(languageOptionsAsTheySound[index])
+                        Button(
+                            action: {
+                                levelSwitchSheetShown.toggle()
                             }
-                        }
-                        .pickerStyle(MenuPickerStyle())
+                            ,label: {
+                                Text("Change your level")
+                            }
+                        )
+                    }
+                    HStack{
+                        Button(
+                            action: {
+                                languageSwitchSheetShown.toggle()
+                            }
+                            ,label: {
+                                Text("Change your native language")
+                            }
+                        )
                     }
                     Button("Log out") {
                         try? Auth.auth().signOut()
@@ -56,16 +59,18 @@ struct SettingsView: View {
                     }
                 })
             }
-            .onChange(of: currentLanguageSelected) { /*_ in*/
-                UserDefaults.standard.set(currentLanguageSelected, forKey: "currentLanguageSelected_key")
-                UserDefaults.standard.set(nativeLanguageSelectedID, forKey: "nativeLanguageSelectedID_key")
-            }
-            .sheet(isPresented: $levelSwitchSheetShown) {
-                LevelSwitcherSheet()
-                    .presentationDetents([.medium])
-                    .navigationBarHidden(true)
-            }
         }
+        .sheet(isPresented: $levelSwitchSheetShown) {
+            LevelSwitcherSheet(languageCodePassed: languageCodeForUse, isShortVersion: true)
+                .presentationDetents([.large])
+                .navigationBarHidden(true)
+        }
+        .sheet(isPresented: $languageSwitchSheetShown) {
+            LanguageSelectionSheet(languageCodeForUse: languageCodeForUse, isShortVersion: true)
+                .navigationBarHidden(true)
+                .presentationDetents([.large])
+        }
+
     }
 }
 #Preview {

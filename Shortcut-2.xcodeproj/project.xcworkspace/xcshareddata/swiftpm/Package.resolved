@@ -1,5 +1,5 @@
 {
-  "originHash" : "073cbf610517a28bf486d961ac48ede2c210d38c3f327f08974bc38868f0259d",
+  "originHash" : "e400f66a2430498b6255b6890d849c206606b0954555c4bae9ef9bf3e65ae199",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -89,6 +89,15 @@
       "state" : {
         "revision" : "a0bc79961d7be727d258d33d5a6b2f1023270ba1",
         "version" : "1.22.5"
+      }
+    },
+    {
+      "identity" : "marquee",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stonko1994/Marquee",
+      "state" : {
+        "revision" : "35445eeadfd5965b3a52c4efc77e5eca93e2c40f",
+        "version" : "1.0.1"
       }
     },
     {

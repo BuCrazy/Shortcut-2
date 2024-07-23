@@ -16,36 +16,43 @@ struct LoginWindow: View {
     @State private var showAlert: Bool = false
     @State private var isLoading: Bool = false
     @State private var nonce: String?
+    @State private var isDetailViewActive = false
     @AppStorage("loginStatus_key") private var userIsLoggedIn: Bool = false
+    @AppStorage("basicOnboardingPassed_key") private var basicOnboardingPassed: Bool = false
     var body: some View {
-        VStack{
-            Spacer()
+        NavigationStack{
             VStack{
-                Text("Please Login:")
-                SignInWithAppleButton(.signIn) { request in
-                    let nonce = randomNonceString()
-                    // Настройки чисто sign in
-                    request.requestedScopes = [.email, .fullName ]
-                    request.nonce = sha256(nonce)
-                    self.nonce = nonce
-                } onCompletion: { result in
-                    switch result {
-                    case .success(let authorization):
-                        loginWithFirebase(authorization)
-                    case .failure(let error):
-                        showError(error.localizedDescription)
+                Spacer()
+                VStack{
+                    Text("Please Login:")
+                    SignInWithAppleButton(.signIn) { request in
+                        let nonce = randomNonceString()
+                        // Настройки чисто sign in
+                        request.requestedScopes = [.email, .fullName ]
+                        request.nonce = sha256(nonce)
+                        self.nonce = nonce
+                    } onCompletion: { result in
+                        switch result {
+                        case .success(let authorization):
+                            loginWithFirebase(authorization)
+                        case .failure(let error):
+                            showError(error.localizedDescription)
+                        }
+                    }
+                    .frame(height: 50)
+                    NavigationLink(destination: LanguageSelectionSheet(isShortVersion: false), isActive: $isDetailViewActive) {
+                        EmptyView()
                     }
                 }
-                .frame(height: 50)
+                Spacer()
             }
-            Spacer()
-        }
-        .alert(errorMessage, isPresented: $showAlert) {
-            
-        }
-        .overlay{
-            if isLoading {
-                Text("Loading...")
+            .alert(errorMessage, isPresented: $showAlert) {
+                
+            }
+            .overlay{
+                if isLoading {
+                    Text("Loading...")
+                }
             }
         }
     }
@@ -94,8 +101,13 @@ struct LoginWindow: View {
               return
             }
               userIsLoggedIn = true
+              if basicOnboardingPassed == false {
+                  isDetailViewActive = true
+              }
+              print("detailView active set to true")
             // User is signed in to Firebase with Apple.
             // ...
+              
           }
         }
     }
@@ -130,6 +142,10 @@ struct LoginWindow: View {
     }
 }
 
-#Preview {
-    LoginWindow()
+struct LoginWindow_Preview: PreviewProvider {
+    static var previews: some View {
+        LoginWindow()
+            .environmentObject(storedNewWordItems())
+            .environmentObject(ActivityCalendar())
+    }
 }

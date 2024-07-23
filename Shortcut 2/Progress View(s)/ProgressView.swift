@@ -16,6 +16,7 @@ struct ProgressView: View {
     @State private var isPickerVisible = false
     @State private var selectedOption = "Option 1"
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
+    @AppStorage("nativeLanguageSelectedID_key") var languageCodeForUse: String = ""
     
     //NOTE: The original code
     //private lazy var viewModel = DailyConsistencyViewModel(activityLogDataLayer: activityLogDataLayer)
@@ -33,6 +34,7 @@ struct ProgressView: View {
     }
     //NOTE: Test Solution Ends
     
+    @State static var resetAnimationTrigger = false
     
     var body: some View {
         NavigationStack {
@@ -97,9 +99,9 @@ struct ProgressView: View {
                     }
                     // Панель переключения уровней
                     .sheet(isPresented: $levelSwitchSheetShown) {
-                        LevelSwitcherSheet()
+                        LevelSwitcherSheet(languageCodePassed: languageCodeForUse, isShortVersion: true)
                             .navigationBarHidden(true)
-                            .presentationDetents([.medium])
+                            .presentationDetents([.large])
                     }
                     .onAppear{
                         try! activityLogDataLayer.loadDataFromJSON()
@@ -132,8 +134,7 @@ struct ProgressView: View {
                             )
                         }
                     )
-                }
-             //   .toolbarBackground(toolBarGradient.opacity(0.9), for: .navigationBar)
+                }             //   .toolbarBackground(toolBarGradient.opacity(0.9), for: .navigationBar)
               //  .foregroundStyle(toolBarGradient)
               //  .toolbarColorScheme(.dark, for: .navigationBar)
              //   .toolbarBackground(.visible, for: .navigationBar)
