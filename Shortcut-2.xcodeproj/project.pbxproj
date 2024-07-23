@@ -43,16 +43,16 @@
 		858A53BA2C0F9C5200725278 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 858A53B92C0F9C5200725278 /* GoogleService-Info.plist */; };
 		858A53BC2C0FB7E200725278 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 858A53BB2C0FB7E200725278 /* readme.md */; };
 		858A53C22C0FBC5500725278 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858A53C12C0FBC5500725278 /* ContentView.swift */; };
-		858A53C42C0FBCC700725278 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858A53C32C0FBCC700725278 /* SignInView.swift */; };
 		858C91D72C18578A003E80CB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 858C91D62C18578A003E80CB /* FirebaseFirestore */; settings = {ATTRIBUTES = (Required, ); }; };
 		858C91D92C1857D2003E80CB /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 858C91D82C1857D2003E80CB /* FirebaseFirestoreCombine-Community */; };
 		858C91DB2C1857D2003E80CB /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 858C91DA2C1857D2003E80CB /* FirebaseFirestoreSwift */; };
 		858C91DD2C185CCD003E80CB /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 858C91DC2C185CCD003E80CB /* FirebaseAuthCombine-Community */; };
-		858E87242C2A07DC00702C2C /* LevelSwitcherSheetNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858E87232C2A07DC00702C2C /* LevelSwitcherSheetNew.swift */; };
+		858E87242C2A07DC00702C2C /* LevelSwitcherSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858E87232C2A07DC00702C2C /* LevelSwitcherSheet.swift */; };
 		85A67FCA2A98D145006A1DF7 /* SwiperScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A67FC92A98D145006A1DF7 /* SwiperScreen.swift */; };
 		85A67FCC2A98D271006A1DF7 /* RevisionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A67FCB2A98D271006A1DF7 /* RevisionScreen.swift */; };
 		85E811CE2ABF035100DF5800 /* intermediate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E811CD2ABF035100DF5800 /* intermediate.swift */; };
 		85EBE06F2C0E6664003E7F21 /* LoginWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EBE06E2C0E6664003E7F21 /* LoginWindow.swift */; };
+		85F1D4AE2C47151300B97D87 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1D4AD2C47151300B97D87 /* RootView.swift */; };
 		85F4AA6F2B714C2100EFFA7B /* KnowledgeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F4AA6E2B714C2100EFFA7B /* KnowledgeMapView.swift */; };
 		BB0149212B1FE89C009C1CF9 /* AlmostLearnedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149202B1FE89C009C1CF9 /* AlmostLearnedChart.swift */; };
 		BB0149232B201D8B009C1CF9 /* DictionaryAlmostLearned.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149222B201D8B009C1CF9 /* DictionaryAlmostLearned.swift */; };
@@ -158,12 +158,12 @@
 		858A53B92C0F9C5200725278 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		858A53BB2C0FB7E200725278 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		858A53C12C0FBC5500725278 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		858A53C32C0FBCC700725278 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
-		858E87232C2A07DC00702C2C /* LevelSwitcherSheetNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSwitcherSheetNew.swift; sourceTree = "<group>"; };
+		858E87232C2A07DC00702C2C /* LevelSwitcherSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSwitcherSheet.swift; sourceTree = "<group>"; };
 		85A67FC92A98D145006A1DF7 /* SwiperScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiperScreen.swift; sourceTree = "<group>"; };
 		85A67FCB2A98D271006A1DF7 /* RevisionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionScreen.swift; sourceTree = "<group>"; };
 		85E811CD2ABF035100DF5800 /* intermediate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = intermediate.swift; sourceTree = "<group>"; };
 		85EBE06E2C0E6664003E7F21 /* LoginWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWindow.swift; sourceTree = "<group>"; };
+		85F1D4AD2C47151300B97D87 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		85F4AA6E2B714C2100EFFA7B /* KnowledgeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeMapView.swift; sourceTree = "<group>"; };
 		BB0149202B1FE89C009C1CF9 /* AlmostLearnedChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlmostLearnedChart.swift; sourceTree = "<group>"; };
 		BB0149222B201D8B009C1CF9 /* DictionaryAlmostLearned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryAlmostLearned.swift; sourceTree = "<group>"; };
@@ -274,9 +274,9 @@
 			children = (
 				858A53B92C0F9C5200725278 /* GoogleService-Info.plist */,
 				377D2D4B2A77E31C00A2D613 /* Shortcut_2_App.swift */,
-				858A53C32C0FBCC700725278 /* SignInView.swift */,
+				85F1D4AD2C47151300B97D87 /* RootView.swift */,
 				858A53C12C0FBC5500725278 /* ContentView.swift */,
-				85EBE06D2C0E664F003E7F21 /* Login & Firebase */,
+				85F1D4B12C4716DE00B97D87 /* OnboardingThings */,
 				BB40B3512BE9504900E908BF /* QuizBranch Folder */,
 				BB40B34E2BE94FA300E908BF /* Naviagation */,
 				BB3D1A122B8FD67B00027DC4 /* GenericComponents */,
@@ -329,7 +329,6 @@
 			isa = PBXGroup;
 			children = (
 				8575BBC12BD087A300131655 /* readme.md */,
-				856D68E72C373E44009FBAC3 /* LanguageSelectionSheet.swift */,
 				850251AD2BBDC6BC00F446CA /* LevelProgress.swift */,
 				8543CD9B2BC94B9600D76AA8 /* OnboardingGoals.swift */,
 				8543CD9D2BC950B600D76AA8 /* OnboardingGoalCircle.swift */,
@@ -430,7 +429,6 @@
 		85A608222B7FABF80076F9AA /* LevelSwitcherSheet */ = {
 			isa = PBXGroup;
 			children = (
-				858E87232C2A07DC00702C2C /* LevelSwitcherSheetNew.swift */,
 			);
 			path = LevelSwitcherSheet;
 			sourceTree = "<group>";
@@ -457,9 +455,19 @@
 			isa = PBXGroup;
 			children = (
 				858A53BB2C0FB7E200725278 /* readme.md */,
-				85EBE06E2C0E6664003E7F21 /* LoginWindow.swift */,
 			);
 			path = "Login & Firebase";
+			sourceTree = "<group>";
+		};
+		85F1D4B12C4716DE00B97D87 /* OnboardingThings */ = {
+			isa = PBXGroup;
+			children = (
+				85EBE06D2C0E664F003E7F21 /* Login & Firebase */,
+				85EBE06E2C0E6664003E7F21 /* LoginWindow.swift */,
+				856D68E72C373E44009FBAC3 /* LanguageSelectionSheet.swift */,
+				858E87232C2A07DC00702C2C /* LevelSwitcherSheet.swift */,
+			);
+			path = OnboardingThings;
 			sourceTree = "<group>";
 		};
 		85F4AA6D2B714BE400EFFA7B /* KnowledgeMap */ = {
@@ -775,7 +783,7 @@
 				BB3D1A192B8FD73300027DC4 /* TestBarChart.swift in Sources */,
 				BB40B3502BE94FD200E908BF /* NavBar.swift in Sources */,
 				BB4236332BE979D400045630 /* HistoricalDataView.swift in Sources */,
-				858E87242C2A07DC00702C2C /* LevelSwitcherSheetNew.swift in Sources */,
+				858E87242C2A07DC00702C2C /* LevelSwitcherSheet.swift in Sources */,
 				BBD930012B477643008AB3BC /* AlmostLearnedBadge.swift in Sources */,
 				BB3D1A2B2B8FDA7900027DC4 /* SuccessHaptics.swift in Sources */,
 				BB3D1A232B8FD99800027DC4 /* SummaryMessage.swift in Sources */,
@@ -792,6 +800,7 @@
 				BB7A03772ADE37C9009EFDD5 /* ActivityCalendarView.swift in Sources */,
 				8543CD9C2BC94B9600D76AA8 /* OnboardingGoals.swift in Sources */,
 				8527F1412A98C2B000620A45 /* CircleAnimation.swift in Sources */,
+				85F1D4AE2C47151300B97D87 /* RootView.swift in Sources */,
 				8543CD9E2BC950B600D76AA8 /* OnboardingGoalCircle.swift in Sources */,
 				85A67FCC2A98D271006A1DF7 /* RevisionScreen.swift in Sources */,
 				BB0149252B201FEA009C1CF9 /* DictionaryTotalWords.swift in Sources */,
@@ -819,7 +828,6 @@
 				BBD92FFA2B47717A008AB3BC /* DiscoveredThisWeekModal.swift in Sources */,
 				BB3D19F72B8E965C00027DC4 /* QuizView.swift in Sources */,
 				377D2D4C2A77E31C00A2D613 /* Shortcut_2_App.swift in Sources */,
-				858A53C42C0FBCC700725278 /* SignInView.swift in Sources */,
 				BB3D1A1F2B8FD93800027DC4 /* CorrectAnswersNumber.swift in Sources */,
 				BB78F8802BF67210001EB8C5 /* TabBar.swift in Sources */,
 				8527F1372A98C23200620A45 /* KnowSection.swift in Sources */,

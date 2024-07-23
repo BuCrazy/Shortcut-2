@@ -171,7 +171,6 @@ struct ContentView: View {
                // .frame(height: 45)
         }
        .edgesIgnoringSafeArea(.bottom)
-        
         .onAppear{
             storedNewWordItemsDataLayer.initialWordDataLoader()
             try! activityLogDataLayer.loadDataFromJSON()

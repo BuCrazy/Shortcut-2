@@ -16,6 +16,7 @@ struct ProgressView: View {
     @State private var isPickerVisible = false
     @State private var selectedOption = "Option 1"
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
+    @AppStorage("nativeLanguageSelectedID_key") var languageCodeForUse: String = ""
     
     //NOTE: The original code
     //private lazy var viewModel = DailyConsistencyViewModel(activityLogDataLayer: activityLogDataLayer)
@@ -98,7 +99,7 @@ struct ProgressView: View {
                     }
                     // Панель переключения уровней
                     .sheet(isPresented: $levelSwitchSheetShown) {
-                        LevelSwitcherSheet(resetAnimationTrigger: ProgressView.$resetAnimationTrigger)
+                        LevelSwitcherSheet(languageCodePassed: languageCodeForUse, isShortVersion: true)
                             .navigationBarHidden(true)
                             .presentationDetents([.large])
                     }
@@ -115,17 +116,17 @@ struct ProgressView: View {
                 .toolbar {
                     Menu(
                         content: {
-                            NavigationLink(destination: LevelSwitcherSheet( resetAnimationTrigger: ProgressView.$resetAnimationTrigger)) {
-                                    Text("Change level")
-                                        .padding()
-                                        .background(Color.blue)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(8)
-                                }
+                            Text("Change level")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
                         },
                         label: {
                             Button(
-                                action: {},
+                                action: {
+                                    levelSwitchSheetShown = true
+                                },
                                 label: {
                                         Image("more")
                                 }

@@ -62,7 +62,7 @@ struct SettingsView: View {
                 UserDefaults.standard.set(nativeLanguageSelectedID, forKey: "nativeLanguageSelectedID_key")
             }
             .sheet(isPresented: $levelSwitchSheetShown) {
-                LevelSwitcherSheet(resetAnimationTrigger: SettingsView.$resetAnimationTrigger)
+                LevelSwitcherSheet(languageCodePassed: languageCodeForUse, isShortVersion: true)
                     .presentationDetents([.medium])
                     .navigationBarHidden(true)
             }
