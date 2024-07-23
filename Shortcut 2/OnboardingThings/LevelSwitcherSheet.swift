@@ -446,11 +446,15 @@ struct LevelSwitcherSheet: View {
                                 .foregroundStyle(Color("MainFontColor"))
                             Spacer()
                                 .frame(height:8)
-                            Text("Swipe left or right to pick the one that suits your needs the most.")
-                                .font(.system(size: 14))
-                                .foregroundStyle(Color("MainFontColor"))
+                            if isShortVersion == false {
+                                Text("Swipe left or right to pick the one that suits your needs the most.")
+                                    .font(.system(size: 14))
+                                    .foregroundStyle(Color("MainFontColor"))
+                                Spacer()
+                                    .frame(height:12)
+                            }
                             Spacer()
-                                .frame(height:24)
+                                .frame(height:12)
                         }
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                         .padding(.top, 0)

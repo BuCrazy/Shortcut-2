@@ -50,6 +50,7 @@ struct LanguageSelectionSheet: View {
     @State var feedbackColor: Color = Color.clear
     @StateObject private var viewModel = LanguageViewModel()
     @AppStorage("nativeLanguageSelectedID_key") var languageCodeForUse: String = ""
+    @AppStorage("languageSwitchSheetShown_key") var languageSwitchSheetShown: Bool = false
     var isShortVersion: Bool
     var body: some View {
         NavigationStack{
@@ -87,61 +88,120 @@ struct LanguageSelectionSheet: View {
                         .padding(.trailing, 16)
                         // Область списка языков
                         VStack {
-                            ScrollView{
-                                VStack{
+                            VStack{
+                                HStack{
+                                    Spacer()
+                                        .frame(width:16)
                                     HStack{
+                                        Image(systemName: "magnifyingglass")
+                                            .foregroundColor(Color("Text-secondary"))
                                         Spacer()
-                                            .frame(width:16)
-                                        HStack{
-                                            Image(systemName: "magnifyingglass")
-                                                .foregroundColor(Color("Text-secondary"))
-                                            Spacer()
-                                                .frame(width:6)
-                                            TextField("", text: $viewModel.searchText, prompt: Text("Search").foregroundColor(Color("Text-secondary")))
-                                                .font(.system(size: 17))
-                                        }
-                                        .padding(.vertical, 7)
-                                        .padding(.horizontal, 8)
-                                        .background(Color("Surface-component-parts"))
-                                        .cornerRadius(4)
-                                        Spacer()
-                                            .frame(width:16)
+                                            .frame(width:6)
+                                        TextField("", text: $viewModel.searchText, prompt: Text("Search").foregroundColor(Color("Text-secondary")))
+                                            .font(.system(size: 17))
                                     }
+                                    .padding(.vertical, 7)
+                                    .padding(.horizontal, 8)
+                                    .background(Color("Surface-component-parts"))
+                                    .cornerRadius(4)
+                                    Spacer()
+                                        .frame(width:16)
                                 }
-                                Spacer()
-                                    .frame(height:28)
+                            }
+                            Spacer()
+                                .frame(height:28)
+                            ScrollView{
                                 HStack{
                                     Spacer()
                                         .frame(width:21)
                                     VStack{
                                         ForEach (viewModel.filteredLanguages) { language in
-                                            NavigationLink(destination: LevelSwitcherSheet(languageCodePassed: language.code, isShortVersion: false)) {
-                                                VStack{
-                                                    Spacer()
-                                                        .frame(height:15)
-                                                    HStack {
+                                            // Проверяем, попали ли мы на этот экран из онбординга, или из настроек
+                                            switch isShortVersion {
+                                            case false:
+                                                NavigationLink(destination: LevelSwitcherSheet(languageCodePassed: language.code, isShortVersion: false)) {
+                                                    VStack{
                                                         Spacer()
-                                                            .frame(width: 15)
-                                                        Text(language.icon)
+                                                            .frame(height:15)
+                                                        HStack {
+                                                            Spacer()
+                                                                .frame(width: 15)
+                                                            Text(language.icon)
+                                                            Spacer()
+                                                                .frame(width: 12)
+                                                            Text(language.name)
+                                                                .foregroundColor(Color("Text-secondary"))
+                                                                .font(.system(size: 14))
+                                                                .fontWeight(.bold)
+                                                            Spacer()
+                                                        }
                                                         Spacer()
-                                                            .frame(width: 12)
-                                                        Text(language.name)
-                                                            .foregroundColor(Color("Text-secondary"))
-                                                            .font(.system(size: 14))
-                                                            .fontWeight(.bold)
-                                                        Spacer()
+                                                            .frame(height:15)
                                                     }
-                                                    Spacer()
-                                                        .frame(height:15)
+                                                    .background(Color("Surface-component-parts"))
+                                                    .cornerRadius(4)
                                                 }
-                                                .background(Color("Surface-component-parts"))
-                                                .cornerRadius(4)
+                                                .onTapGesture {
+                                                    languageCodeForUse = language.code
+                                                }
+                                                Spacer()
+                                                    .frame(height:16)
+                                            case true:
+                                                Button {
+                                                    languageCodeForUse = language.code
+                                                    languageSwitchSheetShown = false
+                                                } label: {
+                                                    VStack{
+                                                        Spacer()
+                                                            .frame(height:15)
+                                                        HStack {
+                                                            Spacer()
+                                                                .frame(width: 15)
+                                                            Text(language.icon)
+                                                            Spacer()
+                                                                .frame(width: 12)
+                                                            Text(language.name)
+                                                                .foregroundColor(Color("Text-secondary"))
+                                                                .font(.system(size: 14))
+                                                                .fontWeight(.bold)
+                                                            Spacer()
+                                                        }
+                                                        Spacer()
+                                                            .frame(height:15)
+                                                    }
+                                                    .background(Color("Surface-component-parts"))
+                                                    .cornerRadius(4)
+                                                }
+                                                Spacer()
+                                                    .frame(height:16)
+                                            default:
+                                                Button {
+                                                    languageCodeForUse = language.code
+                                                } label: {
+                                                    VStack{
+                                                        Spacer()
+                                                            .frame(height:15)
+                                                        HStack {
+                                                            Spacer()
+                                                                .frame(width: 15)
+                                                            Text(language.icon)
+                                                            Spacer()
+                                                                .frame(width: 12)
+                                                            Text(language.name)
+                                                                .foregroundColor(Color("Text-secondary"))
+                                                                .font(.system(size: 14))
+                                                                .fontWeight(.bold)
+                                                            Spacer()
+                                                        }
+                                                        Spacer()
+                                                            .frame(height:15)
+                                                    }
+                                                    .background(Color("Surface-component-parts"))
+                                                    .cornerRadius(4)
+                                                }
+                                                Spacer()
+                                                    .frame(height:16)
                                             }
-                                            .onTapGesture {
-                                                languageCodeForUse = language.code
-                                            }
-                                            Spacer()
-                                                .frame(height:16)
                                         }
                                     }
                                     Spacer()

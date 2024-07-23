@@ -116,25 +116,25 @@ struct ProgressView: View {
                 .toolbar {
                     Menu(
                         content: {
-                            Text("Change level")
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
+                            Button(
+                                action: {
+                                    levelSwitchSheetShown.toggle()
+                                },
+                                label: {
+                                    Text("Switch Level")
+                                }
+                            )
                         },
                         label: {
                             Button(
-                                action: {
-                                    levelSwitchSheetShown = true
-                                },
+                                action: {},
                                 label: {
                                         Image("more")
                                 }
                             )
                         }
                     )
-                }
-             //   .toolbarBackground(toolBarGradient.opacity(0.9), for: .navigationBar)
+                }             //   .toolbarBackground(toolBarGradient.opacity(0.9), for: .navigationBar)
               //  .foregroundStyle(toolBarGradient)
               //  .toolbarColorScheme(.dark, for: .navigationBar)
              //   .toolbarBackground(.visible, for: .navigationBar)
