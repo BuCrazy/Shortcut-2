@@ -422,72 +422,90 @@ class storedNewWordItems: ObservableObject {
     
     var elementaryWordsStorage = [WordItemStruct]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.elementaryWordsStorageSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.elementaryWordsStorageSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
                 }
+                print("elementaryWordsStorage didSet")
             }
         }
     }
     
     var beginnerWordsStorage = [WordItemStruct]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.beginnerWordsStorageSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.beginnerWordsStorageSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
                 }
+                print("beginnerWordsStorage didSet")
             }
         }
     }
     
     var intermediateWordsStorage = [WordItemStruct](){
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.intermediateWordsStorageSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.intermediateWordsStorageSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
                 }
+                print("intermediateWordsStorage didSet")
             }
         }
     }
     
     var advancedWordsStorage = [WordItemStruct](){
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.advancedWordsStorageSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.advancedWordsStorageSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
                 }
+                print("advancedWordsStorage didSet")
             }
         }
     }
     
     var nativelikeWordsStorage = [WordItemStruct](){
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.nativelikeWordsStorageSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.nativelikeWordsStorageSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
                 }
+                print("nativelikeWordsStorage didSet")
             }
         }
     }
     
     var borninenglandWordsStorage = [WordItemStruct]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.borninenglandWordsStorageSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.borninenglandWordsStorageSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
                 }
+                print("borninenglandWordsStorage didSet")
             }
         }
     }
@@ -496,23 +514,29 @@ class storedNewWordItems: ObservableObject {
     
     @Published var elementaryKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).async {
-                do {
-                    try self.elementaryKnewAlreadySave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).async {
+                    do {
+                        try self.elementaryKnewAlreadySave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
                 }
+                print("elementaryKnewAlready didSet")
             }
         }
     }
     
     @Published var elementaryBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.elementaryBeingLearnedSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.elementaryBeingLearnedSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("elementaryBeingLearned didSet")
                 }
             }
         }
@@ -520,11 +544,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var beginnerKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.beginnerKnewAlreadySave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.beginnerKnewAlreadySave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("beginnerKnewAlready didSet")
                 }
             }
         }
@@ -532,11 +559,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var beginnerBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.beginnerBeingLearnedSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.beginnerBeingLearnedSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("beginnerBeingLearned didSet")
                 }
             }
         }
@@ -544,11 +574,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var intermediateKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.intermediateKnewAlreadySave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.intermediateKnewAlreadySave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("intermediateKnewAlready didSet")
                 }
             }
         }
@@ -556,11 +589,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var intermediateBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.intermediateBeingLearnedSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.intermediateBeingLearnedSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("intermediateBeingLearned didSet")
                 }
             }
         }
@@ -568,11 +604,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var advancedKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.advancedKnewAlreadySave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.advancedKnewAlreadySave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("advancedKnewAlready didSet")
                 }
             }
         }
@@ -580,11 +619,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var advancedBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.advancedBeingLearnedSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.advancedBeingLearnedSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("advancedBeingLearned didSet")
                 }
             }
         }
@@ -592,11 +634,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var nativelikeKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.nativelikeKnewAlreadySave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.nativelikeKnewAlreadySave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("nativelikeKnewAlready didSet")
                 }
             }
         }
@@ -604,11 +649,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var nativelikeBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.nativelikeBeingLearnedSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.nativelikeBeingLearnedSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("nativelikeBeingLearned didSet")
                 }
             }
         }
@@ -616,11 +664,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var borninenglandKnewAlready = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.borninenglandKnewAlreadySave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.borninenglandKnewAlreadySave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("borninenglandKnewAlready didSet")
                 }
             }
         }
@@ -628,11 +679,14 @@ class storedNewWordItems: ObservableObject {
     
     @Published var borninenglandBeingLearned = [wordItemNew]() {
         didSet {
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                do {
-                    try self?.borninenglandBeingLearnedSave()
-                } catch {
-                    print("Error saving data: \(error)")
+            if hasLoadedInitially {
+                DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    do {
+                        try self?.borninenglandBeingLearnedSave()
+                    } catch {
+                        print("Error saving data: \(error)")
+                    }
+                    print("borninenglandBeingLearned didSet")
                 }
             }
         }
@@ -690,6 +744,8 @@ class storedNewWordItems: ObservableObject {
       try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
     
+    private var hasLoadedInitially = false
+    
     func initialWordDataLoader() {
         print("Starting initialWordDataLoader")
         try! elementaryWordsStorageLoad()
@@ -713,7 +769,6 @@ class storedNewWordItems: ObservableObject {
         
         if elementaryWordsStorage.isEmpty {
             elementaryWordsStorage = elementaryWordsStorageSource
-            
         }
         if beginnerWordsStorage.isEmpty {
             beginnerWordsStorage = beginnerWordsStorageSource
@@ -723,6 +778,18 @@ class storedNewWordItems: ObservableObject {
         }
         
         print("Completed initialWordDataLoader")
+        
+        print("elementary: \(elementaryWordsStorage.count) words loaded")
+        print("beginner: \(beginnerWordsStorage.count) words loaded")
+        print("intermediate: \(intermediateWordsStorage.count) words loaded")
+        print("advanced: \(advancedWordsStorage.count) words loaded")
+        print("nativelike: \(nativelikeWordsStorage.count) words loaded")
+        print("borninengland: \(borninenglandWordsStorage.count) words loaded")
+        
+        hasLoadedInitially = true
+        
+        print("hasLoadedInitially set to true upon loading all storages")
+        
     }
     
     // Функции для уровня Elementary:
