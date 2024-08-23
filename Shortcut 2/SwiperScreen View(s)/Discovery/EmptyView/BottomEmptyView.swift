@@ -5,7 +5,7 @@ struct BottomEmptyView: View {
         HStack {
             HStack{
                 Text("Swipe here the words you don't know")
-                    .foregroundColor(Color("SecondaryTextColor")).opacity(0.5)
+                    .foregroundColor(Color("secondaryFontColor")).opacity(0.5)
                     .font(Font.custom("Avenir", size: 16))
                     .fontWeight(.regular)
             }

@@ -41,7 +41,7 @@ struct QuizCardView: View {
                 Text(question)
                     .font(.system(size: 16))
                     .fontWeight(.medium)
-                    .foregroundColor(Color("SecondaryTextColor"))
+                    .foregroundColor(Color("secondaryFontColor"))
                     .padding(.horizontal, 20)
                     .fixedSize(horizontal: false, vertical: true)
                 

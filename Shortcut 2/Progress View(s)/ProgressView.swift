@@ -149,7 +149,7 @@ struct ProgressView: View {
             .onPreferenceChange(ScrollViewOffsetKey.self, perform: { value in
                 print("Scroll value: \(value)")
                 withAnimation(.linear(duration: 0.2)) {
-                    hasScrolled = value < 0
+                    hasScrolled = value < -10
                     scrollOffset = value
                 }
             })
@@ -241,7 +241,8 @@ struct ProgressView: View {
     private func interpolate(start: CGFloat, end: CGFloat, value: CGFloat) -> CGFloat {
             let range = end - start
             let progress = min(max(value / -200, 0), 1) // Adjust the range and direction as needed
-            return start + (range * progress)
+        return start + (range * pow(progress, 0.7))
+           // return start + (range * progress)
         }
     
     

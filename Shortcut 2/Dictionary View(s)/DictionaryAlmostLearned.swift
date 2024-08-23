@@ -41,7 +41,7 @@ struct DictionaryAlmostLearned: View {
                 
                 Text("Almost Learned")
                     .font(.system(size: 12))
-                    .foregroundStyle(Color("SecondaryTextColor"))
+                    .foregroundStyle(Color("secondaryFontColor"))
             }
         }
     }

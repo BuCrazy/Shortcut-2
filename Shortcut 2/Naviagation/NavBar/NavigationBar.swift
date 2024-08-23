@@ -73,13 +73,13 @@ struct NavigationBar: View {
                                // .padding(.trailing, 200)
                                 .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3 ) /*hasScrolled ? -20 : 0*/)
                                 .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3  )/*hasScrolled ? 0 : 1*/)
-                                .animation(.easeInOut(duration: 0.3), value: scrollOffset)
+                                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
                         
                         Goal_1_Animation()
                             .padding(.bottom, 26)
                             .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3 ))
                             .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3  ))
-                            .animation(.easeInOut(duration: 0.3), value: scrollOffset)
+                            .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
                     }
                     .clipped()
                     .frame(height: interpolate(start: 130, end: 0, value: scrollOffset) /*hasScrolled ? 0 : nil*/)

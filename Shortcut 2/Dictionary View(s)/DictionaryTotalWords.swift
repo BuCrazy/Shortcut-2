@@ -54,7 +54,7 @@ struct DictionaryTotalWords: View {
                 }
                     Text("Total Words")
                         .font(.system(size: 12))
-                        .foregroundStyle(Color("SecondaryTextColor"))
+                        .foregroundStyle(Color("secondaryFontColor"))
             }
         }
     }

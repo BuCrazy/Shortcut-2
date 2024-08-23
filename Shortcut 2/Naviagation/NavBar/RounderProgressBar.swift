@@ -10,9 +10,13 @@ import SwiftUI
 struct RoundedProgressBar: View {
     var progress: CGFloat
     
+    //NOTE: Prevent progress from exeding 100%
+    private var clampedProgress: CGFloat {
+        min(max(progress, 0), 1)
+    }
     var body: some View {
         VStack(alignment:.leading, spacing: 4) {
-            Text("\(Int(progress * 100))%")
+            Text("\(Int(clampedProgress * 100))%")
                 .font(.system(size: 12))
                 .fontWeight(.semibold)
                 .foregroundStyle(Color("mainCardBG"))
@@ -27,7 +31,7 @@ struct RoundedProgressBar: View {
                     // Foreground bar (progress)
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color("currentGoalProgress 2"))
-                        .frame(width: progress * geometry.size.width * 0.8, height: 8) // Adjust width based on progress
+                        .frame(width: clampedProgress * geometry.size.width, height: 8) // Adjust width based on progress
                 }
                 
             }

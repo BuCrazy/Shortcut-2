@@ -78,6 +78,7 @@ struct QuizSummaryView: View {
 
             }
             .navigationTitle(Text ("Summary"))
+          //  .toolbarBackground(.clear, for: .navigationBar)
         }
         .onAppear {
        
