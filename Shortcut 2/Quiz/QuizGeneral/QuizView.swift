@@ -186,6 +186,11 @@ struct QuizView: View {
         }
         .onAppear {
             print(" A dictionary of the quiz historical results: \(quizHistory.quizHistoricalData)")
+            
+            // Ensuring questionStatuses properly initialized on view appear
+            if questionStatuses.isEmpty {
+                    questionStatuses = Array(repeating: .neutral, count: quizItems.count)
+                }
             print("QuizView appearing. Current question statuses count: \(questionStatuses.count)")
             
             // --- Code for saving Quiz progress ---
@@ -254,6 +259,12 @@ struct QuizView: View {
             if let loadedState = try storedNewWordItems.shared.loadQuizState() {
                 self.currentQuizIndex = loadedState.currentQuizIndex
                 self.questionStatuses = loadedState.questionStatuses
+                
+                // Ensure questionStatuses is not empty
+                if self.questionStatuses.isEmpty {
+                    self.questionStatuses = Array(repeating: .neutral, count: quizItems.count)
+                }
+                
                 //test
                 self.correctAnswerNumber = loadedState.correctAnswerCount
                 self.incorrectAnswerNumber = loadedState.incorrectAnswerCount
@@ -261,6 +272,8 @@ struct QuizView: View {
             }
         } catch {
             print("Could not load quiz state: \(error)")
+            // Initialize questionStatuses if loading fails
+            self.questionStatuses = Array(repeating: .neutral, count: quizItems.count)
         }
     }
     // ---Code for saving Quiz progress ends ---
@@ -380,6 +393,14 @@ struct QuizView: View {
            self.isQuizFinished = true
        }
     // Code for updating historical chart with current quiz ends
+    
+    
+    //Ensuring that count of questionStatuses is always matches the count of quizItems
+    private func synchronizeQuestionStatuses() {
+        if questionStatuses.count != quizItems.count {
+            questionStatuses = Array(repeating: .neutral, count: quizItems.count)
+        }
+    }
 }
 
 struct QuizView_Previews: PreviewProvider {
