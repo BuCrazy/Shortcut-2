@@ -425,15 +425,13 @@ struct LevelSwitcherSheet: View {
     var body: some View {
         NavigationStack{
             VStack {
-                ZStack(alignment: .top){
+                ZStack(alignment: .top) {
+                    P171_CircleAnimation(feedbackColor: feedbackColor)
+                        .blendMode(.screen)
+                        .blur(radius: 28)
+                        .offset(y: -400)
+                        .opacity(0.4)
                     VStack{
-                        P171_CircleAnimation(feedbackColor: feedbackColor)
-                            .blendMode(.screen)
-                            .blur(radius: 28)
-                            .offset(y: -100)
-                            .opacity(0.4)
-                        Spacer()
-                            .frame(height: .infinity)
                     }
                     VStack{
                         // Заголовок и подзаголовок

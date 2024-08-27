@@ -56,14 +56,12 @@ struct LanguageSelectionSheet: View {
         NavigationStack{
             VStack {
                 ZStack(alignment: .top){
+                    P171_CircleAnimation(feedbackColor: feedbackColor)
+                        .blendMode(.screen)
+                        .blur(radius: 28)
+                        .offset(y: -400)
+                        .opacity(0.4)
                     VStack{
-                        P171_CircleAnimation(feedbackColor: feedbackColor)
-                            .blendMode(.screen)
-                            .blur(radius: 28)
-                            .offset(y: -100)
-                            .opacity(0.4)
-                        Spacer()
-                            .frame(height: .infinity)
                     }
                     VStack{
                         // Заголовок и подзаголовок
@@ -174,33 +172,33 @@ struct LanguageSelectionSheet: View {
                                                 }
                                                 Spacer()
                                                     .frame(height:16)
-                                            default:
-                                                Button {
-                                                    languageCodeForUse = language.code
-                                                } label: {
-                                                    VStack{
-                                                        Spacer()
-                                                            .frame(height:15)
-                                                        HStack {
-                                                            Spacer()
-                                                                .frame(width: 15)
-                                                            Text(language.icon)
-                                                            Spacer()
-                                                                .frame(width: 12)
-                                                            Text(language.name)
-                                                                .foregroundColor(Color("Text-secondary"))
-                                                                .font(.system(size: 14))
-                                                                .fontWeight(.bold)
-                                                            Spacer()
-                                                        }
-                                                        Spacer()
-                                                            .frame(height:15)
-                                                    }
-                                                    .background(Color("Surface-component-parts"))
-                                                    .cornerRadius(4)
-                                                }
-                                                Spacer()
-                                                    .frame(height:16)
+//                                            default:
+//                                                Button {
+//                                                    languageCodeForUse = language.code
+//                                                } label: {
+//                                                    VStack{
+//                                                        Spacer()
+//                                                            .frame(height:15)
+//                                                        HStack {
+//                                                            Spacer()
+//                                                                .frame(width: 15)
+//                                                            Text(language.icon)
+//                                                            Spacer()
+//                                                                .frame(width: 12)
+//                                                            Text(language.name)
+//                                                                .foregroundColor(Color("Text-secondary"))
+//                                                                .font(.system(size: 14))
+//                                                                .fontWeight(.bold)
+//                                                            Spacer()
+//                                                        }
+//                                                        Spacer()
+//                                                            .frame(height:15)
+//                                                    }
+//                                                    .background(Color("Surface-component-parts"))
+//                                                    .cornerRadius(4)
+//                                                }
+//                                                Spacer()
+//                                                    .frame(height:16)
                                             }
                                         }
                                     }

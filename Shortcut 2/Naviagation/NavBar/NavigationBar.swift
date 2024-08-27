@@ -27,7 +27,7 @@ struct NavigationBar: View {
            Gradient.Stop(color: Color(red: 0.06, green: 0.06, blue: 0.06).opacity(0.7), location: 0.78),
            Gradient.Stop(color: Color(red: 0.06, green: 0.06, blue: 0.06).opacity(0.03), location: 1.00),
            ],
-           startPoint: UnitPoint(x: 0.5, y: 0),
+           startPoint: UnitPoint(x: 0.5, y: 0.0),
            endPoint: UnitPoint(x: 0.5, y: 1.0)
            )
     var navBarColor: Color
