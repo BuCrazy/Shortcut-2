@@ -17,8 +17,6 @@ struct SwiperScreen: View {
     
     @AppStorage("isFirstAppLaunch") var isFirstAppLaunch: Bool = true
     
-    @State private var refreshID = UUID()
-    
     var body: some View {
         VStack{
             if currentLearningMode == "discovery" {
@@ -38,7 +36,7 @@ struct SwiperScreen: View {
                   ReinforcementView()
               }
         }
-        .id(refreshID)
+
         .onAppear{
 //          try! activityLogDataLayer.loadDataFromJSON()
             if isFirstAppLaunch {
@@ -47,10 +45,6 @@ struct SwiperScreen: View {
                         storedNewWordItemsDataLayer.loadData(for: user.uid)
                         isFirstAppLaunch = false
                         print("Database download run with a 2 second delay")
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            refreshID = UUID()
-                            print("Screen refreshed")
-                        }
                     }
                 }
             } else {

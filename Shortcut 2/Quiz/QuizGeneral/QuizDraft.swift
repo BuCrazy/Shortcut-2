@@ -1,16 +1,14 @@
 //
-//  SwiftUIView.swift
+//  QuizDraft.swift
 //  Shortcut-2
 //
-//  Created by Pavlo Bilashchuk on 2/27/24.
+//  Created by Pavlo Bilashchuk on 8/30/24.
 //
-
-
 
 import SwiftUI
 
 
-struct QuizView: View {
+struct QuizDraft: View {
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("nativeLanguageSelectedID_key") var languageCodeForUse: String = "ENUK_transl"
@@ -34,9 +32,7 @@ struct QuizView: View {
     @State private var isQuizFinished: Bool = false
     @State private var showQuizSummary: Bool = false
     @State var questionStatuses: [AnswerStatus] = []
-    
-   // @State private var isLoading: Bool = true
-    
+
     @State var showIndicators = false
     @State var showQuizCard = false
     @State var showAnswerOptions = false
@@ -63,8 +59,6 @@ struct QuizView: View {
     }
     
     init(storedWords: storedNewWordItems) {
-       
-        
         print("Original Init Block. Initializing quiz")
         print("Original Init Block. Current level selected: \(currentLevelSelected)")
         
@@ -108,12 +102,8 @@ struct QuizView: View {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
                 
-//                if isLoading {
-//                    Text("Loading Quiz...")
-//                                        .font(.headline)
-//                                        .foregroundColor(.primary)
-                    //NOTE: Initial logic for switching views } else
-                  if isQuizFinished {
+                //NOTE: Initial logic for switching views
+                if isQuizFinished {
                   
                     QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, isQuizAlreadyStarted: $isQuizAlreadyStarted)
                            .opacity(isQuizFinished ? 1 : 0)
@@ -207,8 +197,6 @@ struct QuizView: View {
             print("onAppear. QuizView onAppear called")
             print("onAppear. Current quizItems count: \(quizItems.count)")
             
-            
-            
             // Ensuring questionStatuses properly initialized on view appear
             if questionStatuses.isEmpty {
                     questionStatuses = Array(repeating: .neutral, count: quizItems.count)
@@ -269,9 +257,6 @@ struct QuizView: View {
           //      shouldStopVideo = false
                 print("Current wordsPerRevisionSetting: \(wordsPerRevisionSetting)")
             }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                        isLoading = false
-//                    }
         }
         .onDisappear {
           hasNavigatedAway = true
@@ -428,7 +413,7 @@ struct QuizView: View {
     }
 }
 
-struct QuizView_Previews: PreviewProvider {
+struct QuizDraft_Previews: PreviewProvider {
     static var previews: some View {
         QuizView(storedWords: storedNewWordItems())
     }

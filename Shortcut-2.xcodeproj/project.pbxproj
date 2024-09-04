@@ -119,11 +119,14 @@
 		BB92E5E52C75484F00BDC754 /* Goal 1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92E5E42C75484F00BDC754 /* Goal 1.swift */; };
 		BB92E5E72C754B3B00BDC754 /* MiniWordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92E5E62C754B3A00BDC754 /* MiniWordCard.swift */; };
 		BB92E5E92C754B7300BDC754 /* Goal 1 Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92E5E82C754B7300BDC754 /* Goal 1 Animation.swift */; };
+		BBBC75C52C865FC1005857CF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C42C865FC1005857CF /* AppState.swift */; };
+		BBBC75C72C86690B005857CF /* Shortvut_2AppDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */; };
 		BBD92FF82B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */; };
 		BBD92FFA2B47717A008AB3BC /* DiscoveredThisWeekModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FF92B47717A008AB3BC /* DiscoveredThisWeekModal.swift */; };
 		BBD92FFE2B477498008AB3BC /* ModalStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FFD2B477498008AB3BC /* ModalStyle.swift */; };
 		BBD930012B477643008AB3BC /* AlmostLearnedBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD930002B477643008AB3BC /* AlmostLearnedBadge.swift */; };
 		BBD930032B4776DD008AB3BC /* AlmostLearnedModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD930022B4776DD008AB3BC /* AlmostLearnedModal.swift */; };
+		BBE7F8B52C82740C00F056AE /* QuizDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE7F8B42C82740C00F056AE /* QuizDraft.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -234,11 +237,14 @@
 		BB92E5E42C75484F00BDC754 /* Goal 1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal 1.swift"; sourceTree = "<group>"; };
 		BB92E5E62C754B3A00BDC754 /* MiniWordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniWordCard.swift; sourceTree = "<group>"; };
 		BB92E5E82C754B7300BDC754 /* Goal 1 Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal 1 Animation.swift"; sourceTree = "<group>"; };
+		BBBC75C42C865FC1005857CF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortvut_2AppDraft.swift; sourceTree = "<group>"; };
 		BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeekBadge.swift; sourceTree = "<group>"; };
 		BBD92FF92B47717A008AB3BC /* DiscoveredThisWeekModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeekModal.swift; sourceTree = "<group>"; };
 		BBD92FFD2B477498008AB3BC /* ModalStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalStyle.swift; sourceTree = "<group>"; };
 		BBD930002B477643008AB3BC /* AlmostLearnedBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlmostLearnedBadge.swift; sourceTree = "<group>"; };
 		BBD930022B4776DD008AB3BC /* AlmostLearnedModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlmostLearnedModal.swift; sourceTree = "<group>"; };
+		BBE7F8B42C82740C00F056AE /* QuizDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDraft.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +288,7 @@
 			children = (
 				858A53B92C0F9C5200725278 /* GoogleService-Info.plist */,
 				377D2D4B2A77E31C00A2D613 /* Shortcut_2_App.swift */,
+				BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */,
 				85F1D4AD2C47151300B97D87 /* RootView.swift */,
 				858A53C12C0FBC5500725278 /* ContentView.swift */,
 				85F1D4B12C4716DE00B97D87 /* OnboardingThings */,
@@ -329,6 +336,7 @@
 				376D1E902A88310F006385C2 /* ProgressModel.swift */,
 				BB7A03812AE1EA53009EFDD5 /* DailyConsistencyViewModel.swift */,
 				BB16A2462AEA92F200B43FC0 /* ActivityCalendarViewModel.swift */,
+				BBBC75C42C865FC1005857CF /* AppState.swift */,
 			);
 			path = "Models & Logic";
 			sourceTree = "<group>";
@@ -543,6 +551,7 @@
 				BB3D1A302B8FDAEB00027DC4 /* AuraEffect.swift */,
 				BB3D1A262B8FDA3900027DC4 /* Sound */,
 				BB3D1A272B8FDA4500027DC4 /* Haptics */,
+				BBE7F8B42C82740C00F056AE /* QuizDraft.swift */,
 			);
 			path = QuizGeneral;
 			sourceTree = "<group>";
@@ -843,6 +852,7 @@
 				BB0149252B201FEA009C1CF9 /* DictionaryTotalWords.swift in Sources */,
 				BB4236352BE97A1300045630 /* QuizScoreChart.swift in Sources */,
 				BB7A037B2AE083B8009EFDD5 /* DaySquareView.swift in Sources */,
+				BBBC75C72C86690B005857CF /* Shortvut_2AppDraft.swift in Sources */,
 				855416A62A99004C006DBC47 /* beginner.swift in Sources */,
 				BB92E5E72C754B3B00BDC754 /* MiniWordCard.swift in Sources */,
 				BB3D1A352B8FDBD300027DC4 /* Indicator.swift in Sources */,
@@ -863,6 +873,7 @@
 				BB3D1A212B8FD97200027DC4 /* BottomPart.swift in Sources */,
 				BB16A2472AEA92F200B43FC0 /* ActivityCalendarViewModel.swift in Sources */,
 				BB7A03732ADE31A2009EFDD5 /* DiscoveredThisWeek.swift in Sources */,
+				BBBC75C52C865FC1005857CF /* AppState.swift in Sources */,
 				BB3D1A1B2B8FD7D400027DC4 /* BlurCircleAnimationView.swift in Sources */,
 				BBD92FFA2B47717A008AB3BC /* DiscoveredThisWeekModal.swift in Sources */,
 				BB3D19F72B8E965C00027DC4 /* QuizView.swift in Sources */,
@@ -872,6 +883,7 @@
 				8527F1372A98C23200620A45 /* KnowSection.swift in Sources */,
 				377D2D5E2A77E3E500A2D613 /* AppModel.swift in Sources */,
 				BB7A03822AE1EA53009EFDD5 /* DailyConsistencyViewModel.swift in Sources */,
+				BBE7F8B52C82740C00F056AE /* QuizDraft.swift in Sources */,
 				8527F1352A98C1FD00620A45 /* WordChip.swift in Sources */,
 				BB92E5E52C75484F00BDC754 /* Goal 1.swift in Sources */,
 				8527F13F2A98C2A100620A45 /* SwiperSection.swift in Sources */,
