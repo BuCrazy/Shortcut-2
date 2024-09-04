@@ -153,13 +153,18 @@ struct QuizHistory: Codable {
     init() {
             // Try to load existing data when initializing
             let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("quizHistory.json")
+        if FileManager.default.fileExists(atPath: fileURL.path) {
             do {
                 let data = try Data(contentsOf: fileURL)
                 self = try JSONDecoder().decode(QuizHistory.self, from: data)
             } catch {
-                self.quizHistoricalData = [:]  // Initialize with empty data if loading fails
-                print("Failed to load quiz history: \(error)")
+                print("Failed to load existing QuizHistory, starting fresh: \(error)")
+                self.quizHistoricalData = [:]
             }
+        } else  {
+            print("No QuizHistory file found, starting fresh")
+            self.quizHistoricalData = [:]
+        }
         }
     
     mutating func saveQuizData(date: Date, score: Double) {
@@ -255,7 +260,7 @@ class storedNewWordItems: ObservableObject {
         
     // Code for quiz History persistence //
     var quizHistory = QuizHistory()
-
+    weak var appState: AppState?
     // Code for quiz History persistence ends //
     
     func arrayForLevel(_ level: String) -> [wordItemNew] {
@@ -296,8 +301,8 @@ class storedNewWordItems: ObservableObject {
             }
         
         }
-    
-    private var db = Firestore.firestore()
+    //Test Sep 2
+  //  private var db = Firestore.firestore()
 
     @Published var authManager = AuthManager()
     
@@ -340,7 +345,8 @@ class storedNewWordItems: ObservableObject {
             let intermediateKnewAlreadyDict = try JSONSerialization.jsonObject(with: intermediateKnewAlreadyData, options: []) as! [[String: Any]]
             let intermediateBeingLearnedData = try JSONEncoder().encode(intermediateBeingLearned)
             let intermediateBeingLearnedDict = try JSONSerialization.jsonObject(with: intermediateBeingLearnedData, options: []) as! [[String: Any]]
-            db.collection("users").document(user.uid).setData([
+      //      db.collection("users").document(user.uid).setData([ Sep 2
+            appState?.db.collection("users").document(user.uid).setData([
                 "elementaryKnewAlready": elementaryKnewAlreadyDict,
                 "elementaryBeingLearned": elementaryBeingLearnedDict,
                 "beginnerKnewAlready": beginnerKnewAlreadyDict,
@@ -361,7 +367,8 @@ class storedNewWordItems: ObservableObject {
     }
     
     func loadData(for userID: String) {
-        db.collection("users").document(userID).getDocument { [weak self] (document, error) in
+        appState?.db.collection("users").document(userID).getDocument { [weak self] (document, error) in
+      //  db.collection("users").document(userID).getDocument { [weak self] (document, error) in Sep 2
             guard let self = self else { return }
             if let document = document, document.exists {
                 do {
@@ -744,7 +751,7 @@ class storedNewWordItems: ObservableObject {
       try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
     
-    private var hasLoadedInitially = false
+     var hasLoadedInitially = false
     
     func initialWordDataLoader() {
         print("Starting initialWordDataLoader")
