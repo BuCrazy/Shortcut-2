@@ -41,22 +41,14 @@ struct SettingsView: View {
                         try? Auth.auth().signOut()
                         userIsLoggedIn = false
                     }
-//                    Button("Save data") {
-//                        storedNewWordItemsDataLayer.saveData()
+//                    Button("Clear local data") {
+//                        storedNewWordItemsDataLayer.elementaryBeingLearned.removeAll()
+//                        storedNewWordItemsDataLayer.elementaryKnewAlready.removeAll()
+//                        storedNewWordItemsDataLayer.elementaryWordsStorage.removeAll()
+//                        storedNewWordItemsDataLayer.elementaryWordsStorage = elementaryWordsStorageSource
+//                        try! storedNewWordItemsDataLayer.elementaryKnewAlreadySave()
+//                        try! storedNewWordItemsDataLayer.elementaryBeingLearnedSave()
 //                    }
-//                    Button("Load data") {
-//                        if let user = storedNewWordItemsDataLayer.authManager.user {
-//                            storedNewWordItemsDataLayer.loadData(for: user.uid)
-//                        }
-//                    }
-                    Button("Clear local data") {
-                        storedNewWordItemsDataLayer.elementaryBeingLearned.removeAll()
-                        storedNewWordItemsDataLayer.elementaryKnewAlready.removeAll()
-                        storedNewWordItemsDataLayer.elementaryWordsStorage.removeAll()
-                        storedNewWordItemsDataLayer.elementaryWordsStorage = elementaryWordsStorageSource
-                        try! storedNewWordItemsDataLayer.elementaryKnewAlreadySave()
-                        try! storedNewWordItemsDataLayer.elementaryBeingLearnedSave()
-                    }
                 })
             }
         }

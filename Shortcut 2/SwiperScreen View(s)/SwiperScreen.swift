@@ -36,18 +36,9 @@ struct SwiperScreen: View {
                   ReinforcementView()
               }
         }
-
         .onAppear{
 //          try! activityLogDataLayer.loadDataFromJSON()
-            if isFirstAppLaunch {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    if let user = storedNewWordItemsDataLayer.authManager.user {
-                        storedNewWordItemsDataLayer.loadData(for: user.uid)
-                        isFirstAppLaunch = false
-                        print("Database download run with a 2 second delay")
-                    }
-                }
-            } else {
+            if isFirstAppLaunch == false {
                 storedNewWordItemsDataLayer.saveData()
             }
         }

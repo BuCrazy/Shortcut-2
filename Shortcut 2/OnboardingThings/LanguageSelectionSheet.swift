@@ -47,10 +47,12 @@ class LanguageViewModel: ObservableObject {
     }
 }
 struct LanguageSelectionSheet: View {
+    @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @State var feedbackColor: Color = Color.clear
     @StateObject private var viewModel = LanguageViewModel()
     @AppStorage("nativeLanguageSelectedID_key") var languageCodeForUse: String = ""
     @AppStorage("languageSwitchSheetShown_key") var languageSwitchSheetShown: Bool = false
+    @AppStorage("isFirstAppLaunch") var isFirstAppLaunch: Bool = true
     var isShortVersion: Bool
     var body: some View {
         NavigationStack{
@@ -210,6 +212,17 @@ struct LanguageSelectionSheet: View {
                     }
                 }
                 .background(Color("sheetColor"))
+            }
+            .onAppear{
+                if isFirstAppLaunch {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        if let user = storedNewWordItemsDataLayer.authManager.user {
+                            storedNewWordItemsDataLayer.loadData(for: user.uid)
+                            isFirstAppLaunch = false
+                            print("Database download run with a 2 second delay")
+                        }
+                    }
+                }
             }
         }
         .navigationBarTitle("", displayMode: .inline)

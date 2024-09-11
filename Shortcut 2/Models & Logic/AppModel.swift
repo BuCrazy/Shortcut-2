@@ -219,37 +219,37 @@ class AuthManager: ObservableObject {
         }
     }
     
-//    func signUp(email: String, password: String, completion: @escaping (Error?) -> Void) {
-//        auth.createUser(withEmail: email, password: password) { authResult, error in
-//            if let error = error {
-//                completion(error)
-//            } else {
-//                self.user = authResult?.user
-//                completion(nil)
-//            }
-//        }
-//    }
-//    
-//    func signIn(email: String, password: String, completion: @escaping (Error?) -> Void) {
-//        auth.signIn(withEmail: email, password: password) { authResult, error in
-//            if let error = error {
-//                completion(error)
-//            } else {
-//                self.user = authResult?.user
-//                completion(nil)
-//            }
-//        }
-//    }
-//    
-//    func signOut(completion: @escaping (Error?) -> Void) {
-//        do {
-//            try auth.signOut()
-//            self.user = nil
-//            completion(nil)
-//        } catch let signOutError as NSError {
-//            completion(signOutError)
-//        }
-//    }
+    func signUp(email: String, password: String, completion: @escaping (Error?) -> Void) {
+        auth.createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                completion(error)
+            } else {
+                self.user = authResult?.user
+                completion(nil)
+            }
+        }
+    }
+    
+    func signIn(email: String, password: String, completion: @escaping (Error?) -> Void) {
+        auth.signIn(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                completion(error)
+            } else {
+                self.user = authResult?.user
+                completion(nil)
+            }
+        }
+    }
+    
+    func signOut(completion: @escaping (Error?) -> Void) {
+        do {
+            try auth.signOut()
+            self.user = nil
+            completion(nil)
+        } catch let signOutError as NSError {
+            completion(signOutError)
+        }
+    }
 }
 
 // Тут будем хранить два массива слов, "Знаю" и "Не знаю", теперь для всех уровней. Слова в них будут сохраняться по структуре wordItemNew:
@@ -302,7 +302,7 @@ class storedNewWordItems: ObservableObject {
         
         }
     //Test Sep 2
-  //  private var db = Firestore.firestore()
+    private var db = Firestore.firestore()
 
     @Published var authManager = AuthManager()
     
@@ -345,8 +345,8 @@ class storedNewWordItems: ObservableObject {
             let intermediateKnewAlreadyDict = try JSONSerialization.jsonObject(with: intermediateKnewAlreadyData, options: []) as! [[String: Any]]
             let intermediateBeingLearnedData = try JSONEncoder().encode(intermediateBeingLearned)
             let intermediateBeingLearnedDict = try JSONSerialization.jsonObject(with: intermediateBeingLearnedData, options: []) as! [[String: Any]]
-      //      db.collection("users").document(user.uid).setData([ Sep 2
-            appState?.db.collection("users").document(user.uid).setData([
+            db.collection("users").document(user.uid).setData([ /*Sep 2*/
+//            appState?.db.collection("users").document(user.uid).setData([
                 "elementaryKnewAlready": elementaryKnewAlreadyDict,
                 "elementaryBeingLearned": elementaryBeingLearnedDict,
                 "beginnerKnewAlready": beginnerKnewAlreadyDict,
@@ -364,11 +364,11 @@ class storedNewWordItems: ObservableObject {
         } catch {
             print("Error encoding data: \(error.localizedDescription)")
         }
+        print("Datasaving fuction exectuion attempt")
     }
     
     func loadData(for userID: String) {
-        appState?.db.collection("users").document(userID).getDocument { [weak self] (document, error) in
-      //  db.collection("users").document(userID).getDocument { [weak self] (document, error) in Sep 2
+        db.collection("users").document(userID).getDocument { [weak self] (document, error) in
             guard let self = self else { return }
             if let document = document, document.exists {
                 do {
@@ -751,7 +751,7 @@ class storedNewWordItems: ObservableObject {
       try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
     
-     var hasLoadedInitially = false
+    var hasLoadedInitially = false
     
     func initialWordDataLoader() {
         print("Starting initialWordDataLoader")
