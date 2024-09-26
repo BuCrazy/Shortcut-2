@@ -22,7 +22,7 @@ struct HistoricalDataView: View {
                 
                 QuizChartResultsView(quizHistory: quizHistory)
                     .padding(.horizontal, 16)
-                QuizScoreChart(quizHistory: quizHistory)
+                QuizHistoryBarChart(quizHistory: quizHistory)
                     .frame(height: 216)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 16)
@@ -37,8 +37,33 @@ struct HistoricalDataView: View {
 }
 
 struct HistoricalDataView_Previews: PreviewProvider {
-    static var quizHistory = QuizHistory()
+    static var sampleQuizHistory: QuizHistory {
+        var history = QuizHistory()
+        let now = Date()
+        for i in 0..<10 {
+            let date = Calendar.current.date(byAdding: .day, value: -i, to: now)!
+            let score = Double.random(in: 60...100)
+            history.saveQuizData(date: date, score: score)
+        }
+        return history
+    }
+    
     static var previews: some View {
-        HistoricalDataView(quizHistory: quizHistory)
+        Group {
+            HistoricalDataView(quizHistory: sampleQuizHistory)
+                .previewDisplayName("With Sample Data")
+            
+            HistoricalDataView(quizHistory: QuizHistory())
+                .previewDisplayName("Empty History")
+        }
+        .previewLayout(.sizeThatFits)
+       // .padding()
+        .background(Color.gray.opacity(0.1))
     }
 }
+//struct HistoricalDataView_Previews: PreviewProvider {
+//    static var quizHistory = QuizHistory()
+//    static var previews: some View {
+//        HistoricalDataView(quizHistory: quizHistory)
+//    }
+//}
