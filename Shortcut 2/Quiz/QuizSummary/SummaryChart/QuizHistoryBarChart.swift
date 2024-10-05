@@ -22,6 +22,7 @@ struct QuizHistoryBarChart: View {
                 .cornerRadius(4)
             }
         }
+        .chartYScale(domain: 0...100)
         .chartXAxis {
             AxisMarks(values: .automatic) { _ in
                 AxisValueLabel(orientation: .horizontal)

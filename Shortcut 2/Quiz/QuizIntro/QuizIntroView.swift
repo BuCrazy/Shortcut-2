@@ -48,7 +48,7 @@ struct QuizIntroView: View {
                         }
                        // Spacer()
                     }
-                    .padding(.bottom, 16)
+                   // .padding(.bottom, 16)
                     
                     //NOTE: Button
                     VStack {
