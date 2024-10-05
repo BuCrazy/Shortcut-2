@@ -144,28 +144,36 @@ extension String {
 // --- Code for saving Quiz historical data ---
 
 struct QuizHistory: Codable {
+    struct QuizSession: Codable, Identifiable { //Saving last 10 quiz sessions experiment
+            let id: String // This will be the date string
+            let date: Date
+            let score: Double
+        }
     var quizHistoricalData: [String: Double]
+    var recentSessions: [QuizSession] //Saving last 10 quiz sessions experiment
     
     var totalAverage: Double {
         let totalScore = quizHistoricalData.values.reduce(0, +)
         return totalScore / Double(quizHistoricalData.count)
     }
     init() {
-            // Try to load existing data when initializing
-            let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("quizHistory.json")
+        // Try to load existing data when initializing
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("quizHistory.json")
         if FileManager.default.fileExists(atPath: fileURL.path) {
             do {
                 let data = try Data(contentsOf: fileURL)
                 self = try JSONDecoder().decode(QuizHistory.self, from: data)
             } catch {
-                print("Failed to load existing QuizHistory, starting fresh: \(error)")
-                self.quizHistoricalData = [:]
+                self.quizHistoricalData = [:]  // Initialize with empty data if loading fails
+                self.recentSessions = []
+                print("Failed to load quiz history: \(error)")
             }
         } else  {
             print("No QuizHistory file found, starting fresh")
             self.quizHistoricalData = [:]
+            self.recentSessions = []
         }
-        }
+    }
     
     mutating func saveQuizData(date: Date, score: Double) {
         let dateFormatter = DateFormatter()
@@ -173,6 +181,15 @@ struct QuizHistory: Codable {
         let dateKey = dateFormatter.string(from: date)
         
         quizHistoricalData[dateKey] = score
+        
+        // Save to recent sessions
+        let newSession = QuizSession(id: dateKey, date: date, score: score)
+        recentSessions.append(newSession)
+        
+        // Keep only the last 10 sessions in recentSessions
+        if recentSessions.count > 10 {
+            recentSessions = Array(recentSessions.suffix(10))
+        }
     }
     
     func encodeToJson() throws -> Data {

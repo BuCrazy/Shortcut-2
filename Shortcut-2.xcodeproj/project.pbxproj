@@ -119,6 +119,7 @@
 		BB92E5E52C75484F00BDC754 /* Goal 1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92E5E42C75484F00BDC754 /* Goal 1.swift */; };
 		BB92E5E72C754B3B00BDC754 /* MiniWordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92E5E62C754B3A00BDC754 /* MiniWordCard.swift */; };
 		BB92E5E92C754B7300BDC754 /* Goal 1 Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92E5E82C754B7300BDC754 /* Goal 1 Animation.swift */; };
+		BBA904F72CA5F0C700985BA3 /* QuizHistoryBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */; };
 		BBBC75C52C865FC1005857CF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C42C865FC1005857CF /* AppState.swift */; };
 		BBBC75C72C86690B005857CF /* Shortvut_2AppDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */; };
 		BBD92FF82B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */; };
@@ -237,6 +238,7 @@
 		BB92E5E42C75484F00BDC754 /* Goal 1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal 1.swift"; sourceTree = "<group>"; };
 		BB92E5E62C754B3A00BDC754 /* MiniWordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniWordCard.swift; sourceTree = "<group>"; };
 		BB92E5E82C754B7300BDC754 /* Goal 1 Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal 1 Animation.swift"; sourceTree = "<group>"; };
+		BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHistoryBarChart.swift; sourceTree = "<group>"; };
 		BBBC75C42C865FC1005857CF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortvut_2AppDraft.swift; sourceTree = "<group>"; };
 		BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeekBadge.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 				BB3D1A182B8FD73300027DC4 /* TestBarChart.swift */,
 				BB3D1A162B8FD71D00027DC4 /* ChartSampleData.swift */,
 				BB4236342BE97A1300045630 /* QuizScoreChart.swift */,
+				BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */,
 			);
 			path = SummaryChart;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				BB7A037D2AE08724009EFDD5 /* CalendarLegendView.swift in Sources */,
 				BB3D1A312B8FDAEB00027DC4 /* AuraEffect.swift in Sources */,
 				BB3D1A3D2B8FDD2300027DC4 /* QuizCardView.swift in Sources */,
+				BBA904F72CA5F0C700985BA3 /* QuizHistoryBarChart.swift in Sources */,
 				BB3D1A332B8FDB5E00027DC4 /* PlayerView.swift in Sources */,
 				BB3D1A0D2B8FD52E00027DC4 /* OnboardingMessage.swift in Sources */,
 				8527F1332A98C1DB00620A45 /* VerticalCard.swift in Sources */,
