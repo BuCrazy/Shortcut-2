@@ -162,9 +162,40 @@ struct TabBarItem: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+        let actualStoredNewWordItems = storedNewWordItems()
+            let actualActivityLog = ActivityCalendar()
+            let actualStoredStates = storedStates()
+        
+        let actualAppState = AppState(storedNewWordItems: actualStoredNewWordItems, activityLog: actualActivityLog)
+        
+        actualStoredNewWordItems.initialWordDataLoader()
+        
+        // Load activity log data
+                do {
+                    try actualActivityLog.loadDataFromJSON()
+                } catch {
+                    print("Error loading activity log data: \(error)")
+                }
+        // Set dataLoaded to true after loading data
+                actualAppState.dataLoaded = true
+        
+        return ContentView()
+            .environmentObject(actualStoredNewWordItems)
+                       .environmentObject(actualActivityLog)
+                       .environmentObject(actualStoredStates)
+                       .environmentObject(actualAppState)
+    }
+}
+
+
+/*struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
         let mockStoredNewWordItems = storedNewWordItems()
         let mockActivityLog = ActivityCalendar()
         let mockAppState = AppState(storedNewWordItems: mockStoredNewWordItems, activityLog: mockActivityLog)
+        
+        // Set dataLoaded to true
+               mockAppState.dataLoaded = true
         
         return ContentView()
             .environmentObject(mockStoredNewWordItems)
@@ -172,8 +203,7 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(storedStates())
             .environmentObject(mockAppState)
     }
-}
-
+}*/
 
 
 // Standard Tab Bar

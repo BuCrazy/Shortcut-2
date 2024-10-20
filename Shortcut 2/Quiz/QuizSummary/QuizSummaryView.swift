@@ -26,6 +26,7 @@ struct QuizSummaryView: View {
     }
     // --- Code for saving Quiz historical data ---
     @Binding var isQuizAlreadyStarted: Bool
+    @Binding var isQuizFinished: Bool
     @State private var navigateToReinforcement = false
     // --- Code for saving Quiz historical data ends ---
     
@@ -58,6 +59,7 @@ struct QuizSummaryView: View {
                             .simultaneousGesture(TapGesture().onEnded {
                                 resetQuizState()
                                 isQuizAlreadyStarted = false
+                                isQuizFinished = false //test Oct 14 2024
                             })
                             
                             
@@ -119,6 +121,6 @@ struct QuizSummary_Previews: PreviewProvider {
     @State static var correctAnswerNumber: Int = 20
     @State static var incorrectAnswerNumber: Int = 10
     static var previews: some View {
-        QuizSummaryView(correctAnswerNumber: .constant(correctAnswerNumber), incorrectAnswerNumber: .constant(incorrectAnswerNumber), isQuizAlreadyStarted: .constant(false))
+        QuizSummaryView(correctAnswerNumber: .constant(correctAnswerNumber), incorrectAnswerNumber: .constant(incorrectAnswerNumber), isQuizAlreadyStarted: .constant(false), isQuizFinished: .constant(false))
     }
 }
