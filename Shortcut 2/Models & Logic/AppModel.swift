@@ -1206,7 +1206,8 @@ extension storedNewWordItems {
             questionStatuses: [],
             //test
             correctAnswerCount: 0,
-            incorrectAnswerCount: 0
+            incorrectAnswerCount: 0,
+            isQuizFinished: false   //test Oct 14 2024
         )
         let data = try JSONEncoder().encode(initialState)
         try data.write(to: quizStateFile)
@@ -1221,6 +1222,7 @@ extension storedNewWordItems {
         //Test
         var correctAnswerCount: Int
         var incorrectAnswerCount: Int
+        var isQuizFinished: Bool //test Oct 14 2024
     }
 
     func isQuizInProgress() -> Bool {

@@ -115,7 +115,7 @@ struct QuizView: View {
                     //NOTE: Initial logic for switching views } else
                   if isQuizFinished {
                   
-                    QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, isQuizAlreadyStarted: $isQuizAlreadyStarted)
+                      QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, isQuizAlreadyStarted: $isQuizAlreadyStarted, isQuizFinished: $isQuizFinished)
                            .opacity(isQuizFinished ? 1 : 0)
                            .animation(.easeIn, value: isQuizFinished)
                 } else {
@@ -293,7 +293,13 @@ struct QuizView: View {
                 //test
                 self.correctAnswerNumber = loadedState.correctAnswerCount
                 self.incorrectAnswerNumber = loadedState.incorrectAnswerCount
+                self.isQuizFinished = loadedState.isQuizFinished //test Oct 14 2024
                 // Load any other necessary state components
+                
+                // If the quiz is finished, immediately show the summary, test Oct 14 2024
+                if self.isQuizFinished {
+                    self.showQuizSummary = true
+                }
             }
         } catch {
             print("Could not load quiz state: \(error)")
@@ -376,7 +382,8 @@ struct QuizView: View {
             questionStatuses: questionStatuses,
             //test
             correctAnswerCount: correctAnswerNumber,
-            incorrectAnswerCount: incorrectAnswerNumber
+            incorrectAnswerCount: incorrectAnswerNumber,
+            isQuizFinished: isQuizFinished //test Oct 14 2024
         )
         do {
             try storedNewWordItems.shared.saveQuizState(state)
