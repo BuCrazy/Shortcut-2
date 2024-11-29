@@ -14,15 +14,17 @@ struct RootView: View {
                                 .opacity(onboardingBlockOpacity)
                         }
                     } else {
-                        VStack{
+                        
+                        // I commented out VStack and .onAppear animation because it cause a weird launch UI transition from the left corner to center.
+                   //     VStack{
                             ContentView()
-                                .opacity(contentBlockOpacity)
-                        }
-                        .onAppear{
-                            withAnimation(.easeIn(duration: 0.5)) {
-                                contentBlockOpacity = 1
-                            }
-                        }
+                       //         .opacity(contentBlockOpacity)
+                 //       }
+//                        .onAppear{
+//                            withAnimation(.easeIn(duration: 0.5)) {
+//                                contentBlockOpacity = 1
+//                            }
+//                        }
                     }
                 }
 

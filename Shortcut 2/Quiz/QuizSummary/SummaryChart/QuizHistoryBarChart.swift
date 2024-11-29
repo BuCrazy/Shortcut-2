@@ -16,6 +16,7 @@ struct QuizHistoryBarChart: View {
             ForEach(quizHistory.recentSessions) { session in
                 BarMark(
                     x: .value("Date", formatDate(session.date)),
+                  //  x: .value("Date", session.date),
                     y: .value("Score", session.score)
                 )
                 .foregroundStyle(Color.blue)
@@ -23,17 +24,27 @@ struct QuizHistoryBarChart: View {
             }
         }
         .chartYScale(domain: 0...100)
-        .chartXAxis {
-            AxisMarks(values: .automatic) { _ in
-                AxisValueLabel(orientation: .horizontal)
-            }
-        }
+//        .chartXAxis {
+//            AxisMarks(values: .automatic) { value in
+//                if let date = value.as(Date.self) {
+//                    AxisValueLabel(formatDateForLabel(date), orientation: .horizontal)
+//                }
+//              //  AxisValueLabel(orientation: .horizontal)
+//
+//            }
+//        }
         .chartYAxis {
             AxisMarks(position: .leading)
         }
         .frame(height: 200)
-        .padding()
+      //  .padding()
     }
+    
+    private func formatDateForLabel(_ date: Date) -> String {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "MM/dd"  // Simplified format for labels
+            return outputFormatter.string(from: date)
+        }
     
     private func formatDate(_ date: Date) -> String {
         let outputFormatter = DateFormatter()

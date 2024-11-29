@@ -31,7 +31,7 @@ struct ConsistencyCircle: View {
                     
                 Circle()
                     .trim(from: 0, to: trimEnd)
-                    .stroke(Color("consistencyCircleYellow"), style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                    .stroke(Color("consistencyCircleGold"), style: StrokeStyle(lineWidth: 3, lineCap: .round))
                     .rotationEffect(.degrees(-90))
                     .onAppear {
                         withAnimation(.easeInOut(duration: 1)) {

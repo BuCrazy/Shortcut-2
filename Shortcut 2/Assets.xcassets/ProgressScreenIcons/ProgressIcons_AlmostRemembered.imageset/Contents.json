@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "In Propgress.png",
+      "filename" : "ProgressIcons_AlmostRemembered.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "In Propgress 1.png",
+      "filename" : "ProgressIcons_AlmostRemembered 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "In Propgress 2.png",
+      "filename" : "ProgressIcons_AlmostRemembered 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

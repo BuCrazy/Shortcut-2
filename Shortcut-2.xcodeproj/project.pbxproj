@@ -123,6 +123,7 @@
 		BBA904F72CA5F0C700985BA3 /* QuizHistoryBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */; };
 		BBBC75C52C865FC1005857CF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C42C865FC1005857CF /* AppState.swift */; };
 		BBBC75C72C86690B005857CF /* Shortvut_2AppDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */; };
+		BBCB303A2CDEC3BE00C74881 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB30392CDEC3BE00C74881 /* Goals.swift */; };
 		BBD92FF82B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */; };
 		BBD92FFA2B47717A008AB3BC /* DiscoveredThisWeekModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FF92B47717A008AB3BC /* DiscoveredThisWeekModal.swift */; };
 		BBD92FFE2B477498008AB3BC /* ModalStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FFD2B477498008AB3BC /* ModalStyle.swift */; };
@@ -243,6 +244,7 @@
 		BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHistoryBarChart.swift; sourceTree = "<group>"; };
 		BBBC75C42C865FC1005857CF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortvut_2AppDraft.swift; sourceTree = "<group>"; };
+		BBCB30392CDEC3BE00C74881 /* Goals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
 		BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeekBadge.swift; sourceTree = "<group>"; };
 		BBD92FF92B47717A008AB3BC /* DiscoveredThisWeekModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeekModal.swift; sourceTree = "<group>"; };
 		BBD92FFD2B477498008AB3BC /* ModalStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalStyle.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				8575BBC12BD087A300131655 /* readme.md */,
 				850251AD2BBDC6BC00F446CA /* LevelProgress.swift */,
 				8543CD9B2BC94B9600D76AA8 /* OnboardingGoals.swift */,
+				BBCB30392CDEC3BE00C74881 /* Goals.swift */,
 				8543CD9D2BC950B600D76AA8 /* OnboardingGoalCircle.swift */,
 			);
 			path = OnboardingViews;
@@ -852,6 +855,7 @@
 				85A67FCA2A98D145006A1DF7 /* SwiperScreen.swift in Sources */,
 				BB7A03772ADE37C9009EFDD5 /* ActivityCalendarView.swift in Sources */,
 				8543CD9C2BC94B9600D76AA8 /* OnboardingGoals.swift in Sources */,
+				BBCB303A2CDEC3BE00C74881 /* Goals.swift in Sources */,
 				8527F1412A98C2B000620A45 /* CircleAnimation.swift in Sources */,
 				85F1D4AE2C47151300B97D87 /* RootView.swift in Sources */,
 				8543CD9E2BC950B600D76AA8 /* OnboardingGoalCircle.swift in Sources */,

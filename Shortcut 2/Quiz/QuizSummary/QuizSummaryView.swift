@@ -72,7 +72,7 @@ struct QuizSummaryView: View {
                 }
                 
                 ZStack {
-                    BCircleAnimation(feedbackColor: .green)
+                    BCircleAnimation(feedbackColor: feedbackColor)
                         .blendMode(.screen)
                         .blur(radius: 40)
                         .offset(x: -50, y: -400)
@@ -80,10 +80,10 @@ struct QuizSummaryView: View {
 
             }
             .navigationTitle(Text ("Summary"))
-          //  .toolbarBackground(.clear, for: .navigationBar)
+            .toolbarBackground(.clear, for: .navigationBar)
         }
         .onAppear {
-       
+            feedbackColor = sessionScore >= 60 ? .green : .red
             updateQuizHistoryWithScore(score: sessionScore, date: Date())
         }
         .onDisappear {

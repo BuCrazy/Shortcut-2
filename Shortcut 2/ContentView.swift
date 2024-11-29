@@ -101,7 +101,7 @@ struct ContentView: View {
                     
                     // .frame(height: 45)
                 }
-                
+               
                 .edgesIgnoringSafeArea(.bottom)
                 
 //                .onAppear{
@@ -122,7 +122,6 @@ struct ContentView: View {
     }
 
 }
-
 struct TabIconView: View {
     
     let selectedImageName: String
