@@ -9,6 +9,8 @@ import SwiftUI
 
 struct QuizSummaryView: View {
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
+    @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
+    @EnvironmentObject var goalsManager: GoalsManager
     
     @State var feedbackColor: Color = Color.clear
     @Binding var correctAnswerNumber: Int
@@ -24,11 +26,19 @@ struct QuizSummaryView: View {
             return 0.0 // Return 0.0 if there are no questions.
         }
     }
+    
     // --- Code for saving Quiz historical data ---
     @Binding var isQuizAlreadyStarted: Bool
     @Binding var isQuizFinished: Bool
     @State private var navigateToReinforcement = false
     // --- Code for saving Quiz historical data ends ---
+    
+    init(correctAnswerNumber: Binding<Int>, incorrectAnswerNumber: Binding<Int>, isQuizAlreadyStarted: Binding<Bool>, isQuizFinished: Binding<Bool>) {
+        self._correctAnswerNumber = correctAnswerNumber
+        self._incorrectAnswerNumber = incorrectAnswerNumber
+        self._isQuizAlreadyStarted = isQuizAlreadyStarted
+        self._isQuizFinished = isQuizFinished
+    }
     
     var body: some View {
         NavigationStack {
@@ -37,11 +47,18 @@ struct QuizSummaryView: View {
                 ScrollView {
                     VStack {
                         
-                        SummaryMessage()
-                            .padding(.vertical, 32)
+//                        SummaryMessage(goalsManager: goalsManager)
+//                            .padding(.vertical, 32)
+                           // .padding(.horizontal, 16)
                         
                         
                         VStack(spacing: 24) {
+                           SummaryMessage(goalsManager: goalsManager)
+                                .padding(.vertical, 32)
+                           
+                            QS_GoalReporter(goalsManager: goalsManager)
+                                .padding(.horizontal, 16)
+                            
                             SessionStats(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, sessionScore: sessionScore)
                                 .padding(.horizontal, 16)
                                 .shadow(color: .black.opacity(0.16), radius: 6, x: 0, y: 5)
@@ -60,6 +77,7 @@ struct QuizSummaryView: View {
                                 resetQuizState()
                                 isQuizAlreadyStarted = false
                                 isQuizFinished = false //test Oct 14 2024
+                                currentLearningMode = "reinforcement"
                             })
                             
                             
@@ -83,11 +101,22 @@ struct QuizSummaryView: View {
             .toolbarBackground(.clear, for: .navigationBar)
         }
         .onAppear {
-            feedbackColor = sessionScore >= 60 ? .green : .red
+            goalsManager.updateStoredItems(storedNewWordItemsDataLayer)
             updateQuizHistoryWithScore(score: sessionScore, date: Date())
+            feedbackColor = sessionScore >= 60 ? .green : .red
+  
+            print("Goal 2 Status \(goalsManager.goals[1].status)")
+
         }
         .onDisappear {
             isQuizAlreadyStarted = false
+            
+            // TEST June 29
+            if goalsManager.goals.allSatisfy({ $0.status == .completed}) {
+                goalsManager.hasShownCompletionToast = true
+                goalsManager.saveState()
+            }
+
         }
     }
     // --- Test for saving Quiz historical data ---
@@ -118,9 +147,12 @@ struct QuizSummaryView: View {
 }
 
 struct QuizSummary_Previews: PreviewProvider {
-    @State static var correctAnswerNumber: Int = 20
-    @State static var incorrectAnswerNumber: Int = 10
+    @State static var correctAnswerNumber: Int = 28
+    @State static var incorrectAnswerNumber: Int = 2
     static var previews: some View {
         QuizSummaryView(correctAnswerNumber: .constant(correctAnswerNumber), incorrectAnswerNumber: .constant(incorrectAnswerNumber), isQuizAlreadyStarted: .constant(false), isQuizFinished: .constant(false))
+            .environmentObject(storedNewWordItems.shared)
+            .environmentObject(GoalsManager.shared)
+            
     }
 }

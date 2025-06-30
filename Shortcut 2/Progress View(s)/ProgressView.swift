@@ -18,11 +18,12 @@ struct ProgressView: View {
     
     @EnvironmentObject var activityLogDataLayer: ActivityCalendar
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
+    @EnvironmentObject var goalsManager: GoalsManager
     
     @AppStorage("dailyGoal_key") var dailyGoal: Int = 100
     @AppStorage("currentLevel_key") var currentLevel: String = "elementary"
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
-    @AppStorage("weeklySwipeCount") var weeklySwipeCount: Int = 1
+    @AppStorage("weeklySwipeCount") var weeklySwipeCount: Int = 0
     
     @State private var isPickerVisible = false
     @State private var selectedOption = "Option 1"
@@ -138,6 +139,7 @@ struct ProgressView: View {
                         .presentationDetents([.large])
                 }
                 .onAppear{
+                    goalsManager.updateStoredItems(storedNewWordItemsDataLayer)
                     try! activityLogDataLayer.loadDataFromJSON()
                 }
                 .onChange(of: activityLogDataLayer.activityLog) {/* _ in*/
@@ -160,9 +162,11 @@ struct ProgressView: View {
             .overlay(
                 NavigationBar(
                     title: "Progress",
-                    titelColor: Color( hasScrolled ? .white : Color("mainCardBG")),
+                    titleColor: hasScrolled || goalsManager.currentGoalIndex == 1 ? .white : Color("mainCardBG"),
                     fontsize: interpolate(start: 34, end: 24, value: scrollOffset),//hasScrolled ? 24 : 34,
                     height: interpolate(start: 200, end: 50, value: scrollOffset), // hasScrolled ? 50 : 190,
+                    navBarColor: interpolateColor(start: Color("navBar"), end: Color("BackgroundColor"), value: scrollOffset),
+                    scrollOffset: scrollOffset,
                     trailingButton: AnyView(
                         Menu(
                             content: {
@@ -181,40 +185,12 @@ struct ProgressView: View {
                                     .font(.body.weight(.bold))
                             }
                         )
-                    ),
-                    navBarColor: interpolateColor(start: Color("navBar"), end: Color("BackgroundColor"), value: scrollOffset),
-                    scrollOffset: scrollOffset
-                )
+                    )
+                ).environmentObject(goalsManager)
             )
-            //                .background(Color("BackgroundColor"))
-            //                .navigationTitle(Text ("Progress")).navigationBarBackButtonHidden(false)
-            //                .toolbar {
-            //                    Menu(
-            //                        content: {
-            //                            Button(
-            //                                action: {
-            //                                    levelSwitchSheetShown.toggle()
-            //                                },
-            //                                label: {
-            //                                    Text("Switch Level")
-            //                                }
-            //                            )
-            //                        },
-            //                        label: {
-            //                            Button(
-            //                                action: {},
-            //                                label: {
-            //                                        Image("more")
-            //                                }
-            //                            )
-            //                        }
-            //                    )
-            //                }
-                }
-            }
-        
-        
+        }
     }
+}
     private func interpolateColor(start: Color, end: Color, value: CGFloat) -> Color {
             let progress = min(max(value / -200, 0), 1)
             
@@ -253,9 +229,13 @@ struct ProgressView_Previews: PreviewProvider {
     static var previews: some View {
         // Here you need to provide an instance of ActivityCalendar to the initializer
         let activityCalendar = ActivityCalendar()
+        let mockStoredItems = storedNewWordItems()
+        let goalsManager = GoalsManager(storedItems: mockStoredItems)
+        
         return ProgressView(activeModal: .constant(.none), activityLogDataLayer: activityCalendar)
             .environmentObject(activityCalendar)
-            .environmentObject(storedNewWordItems())
+            .environmentObject(mockStoredItems)
+            .environmentObject(goalsManager)
     }
 }
 

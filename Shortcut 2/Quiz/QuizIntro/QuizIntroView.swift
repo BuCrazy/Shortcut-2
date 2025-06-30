@@ -9,7 +9,10 @@ import SwiftUI
 
 struct QuizIntroView: View {
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
+    @AppStorage("weeklySwipeCount") var weeklySwipeCount: Int = 0
+    
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
+    @EnvironmentObject var goalsManager: GoalsManager
     
     @State private var appeared: Bool = false
     @State private var rotationAmount: Double = 360
@@ -42,17 +45,26 @@ struct QuizIntroView: View {
                     
                     //NOTE: Counter
                     VStack {
-                        //Spacer()
-                        HStack(alignment: .center) {
-                            DiscoveryCounter()
+                       // Spacer()
+                        
+                        ZStack(alignment: .center) {
+//                            GoalToast_2(goalsManager: goalsManager)
+//                                .padding(.horizontal, 32)
+//                                .offset(x: 0, y: -16)
+//                            
+//                            GoalToast_1()
+//                                .padding(.horizontal, 16)
+//                            DiscoveryCounter(discoveredThisWeek: $weeklySwipeCount)
+                            QI_GoalReporter(goalsManager: goalsManager)
                         }
+                        .padding(.top, 24)
                        // Spacer()
                     }
                    // .padding(.bottom, 16)
                     
                     //NOTE: Button
                     VStack {
-                        Spacer()
+                       // Spacer()
                         NavigationLink(destination:  QuizView(storedWords: storedNewWordItemsDataLayer)) {
                             CTAButton(buttonText: "Let's Go!")
                                 .padding(.horizontal, 16)
@@ -126,7 +138,18 @@ struct QuizIntroView: View {
         
 }
 
-#Preview {
-    QuizIntroView()
-        .environmentObject(storedNewWordItems())
+struct QuizIntroView_Previews: PreviewProvider {
+    static var previews: some View {
+        let mockStoredItems = storedNewWordItems()
+        let mockGoalsManager = GoalsManager(storedItems: mockStoredItems)
+        
+        return QuizIntroView()
+            .environmentObject(mockStoredItems)
+            .environmentObject(mockGoalsManager)
+    }
 }
+
+//#Preview {
+//    QuizIntroView()
+//        .environmentObject(storedNewWordItems())
+//}

@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ReinforcementView: View {
-    @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
+    @AppStorage("currentLearningMode_key") var currentLearningMode: String = "reinforcement"
     
     var body: some View {
         VStack {
+            Spacer()
+            
             NavigationLink(destination:    SwiperScreen(), label: {
                 CTAButton(buttonText: "To Discovery")
             })
@@ -19,6 +21,12 @@ struct ReinforcementView: View {
                 
                 currentLearningMode = "discovery"
             })
+            Spacer()
+        }
+        .background(Color("dictionaryBGColor"))
+        .onAppear {
+            currentLearningMode = "reinforcement"
+            print ("Current learning mode is \(currentLearningMode)")
         }
     }
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -61,6 +61,7 @@
 		BB0149292B210590009C1CF9 /* DictionaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149282B210590009C1CF9 /* DictionaryHeaderView.swift */; };
 		BB0FD8FB2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FD8FA2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift */; };
 		BB0FD8FD2B44CED100D62B25 /* LearnedAtThisLvlModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FD8FC2B44CED100D62B25 /* LearnedAtThisLvlModal.swift */; };
+		BB1394C22DBEAFF100F3D126 /* MockDonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1394C12DBEAFF100F3D126 /* MockDonutChart.swift */; };
 		BB16A2472AEA92F200B43FC0 /* ActivityCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB16A2462AEA92F200B43FC0 /* ActivityCalendarViewModel.swift */; };
 		BB2A1B512CBCB204002ACFD9 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2A1B502CBCB204002ACFD9 /* QuizViewModel.swift */; };
 		BB3D19F72B8E965C00027DC4 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D19F62B8E965C00027DC4 /* QuizView.swift */; };
@@ -70,8 +71,6 @@
 		BB3D1A032B8FD42000027DC4 /* AdvanceSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D1A022B8FD42000027DC4 /* AdvanceSymbolView.swift */; };
 		BB3D1A052B8FD42C00027DC4 /* NativeLikeSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D1A042B8FD42C00027DC4 /* NativeLikeSymbolView.swift */; };
 		BB3D1A072B8FD43900027DC4 /* BornInEnglandSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D1A062B8FD43900027DC4 /* BornInEnglandSymbolView.swift */; };
-		BB3D1A092B8FD4CD00027DC4 /* DiscoverUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D1A082B8FD4CD00027DC4 /* DiscoverUpdateView.swift */; };
-		BB3D1A0B2B8FD4F400027DC4 /* DiscoveryCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D1A0A2B8FD4F400027DC4 /* DiscoveryCounter.swift */; };
 		BB3D1A0D2B8FD52E00027DC4 /* OnboardingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D1A0C2B8FD52E00027DC4 /* OnboardingMessage.swift */; };
 		BB3D1A0F2B8FD55900027DC4 /* StripedBG.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D1A0E2B8FD55900027DC4 /* StripedBG.swift */; };
 		BB3D1A112B8FD57900027DC4 /* QuizIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D1A102B8FD57900027DC4 /* QuizIntroView.swift */; };
@@ -107,6 +106,7 @@
 		BB4255172B46F674008370AB /* DailyConsistencyModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4255162B46F674008370AB /* DailyConsistencyModal.swift */; };
 		BB56C72C2B1596ED00B9C8F4 /* LexCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB56C72B2B1596ED00B9C8F4 /* LexCardView.swift */; };
 		BB56C72E2B159A0900B9C8F4 /* MemoryChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB56C72D2B159A0900B9C8F4 /* MemoryChartView.swift */; };
+		BB6253E12DACB37D001895F2 /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6253E02DACB37D001895F2 /* GoalModel.swift */; };
 		BB78F8802BF67210001EB8C5 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB78F87F2BF67210001EB8C5 /* TabBar.swift */; };
 		BB7A03712ADE06D1009EFDD5 /* LearnedAtThisLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7A03702ADE06D1009EFDD5 /* LearnedAtThisLevel.swift */; };
 		BB7A03732ADE31A2009EFDD5 /* DiscoveredThisWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7A03722ADE31A2009EFDD5 /* DiscoveredThisWeek.swift */; };
@@ -123,13 +123,14 @@
 		BBA904F72CA5F0C700985BA3 /* QuizHistoryBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */; };
 		BBBC75C52C865FC1005857CF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C42C865FC1005857CF /* AppState.swift */; };
 		BBBC75C72C86690B005857CF /* Shortvut_2AppDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */; };
-		BBCB303A2CDEC3BE00C74881 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB30392CDEC3BE00C74881 /* Goals.swift */; };
 		BBD92FF82B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */; };
 		BBD92FFA2B47717A008AB3BC /* DiscoveredThisWeekModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FF92B47717A008AB3BC /* DiscoveredThisWeekModal.swift */; };
 		BBD92FFE2B477498008AB3BC /* ModalStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FFD2B477498008AB3BC /* ModalStyle.swift */; };
 		BBD930012B477643008AB3BC /* AlmostLearnedBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD930002B477643008AB3BC /* AlmostLearnedBadge.swift */; };
 		BBD930032B4776DD008AB3BC /* AlmostLearnedModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD930022B4776DD008AB3BC /* AlmostLearnedModal.swift */; };
+		BBDA33E32DCC352600606E9E /* QI_GoalReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDA33E22DCC352600606E9E /* QI_GoalReporter.swift */; };
 		BBE7F8B52C82740C00F056AE /* QuizDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE7F8B42C82740C00F056AE /* QuizDraft.swift */; };
+		BBFC18312DCFC6BC0007FDE0 /* QS_GoalReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC18302DCFC6BC0007FDE0 /* QS_GoalReporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -182,6 +183,7 @@
 		BB0149282B210590009C1CF9 /* DictionaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryHeaderView.swift; sourceTree = "<group>"; };
 		BB0FD8FA2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedAtThisLvlBadge.swift; sourceTree = "<group>"; };
 		BB0FD8FC2B44CED100D62B25 /* LearnedAtThisLvlModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedAtThisLvlModal.swift; sourceTree = "<group>"; };
+		BB1394C12DBEAFF100F3D126 /* MockDonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDonutChart.swift; sourceTree = "<group>"; };
 		BB16A2462AEA92F200B43FC0 /* ActivityCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCalendarViewModel.swift; sourceTree = "<group>"; };
 		BB2A1B502CBCB204002ACFD9 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		BB3D19F62B8E965C00027DC4 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
@@ -191,8 +193,6 @@
 		BB3D1A022B8FD42000027DC4 /* AdvanceSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvanceSymbolView.swift; sourceTree = "<group>"; };
 		BB3D1A042B8FD42C00027DC4 /* NativeLikeSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeLikeSymbolView.swift; sourceTree = "<group>"; };
 		BB3D1A062B8FD43900027DC4 /* BornInEnglandSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BornInEnglandSymbolView.swift; sourceTree = "<group>"; };
-		BB3D1A082B8FD4CD00027DC4 /* DiscoverUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverUpdateView.swift; sourceTree = "<group>"; };
-		BB3D1A0A2B8FD4F400027DC4 /* DiscoveryCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryCounter.swift; sourceTree = "<group>"; };
 		BB3D1A0C2B8FD52E00027DC4 /* OnboardingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMessage.swift; sourceTree = "<group>"; };
 		BB3D1A0E2B8FD55900027DC4 /* StripedBG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripedBG.swift; sourceTree = "<group>"; };
 		BB3D1A102B8FD57900027DC4 /* QuizIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIntroView.swift; sourceTree = "<group>"; };
@@ -228,6 +228,7 @@
 		BB4255162B46F674008370AB /* DailyConsistencyModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyConsistencyModal.swift; sourceTree = "<group>"; };
 		BB56C72B2B1596ED00B9C8F4 /* LexCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexCardView.swift; sourceTree = "<group>"; };
 		BB56C72D2B159A0900B9C8F4 /* MemoryChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryChartView.swift; sourceTree = "<group>"; };
+		BB6253E02DACB37D001895F2 /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
 		BB78F87F2BF67210001EB8C5 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		BB7A03702ADE06D1009EFDD5 /* LearnedAtThisLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedAtThisLevel.swift; sourceTree = "<group>"; };
 		BB7A03722ADE31A2009EFDD5 /* DiscoveredThisWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeek.swift; sourceTree = "<group>"; };
@@ -244,14 +245,23 @@
 		BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHistoryBarChart.swift; sourceTree = "<group>"; };
 		BBBC75C42C865FC1005857CF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortvut_2AppDraft.swift; sourceTree = "<group>"; };
-		BBCB30392CDEC3BE00C74881 /* Goals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
 		BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeekBadge.swift; sourceTree = "<group>"; };
 		BBD92FF92B47717A008AB3BC /* DiscoveredThisWeekModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeekModal.swift; sourceTree = "<group>"; };
 		BBD92FFD2B477498008AB3BC /* ModalStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalStyle.swift; sourceTree = "<group>"; };
 		BBD930002B477643008AB3BC /* AlmostLearnedBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlmostLearnedBadge.swift; sourceTree = "<group>"; };
 		BBD930022B4776DD008AB3BC /* AlmostLearnedModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlmostLearnedModal.swift; sourceTree = "<group>"; };
+		BBDA33E22DCC352600606E9E /* QI_GoalReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QI_GoalReporter.swift; sourceTree = "<group>"; };
 		BBE7F8B42C82740C00F056AE /* QuizDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDraft.swift; sourceTree = "<group>"; };
+		BBFC18302DCFC6BC0007FDE0 /* QS_GoalReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QS_GoalReporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BB843BE52DADEA3000CBE173 /* No Goals */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "No Goals"; sourceTree = "<group>"; };
+		BB843BE82DADEB4300CBE173 /* Goal 2 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Goal 2"; sourceTree = "<group>"; };
+		BB843BF52DBB03D800CBE173 /* Goal Toasts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Goal Toasts"; sourceTree = "<group>"; };
+		BBBFA9CA2E076F6F00948710 /* QuizCardView 2 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "QuizCardView 2"; sourceTree = "<group>"; };
+		BBDA33E12DCC34A200606E9E /* Counter */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Counter; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		377D2D452A77E31C00A2D613 /* Frameworks */ = {
@@ -343,6 +353,7 @@
 				BB7A03812AE1EA53009EFDD5 /* DailyConsistencyViewModel.swift */,
 				BB16A2462AEA92F200B43FC0 /* ActivityCalendarViewModel.swift */,
 				BBBC75C42C865FC1005857CF /* AppState.swift */,
+				BB6253E02DACB37D001895F2 /* GoalModel.swift */,
 			);
 			path = "Models & Logic";
 			sourceTree = "<group>";
@@ -353,7 +364,6 @@
 				8575BBC12BD087A300131655 /* readme.md */,
 				850251AD2BBDC6BC00F446CA /* LevelProgress.swift */,
 				8543CD9B2BC94B9600D76AA8 /* OnboardingGoals.swift */,
-				BBCB30392CDEC3BE00C74881 /* Goals.swift */,
 				8543CD9D2BC950B600D76AA8 /* OnboardingGoalCircle.swift */,
 			);
 			path = OnboardingViews;
@@ -536,11 +546,12 @@
 		BB3D19F82B8FD39E00027DC4 /* QuizIntro */ = {
 			isa = PBXGroup;
 			children = (
+				BB843BF52DBB03D800CBE173 /* Goal Toasts */,
+				BBDA33E12DCC34A200606E9E /* Counter */,
 				BB3D1A102B8FD57900027DC4 /* QuizIntroView.swift */,
+				BBDA33E22DCC352600606E9E /* QI_GoalReporter.swift */,
 				BB3D1A0E2B8FD55900027DC4 /* StripedBG.swift */,
 				BB3D1A0C2B8FD52E00027DC4 /* OnboardingMessage.swift */,
-				BB3D1A0A2B8FD4F400027DC4 /* DiscoveryCounter.swift */,
-				BB3D1A082B8FD4CD00027DC4 /* DiscoverUpdateView.swift */,
 				BB3D19FD2B8FD3F000027DC4 /* LevelsSymbols */,
 			);
 			path = QuizIntro;
@@ -551,6 +562,7 @@
 			children = (
 				BB3D19F62B8E965C00027DC4 /* QuizView.swift */,
 				BB3D1A3C2B8FDD2300027DC4 /* QuizCardView.swift */,
+				BBBFA9CA2E076F6F00948710 /* QuizCardView 2 */,
 				BB3D1A3A2B8FDCEE00027DC4 /* AnswerOptionView.swift */,
 				BB3D1A382B8FDC5200027DC4 /* QuizItem.swift */,
 				BB3D1A362B8FDC2600027DC4 /* IndicatorBar.swift */,
@@ -576,6 +588,7 @@
 				BB3D1A1E2B8FD93800027DC4 /* CorrectAnswersNumber.swift */,
 				BB3D1A1C2B8FD8FC00027DC4 /* IncorrectAnswersNumber.swift */,
 				BB3D1A1A2B8FD7D400027DC4 /* BlurCircleAnimationView.swift */,
+				BBFC18302DCFC6BC0007FDE0 /* QS_GoalReporter.swift */,
 				BB42362B2BE9787200045630 /* Unrelevant */,
 				BB3D1A152B8FD70500027DC4 /* SummaryChart */,
 			);
@@ -599,6 +612,7 @@
 			isa = PBXGroup;
 			children = (
 				BB3D1A132B8FD69300027DC4 /* CTAButton.swift */,
+				BB1394C12DBEAFF100F3D126 /* MockDonutChart.swift */,
 			);
 			path = GenericComponents;
 			sourceTree = "<group>";
@@ -705,6 +719,8 @@
 		BB92E5E22C75482400BDC754 /* Goals */ = {
 			isa = PBXGroup;
 			children = (
+				BB843BE82DADEB4300CBE173 /* Goal 2 */,
+				BB843BE52DADEA3000CBE173 /* No Goals */,
 				BB92E5E32C75482F00BDC754 /* Goal 1 */,
 			);
 			path = Goals;
@@ -754,6 +770,13 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BB843BE52DADEA3000CBE173 /* No Goals */,
+				BB843BE82DADEB4300CBE173 /* Goal 2 */,
+				BB843BF52DBB03D800CBE173 /* Goal Toasts */,
+				BBBFA9CA2E076F6F00948710 /* QuizCardView 2 */,
+				BBDA33E12DCC34A200606E9E /* Counter */,
 			);
 			name = "Shortcut-2";
 			packageProductDependencies = (
@@ -848,14 +871,12 @@
 				BB3D1A0F2B8FD55900027DC4 /* StripedBG.swift in Sources */,
 				850251AE2BBDC6BC00F446CA /* LevelProgress.swift in Sources */,
 				8527F1292A98C0F300620A45 /* SwiperView.swift in Sources */,
-				BB3D1A092B8FD4CD00027DC4 /* DiscoverUpdateView.swift in Sources */,
 				BBD92FF82B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift in Sources */,
+				BBDA33E32DCC352600606E9E /* QI_GoalReporter.swift in Sources */,
 				BB42362F2BE9795F00045630 /* SessionStats.swift in Sources */,
-				BB3D1A0B2B8FD4F400027DC4 /* DiscoveryCounter.swift in Sources */,
 				85A67FCA2A98D145006A1DF7 /* SwiperScreen.swift in Sources */,
 				BB7A03772ADE37C9009EFDD5 /* ActivityCalendarView.swift in Sources */,
 				8543CD9C2BC94B9600D76AA8 /* OnboardingGoals.swift in Sources */,
-				BBCB303A2CDEC3BE00C74881 /* Goals.swift in Sources */,
 				8527F1412A98C2B000620A45 /* CircleAnimation.swift in Sources */,
 				85F1D4AE2C47151300B97D87 /* RootView.swift in Sources */,
 				8543CD9E2BC950B600D76AA8 /* OnboardingGoalCircle.swift in Sources */,
@@ -871,8 +892,10 @@
 				BB3D1A392B8FDC5200027DC4 /* QuizItem.swift in Sources */,
 				85E811CE2ABF035100DF5800 /* intermediate.swift in Sources */,
 				BB42362D2BE978FD00045630 /* SessionScoreView.swift in Sources */,
+				BBFC18312DCFC6BC0007FDE0 /* QS_GoalReporter.swift in Sources */,
 				BB3D1A292B8FDA6600027DC4 /* FailHaptics.swift in Sources */,
 				85EBE06F2C0E6664003E7F21 /* LoginWindow.swift in Sources */,
+				BB1394C22DBEAFF100F3D126 /* MockDonutChart.swift in Sources */,
 				8527F1432A98C2BB00620A45 /* AnnotationView.swift in Sources */,
 				BB0FD8FD2B44CED100D62B25 /* LearnedAtThisLvlModal.swift in Sources */,
 				377D2D5B2A77E38B00A2D613 /* elementary.swift in Sources */,
@@ -904,6 +927,7 @@
 				BB56C72E2B159A0900B9C8F4 /* MemoryChartView.swift in Sources */,
 				858A53C22C0FBC5500725278 /* ContentView.swift in Sources */,
 				BB0149232B201D8B009C1CF9 /* DictionaryAlmostLearned.swift in Sources */,
+				BB6253E12DACB37D001895F2 /* GoalModel.swift in Sources */,
 				BB40B3532BE9505E00E908BF /* QuizBranchFile.swift in Sources */,
 				376D1E8E2A880C77006385C2 /* ProgressView.swift in Sources */,
 				BB7A03792AE07E69009EFDD5 /* DailyConsistencyView.swift in Sources */,

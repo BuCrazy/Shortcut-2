@@ -11,7 +11,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Shortcut_2_App: App {
 @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 @StateObject private var appState: AppState
-    
+@StateObject private var goalsManager = GoalsManager.shared //April 14
     
     init() {
         FirebaseApp.configure()
@@ -20,6 +20,7 @@ struct Shortcut_2_App: App {
         let appState = AppState(storedNewWordItems: storedNewWordItems, activityLog: activityLog)
         _appState = StateObject(wrappedValue: appState)
         setupNavigationBarAppearance()
+        _goalsManager = StateObject(wrappedValue: GoalsManager(storedItems: storedNewWordItems)) //April 14
     }
     var body: some Scene {
         WindowGroup {
@@ -29,6 +30,7 @@ struct Shortcut_2_App: App {
                 .environmentObject(appState.activityLog)
                 .environmentObject(appState.storedNewWordItems)
                 .environmentObject(appState)
+                .environmentObject(goalsManager) //April 14
                 .environment(\.colorScheme, .dark)
                 .onAppear {
                     appState.loadInitialData()

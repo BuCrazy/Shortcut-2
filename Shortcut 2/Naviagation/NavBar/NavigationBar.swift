@@ -9,10 +9,55 @@ import SwiftUI
 
 struct NavigationBar: View {
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
+    @EnvironmentObject var goalsManager: GoalsManager
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     
+    @State var firstGoalIsCompleted = false
+    @State var feedbackColor: Color = .green
+    @State private var isGoalCompleted: Bool = false
+    
+    var greenGradient = LinearGradient(
+        stops: [
+        Gradient.Stop(color: Color(red: 0.09, green: 0.09, blue: 0.09), location: 0.00),
+        Gradient.Stop(color: Color(red: 0.07, green: 0.08, blue: 0.07), location: 0.21),
+        Gradient.Stop(color: Color(red: 0.06, green: 0.06, blue: 0.05), location: 0.42),
+        Gradient.Stop(color: Color(red: 0.05, green: 0.05, blue: 0.03), location: 0.63),
+        Gradient.Stop(color: Color(red: 0.05, green: 0.05, blue: 0.03), location: 0.84),
+        Gradient.Stop(color: Color(red: 0.04, green: 0.05, blue: 0.02), location: 1.00),
+        ],
+        startPoint: UnitPoint(x: 0, y: 0.5),
+        endPoint: UnitPoint(x: 1, y: 0.5)
+        )
+    var redGradient = LinearGradient(
+        stops: [
+        Gradient.Stop(color: Color(red: 0.17, green: 0.03, blue: 0.02), location: 0.00),
+        Gradient.Stop(color: Color(red: 0.17, green: 0.04, blue: 0.03), location: 0.24),
+        Gradient.Stop(color: Color(red: 0.14, green: 0.05, blue: 0.04), location: 0.42),
+        Gradient.Stop(color: Color(red: 0.1, green: 0.07, blue: 0.06), location: 0.67),
+        Gradient.Stop(color: Color(red: 0.1, green: 0.07, blue: 0.07), location: 0.83),
+        Gradient.Stop(color: Color(red: 0.09, green: 0.09, blue: 0.09), location: 1.00),
+        ],
+        startPoint: UnitPoint(x: 1, y: 0.5),
+        endPoint: UnitPoint(x: 0, y: 0.5)
+        )
+    var navBarTitleColor: Color {
+        goalsManager.currentGoalIndex == 0 ? Color("mainCardBG")  : Color.white
+    }
+    var activeBGColor: Color {
+        if goalsManager.currentGoalIndex == 0 { // Test Jan 14 (switch 0 and 1 to go back)
+            return Color("navBar")
+        } else if goalsManager.currentGoalIndex == 1 { // Test Jan 14 (switch 0 and 1 to go back)
+            return feedbackColor == .green ? Color("navBarDarkGreen") : Color("navBarDarkRed")
+        } else {
+            return  Color("navBar")
+        }
+    }
+    var trailingButtonColor: Color {
+        goalsManager.currentGoalIndex == 1 ? Color.white : Color("mainCardBG")
+    }
+    
     var title = ""
-    var titelColor: Color
+    var titlColor: Color
     var fontsize: CGFloat = 34
     var height: CGFloat = 200
     var trailingButton: AnyView?
@@ -34,14 +79,111 @@ struct NavigationBar: View {
   //  var hasScrolled: Bool
     var scrollOffset: CGFloat
     
+    init(
+           title: String,
+           titleColor: Color,
+           fontsize: CGFloat = 34,
+           height: CGFloat = 200,
+           navBarColor: Color,
+           scrollOffset: CGFloat,
+           trailingButton: AnyView? = nil
+       ) {
+           self.title = title
+           self.titlColor = titleColor
+           self.fontsize = fontsize
+           self.height = height
+           self.navBarColor = navBarColor
+           self.scrollOffset = scrollOffset
+           self.trailingButton = trailingButton
+       }
+    
+    @ViewBuilder
+    private var currentGoalView: some View {
+        if goalsManager.currentGoalIndex == 0 {
+            HStack {
+                Goal_1(firstGoalIsCompleted: $firstGoalIsCompleted, goalsManager: goalsManager)
+                    .environmentObject(goalsManager)
+                    .padding(.leading, 16)
+                    .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3))
+                    .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3))
+                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
+                
+                Goal_1_Animation()
+                    .padding(.bottom, 26)
+                    .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3))
+                    .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3))
+                    .animation(.easeInOut(duration: 0.3), value: scrollOffset)
+            }
+        } else if goalsManager.currentGoalIndex == 1  {
+            
+            if isGoalCompleted {
+                let _ = print("🎇Second goal was completed Greeting will be displayed now")
+                HStack {
+                    Greeting()
+                        .padding(.leading, 16)
+                        .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3))
+                        .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3))
+                        .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
+                    Spacer()
+                }
+            } else {
+                HStack {
+                    Goal_2(goalsManager: goalsManager)
+                        .environmentObject(goalsManager)
+                        .frame(maxWidth: UIScreen.main.bounds.width / 2)
+                        .padding(.leading, 16)
+                        .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3))
+                        .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3))
+                        .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
+                    Spacer()
+                    
+                    
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     var body: some View {
-        
         ZStack {
             RoundedRectangle(cornerRadius: 0, style: .continuous)
                 .foregroundColor(.clear)
-                .background(interpolateColor(start: startColor, end: toolBarGradient, value: scrollOffset))
+                .background(
+                    Group {
+                        if goalsManager.currentGoalIndex == 1 && !isGoalCompleted {
+                                Goal_2_Animation(feedbackColor: $feedbackColor)
+                                    .offset(y: interpolate(start: 50, end: -20, value: scrollOffset * 3))
+                                    .offset(x: 90)
+                                    .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3))
+                                    .animation(.easeInOut(duration: 0.3), value: scrollOffset)
+                        }
+                    }
+                         
+                )
+                .background(
+                    Group {
+                        if goalsManager.currentGoalIndex == 1 {
+                            if isGoalCompleted {
+                                Image("greetingBg")
+                                    .resizable()
+                                    .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3))
+                            } else {
+                                Image("navBarNoise")
+                                    .resizable()
+                                    .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3))
+                            }
+                        }
+                    }
+                    
+                    
+                )
+                .background(interpolateColor(start: activeBGColor, end: toolBarGradient, value: scrollOffset))
                 .mask(
-                    BottomRoundedRectangle(radius: 20, corners: [.bottomLeft, .bottomRight])
+                    ZStack {
+                        BottomRoundedRectangle(radius: 20, corners: [.bottomLeft, .bottomRight])
+                    }
                 )
                 .ignoresSafeArea()
 
@@ -54,35 +196,38 @@ struct NavigationBar: View {
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     .padding(.leading, 16)
                     .padding(.top, 32)
-                    .foregroundStyle(titelColor)
+                    .foregroundStyle(/*navBarTitleColor*/titlColor)
                     if let trailingButton = trailingButton {
                         trailingButton
                         .frame(width: 36, height: 36)
                         .padding(.trailing, 16)
                         .padding(.top, 32)
-                        .foregroundStyle(Color("mainCardBG"))
+                        .foregroundStyle(trailingButtonColor)
                         }
-                    }
+                }
 
-                
-                // NOTE: Current Goal
-              //  if !hasScrolled {
-                    HStack {
-                            Goal_1()
-                                .padding(.leading, 16)
-                               // .padding(.trailing, 200)
-                                .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3 ) /*hasScrolled ? -20 : 0*/)
-                                .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3  )/*hasScrolled ? 0 : 1*/)
-                                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
-                        
-                        Goal_1_Animation()
-                            .padding(.bottom, 26)
-                            .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3 ))
-                            .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3  ))
-                            .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
+                ZStack {
+                    currentGoalView
+                }
+              
+//                    HStack {
+//                            Goal_1()
+//                                .padding(.leading, 16)
+//                               // .padding(.trailing, 200)
+//                                .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3 ) /*hasScrolled ? -20 : 0*/)
+//                                .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3  )/*hasScrolled ? 0 : 1*/)
+//                                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
+//                        
+//                        Goal_1_Animation()
+//                            .padding(.bottom, 26)
+//                            .offset(y: interpolate(start: 0, end: -20, value: scrollOffset * 3 ))
+//                            .opacity(interpolate(start: 1, end: 0, value: scrollOffset * 3  ))
+//                            .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0), value: scrollOffset)
+//                    }
+                    .frame(height: interpolate(start: 130, end: 0, value: scrollOffset))
+                    .if(goalsManager.currentGoalIndex == 0) { view in
+                        view.clipShape(BottomRoundedRectangle(radius: 20, corners: [.bottomLeft, .bottomRight]))
                     }
-                    .clipped()
-                    .frame(height: interpolate(start: 130, end: 0, value: scrollOffset) /*hasScrolled ? 0 : nil*/)
                     
                // }
             }
@@ -92,8 +237,26 @@ struct NavigationBar: View {
         
         .frame(height: height)
         .frame(maxHeight: .infinity, alignment: .top)
+        .onAppear {
+            isGoalCompleted = goalsManager.currentGoalIndex == 1 &&
+                              goalsManager.currentGoal.status == .completed
+            print("🎯 NavigationBar appeared")
+            print("Current goal index in NavigationBar: \(goalsManager.currentGoalIndex)")
+            print("storedItems count: \(storedNewWordItemsDataLayer.elementaryBeingLearned.count)")
+            print("Goal status: \(goalsManager.currentGoal.status)")
+            print("isGoalCompleted: \(isGoalCompleted)")
+            
+        }
+        .onChange(of: goalsManager.currentGoal.status) { newStatus in
+            print("🔔 Goal status changed to: \(newStatus)")
+            isGoalCompleted = goalsManager.currentGoalIndex == 1 && newStatus == .completed
+        }
+        .onChange(of: goalsManager.currentGoalIndex) { newIndex in
+            print("🔄 Goal index changed to: \(newIndex)")
+            isGoalCompleted = newIndex == 1 && goalsManager.currentGoal.status == .completed
+        }
         
-    }
+    } //body ends
     
     
     private func interpolateColor(start: Color, end: LinearGradient, value: CGFloat) -> some View {
@@ -114,26 +277,36 @@ struct NavigationBar: View {
 
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar(
-            title: "Progress",
-            titelColor: Color("mainCardBG"),
-            trailingButton: AnyView(Button(action: {
-            print("Button tapped")
-        }) {
-            Image(systemName: "ellipsis")
-                .font(.body.weight(.bold))
-        }),
-           navBarColor: Color("navBar"),
-            //hasScrolled: false
-            scrollOffset: 0
+        let mockStoredItems = storedNewWordItems()
+        let mockGoalsManager = GoalsManager(storedItems: mockStoredItems)
         
+        return NavigationBar(
+            title: "Progress",
+            titleColor: Color("mainCardBG") ,
+            navBarColor: Color("navBar"),  // Match initializer parameter order
+            scrollOffset: 0,
+            trailingButton: AnyView(Button(action: {
+                print("Button tapped")
+            }) {
+                Image(systemName: "ellipsis")
+                    .font(.body.weight(.bold))
+            })
+          //  goalsManager: mockGoalsManager //Test March 12 (uncommit to get back)
         )
-        .environmentObject(storedNewWordItems())
+        .environmentObject(mockStoredItems)
+        .environmentObject(GoalsManager.shared)
     }
-   
-    
 }
 
+extension View {
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
 
 
 struct BottomRoundedRectangle: Shape {
@@ -151,15 +324,15 @@ struct BottomRoundedRectangle: Shape {
 }
 
 
-struct BottomClipShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        // Clip only the bottom portion of the view
-        // The clipping height is reduced by 10 pixels to leave room for shadows above the bottom edge
-        path.addRect(CGRect(x: rect.minX, y: rect.minY, width: rect.width, height: rect.height - 20))
-        return path
-    }
-}
+//struct BottomClipShape: Shape {
+//    func path(in rect: CGRect) -> Path {
+//        var path = Path()
+//        // Clip only the bottom portion of the view
+//        // The clipping height is reduced by 10 pixels to leave room for shadows above the bottom edge
+//        path.addRect(CGRect(x: rect.minX, y: rect.minY, width: rect.width, height: rect.height - 20))
+//        return path
+//    }
+//}
 
 //struct NavigationBar: View {
 //    var title = ""

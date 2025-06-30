@@ -6,7 +6,7 @@
 //
 
 
-
+// Properly working QuizView
 import SwiftUI
 
 
@@ -364,14 +364,14 @@ struct QuizView: View {
                     resetAndAnimateUIComponents()
                 }
             }
-            saveCurrentQuizState()
+            saveCurrentQuizState() 
         }
         //NOTE: Update the status for the current question
             questionStatuses[currentQuizIndex] = isCorrect ? .correct : .incorrect
         print("Updated questionStatuses at index \(currentQuizIndex) to \(isCorrect ? "correct" : "incorrect").")
         
         // --- Code for saving Quiz progress ---
-        saveCurrentQuizState()
+     //   saveCurrentQuizState() //TEST May 10 (uncommit to get back to normal functionality)
         // ---Code for saving Quiz progress ends---
     }
     
@@ -423,6 +423,8 @@ struct QuizView: View {
            
            // Trigger navigation to Summary View
            self.isQuizFinished = true
+        
+    
        }
     // Code for updating historical chart with current quiz ends
     

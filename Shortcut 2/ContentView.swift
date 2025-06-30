@@ -180,9 +180,9 @@ struct ContentView_Previews: PreviewProvider {
         
         return ContentView()
             .environmentObject(actualStoredNewWordItems)
-                       .environmentObject(actualActivityLog)
-                       .environmentObject(actualStoredStates)
-                       .environmentObject(actualAppState)
+            .environmentObject(actualActivityLog)
+            .environmentObject(actualStoredStates)
+            .environmentObject(actualAppState)
     }
 }
 
