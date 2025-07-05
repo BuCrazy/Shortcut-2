@@ -123,11 +123,14 @@ struct QuizView: View {
                         AuraEffect(feedbackColor: feedbackColor)
                             .scaleEffect(auraEffectScale)
                     }
+                    
+                    //UI Hierarchy
                     VStack {
                         if !showCircleAnimation {
                             
                         //NOTE: Quiz Card + Indicator
                         VStack {
+                            //Progress Indicators
                             VStack(spacing: 16) {
 
                                 //NOTE: Generate rows
@@ -153,23 +156,36 @@ struct QuizView: View {
                     //      .offset(y: showIndicators ? 0 : 25)
                             .animation(.easeInOut(duration: 0.5).delay(0.0), value: showIndicators)
                                 
-                        //NOTE: Quiz Card
-                        Spacer().frame(height: screenHeight > 852 ? 48 : (screenHeight > 700 ? 32 : 10))
-                        VStack {
+                            //NOTE: Quiz Card
+                            Spacer().frame(height: screenHeight > 852 ? 48 : (screenHeight > 700 ? 32 : 10))
+                            VStack {
                             if currentQuizIndex < quizItems.count {
-                                QuizCardView(word: quizItems[currentQuizIndex].quizWord, question: quizItems[currentQuizIndex].questionText, video: $currentVideo/*, shouldStopVideo: $shouldStopVideo*/)
+//                                QuizCardView(word: quizItems[currentQuizIndex].quizWord, question: quizItems[currentQuizIndex].questionText, video: $currentVideo/*, shouldStopVideo: $shouldStopVideo*/)
+                                QuizCardVIew2(word: quizItems[currentQuizIndex].quizWord)
                                     .id(quizItems[currentQuizIndex].quizWord)
+                                    .layoutPriority(1)
+
                             }
                         }
-                        .opacity(showQuizCard ? 1 : 0)
+                            .opacity(showQuizCard ? 1 : 0)
                         .offset(y: showQuizCard ? 0 : 15)
-                        .animation(.easeInOut(duration: 0.5).delay(0.0), value: showQuizCard)
+                            .animation(.easeInOut(duration: 0.5).delay(0.0), value: showQuizCard)
+                            
+                            Spacer().frame(height: 10)
+
                         }
+                           
                       }
-                        
-                    //NOTE: Answer options
+                       
+                    //NOTE: Answer Options
                     VStack(spacing: 10) {
-                        Spacer()
+                        if showCircleAnimation {
+                            Spacer()
+                        } else {
+                            Spacer().frame(height: 30)
+                            }
+
+                        //First Answer Row
                         HStack {
                             ForEach(currentPossibleAnswers.prefix(2), id: \.self) { answer in
                                 Button ( action: {
@@ -180,6 +196,8 @@ struct QuizView: View {
                                 .disabled(hasAnswered)
                             }
                         }
+                        
+                        //Second Answer Row
                         HStack {
                             ForEach(currentPossibleAnswers.suffix(2), id: \.self) { answer in
                                 Button ( action: {
@@ -196,7 +214,7 @@ struct QuizView: View {
                     .opacity(showAnswerOptions ? 1 : 0)
                     .offset(y: showAnswerOptions ? 0 : 15)
                     .animation(.easeInOut(duration: 0.5).delay(0.0), value: showAnswerOptions)
-                        Spacer().frame(height: 44)
+                    Spacer().frame(height: 44)
                     }
                 }
             }

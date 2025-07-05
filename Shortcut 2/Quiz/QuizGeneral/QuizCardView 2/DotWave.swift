@@ -48,7 +48,7 @@ struct DotWave: View {
                                     //         .shiny()
                                     //.foregroundColor(mashGradient)//.opacity(isTapped ? 0.05 : 0.1)
                                        .fill(.white).opacity(isTapped ? 0.05 : 0.1)
-                                        .frame(width: 3, height: 3)
+                                        .frame(width: 2, height: 2)
                                         .animation(.spring(response: 0.4, dampingFraction: 0.4)
                                             .delay(Double(rowIndex + colIndex) * 0.02), value: isTapped
                                         )
