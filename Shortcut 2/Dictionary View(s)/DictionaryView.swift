@@ -8,7 +8,7 @@ struct DictionaryView: View {
     @State private var resetChartAnimation = false
     @State var consecutiveCorrectRecalls: Int
     @State var progress: Double
-
+    let screenHeight = UIScreen.main.bounds.height
     
     @State private var animatedNumber: Int = 0
     @State private var chartData: [TotalWords] = []
@@ -19,8 +19,12 @@ struct DictionaryView: View {
                 ScrollView {
                     VStack(spacing: 0) {
                         DictionaryHeaderView(resetChartAnimation: $resetChartAnimation, animatedNumber: $animatedNumber, chartData: $chartData)
+                        
+                        //NOTE: Probably need to check if current leevel's selected .biengLearned file is empty and display empty state then
+                   
                         switch currentLevelSelected {
                         case "elementary":
+                            
                             //NOTE: Don't delete this
 //                            Text("Known words:")
 //                            Spacer()
@@ -33,59 +37,84 @@ struct DictionaryView: View {
 //                            Text("Unknown words:")
 //                            Spacer()
 //                                .frame(height:10)
-                        ForEach(storedNewWordItemsDataLayer.elementaryBeingLearned) { word in
-                            LexCardView(
-                                consecutiveCorrectRecalls: $consecutiveCorrectRecalls,
-                                progress: $progress,
-                                word: word.word,
-                                transcription: elementaryWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
-                            )
-                            // Это потом удалить - сейчас оно для отладки экрана прогресса
-                            .onTapGesture {
-                                print("tapped!")
-                                if let matchingItemIndex = storedNewWordItemsDataLayer.elementaryBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
-                                    var matchingItem = storedNewWordItemsDataLayer.elementaryBeingLearned[matchingItemIndex]
-                                    matchingItem.consecutiveCorrectRecalls += 1
-                                    matchingItem.timesReviewed += 1
-                                    storedNewWordItemsDataLayer.elementaryBeingLearned[matchingItemIndex] = matchingItem
+                            if storedNewWordItemsDataLayer.elementaryBeingLearned.isEmpty {
+                         
+                                VStack {
+                                    Spacer().frame(height: screenHeight > 852 ? 200 : (screenHeight > 700 ? 175 : 120))
+                                    EmptyDictionaryView()
                                 }
-                            }
-                        }
-                        case "beginner":
-                            ForEach(storedNewWordItemsDataLayer.beginnerBeingLearned) { word in
-                                LexCardView(
-                                    consecutiveCorrectRecalls: $consecutiveCorrectRecalls,
-                                    progress: $progress,
-                                    word: word.word,
-                                    transcription: beginnerWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
-                                )
-                                // Это потом удалить - сейчас оно для отладки экрана прогресса
-                                .onTapGesture {
-                                    print("tapped!")
-                                    if let matchingItemIndex = storedNewWordItemsDataLayer.beginnerBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
-                                        var matchingItem = storedNewWordItemsDataLayer.beginnerBeingLearned[matchingItemIndex]
-                                        matchingItem.consecutiveCorrectRecalls += 1
-                                        matchingItem.timesReviewed += 1
-                                        storedNewWordItemsDataLayer.beginnerBeingLearned[matchingItemIndex] = matchingItem
+                                
+                            } else {
+                                ForEach(storedNewWordItemsDataLayer.elementaryBeingLearned) { word in
+                                    LexCardView(
+                                        consecutiveCorrectRecalls: $consecutiveCorrectRecalls,
+                                        progress: $progress,
+                                        word: word.word,
+                                        transcription: elementaryWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
+                                    )
+                                    // Это потом удалить - сейчас оно для отладки экрана прогресса
+                                    .onTapGesture {
+                                        print("tapped!")
+                                        if let matchingItemIndex = storedNewWordItemsDataLayer.elementaryBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
+                                            var matchingItem = storedNewWordItemsDataLayer.elementaryBeingLearned[matchingItemIndex]
+                                            matchingItem.consecutiveCorrectRecalls += 1
+                                            matchingItem.timesReviewed += 1
+                                            storedNewWordItemsDataLayer.elementaryBeingLearned[matchingItemIndex] = matchingItem
+                                        }
                                     }
                                 }
                             }
+                            
+                        case "beginner":
+                            if storedNewWordItemsDataLayer.beginnerBeingLearned.isEmpty {
+                                VStack {
+                                    Spacer().frame(height: screenHeight > 852 ? 200 : (screenHeight > 700 ? 175 : 120))
+                                    EmptyDictionaryView()
+                                }
+                            } else {
+                                ForEach(storedNewWordItemsDataLayer.beginnerBeingLearned) { word in
+                                    LexCardView(
+                                        consecutiveCorrectRecalls: $consecutiveCorrectRecalls,
+                                        progress: $progress,
+                                        word: word.word,
+                                        transcription: beginnerWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
+                                    )
+                                    // Это потом удалить - сейчас оно для отладки экрана прогресса
+                                    .onTapGesture {
+                                        print("tapped!")
+                                        if let matchingItemIndex = storedNewWordItemsDataLayer.beginnerBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
+                                            var matchingItem = storedNewWordItemsDataLayer.beginnerBeingLearned[matchingItemIndex]
+                                            matchingItem.consecutiveCorrectRecalls += 1
+                                            matchingItem.timesReviewed += 1
+                                            storedNewWordItemsDataLayer.beginnerBeingLearned[matchingItemIndex] = matchingItem
+                                        }
+                                    }
+                                }
+                            }
+                            
                         case "intermediate":
-                            ForEach(storedNewWordItemsDataLayer.intermediateBeingLearned) { word in
-                                LexCardView(
-                                    consecutiveCorrectRecalls: $consecutiveCorrectRecalls,
-                                    progress: $progress,
-                                    word: word.word,
-                                    transcription: intermediateWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
-                                )
-                                // Это потом удалить - сейчас оно для отладки экрана прогресса
-                                .onTapGesture {
-                                    print("tapped!")
-                                    if let matchingItemIndex = storedNewWordItemsDataLayer.intermediateBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
-                                        var matchingItem = storedNewWordItemsDataLayer.intermediateBeingLearned[matchingItemIndex]
-                                        matchingItem.consecutiveCorrectRecalls += 1
-                                        matchingItem.timesReviewed += 1
-                                        storedNewWordItemsDataLayer.intermediateBeingLearned[matchingItemIndex] = matchingItem
+                            if storedNewWordItemsDataLayer.intermediateBeingLearned.isEmpty {
+                                VStack {
+                                    Spacer().frame(height: screenHeight > 852 ? 200 : (screenHeight > 700 ? 175 : 120))
+                                    EmptyDictionaryView()
+                                }
+                            } else {
+                                ForEach(storedNewWordItemsDataLayer.intermediateBeingLearned) { word in
+                                    LexCardView(
+                                        consecutiveCorrectRecalls: $consecutiveCorrectRecalls,
+                                        progress: $progress,
+                                        word: word.word,
+                                        transcription: intermediateWordsStorageSource.first { $0.position_now == word.position_now }?.phonetics ?? "phonetics"
+                                    )
+                                    // Это потом удалить - сейчас оно для отладки экрана прогресса
+                                    .onTapGesture {
+                                        print("tapped!")
+                                        if let matchingItemIndex = storedNewWordItemsDataLayer.intermediateBeingLearned.firstIndex(where: { $0.position_now == word.position_now }) {
+                                            var matchingItem = storedNewWordItemsDataLayer.intermediateBeingLearned[matchingItemIndex]
+                                            matchingItem.consecutiveCorrectRecalls += 1
+                                            matchingItem.timesReviewed += 1
+                                            storedNewWordItemsDataLayer.intermediateBeingLearned[matchingItemIndex] = matchingItem
+                                        }
                                     }
                                 }
                             }

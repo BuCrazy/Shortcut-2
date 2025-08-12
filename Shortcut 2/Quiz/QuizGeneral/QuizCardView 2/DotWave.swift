@@ -22,7 +22,7 @@ struct DotWave: View {
         endPoint: UnitPoint(x: 0.67, y: 0.5)
     )
 
-    let spacing: CGFloat = 13.5
+    let spacing: CGFloat = 13.0
     var stackDistance: CGFloat {!isTapped ? spacing : spacing * 1.8}
     var body: some View {
         Button(action: {

@@ -104,6 +104,8 @@
 		BB4236352BE97A1300045630 /* QuizScoreChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4236342BE97A1300045630 /* QuizScoreChart.swift */; };
 		BB4255152B46F4AB008370AB /* DailyConsistencyBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4255142B46F4AB008370AB /* DailyConsistencyBadge.swift */; };
 		BB4255172B46F674008370AB /* DailyConsistencyModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4255162B46F674008370AB /* DailyConsistencyModal.swift */; };
+		BB4A5EC62E4ABE7300776EFC /* LevelTabContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4A5EC52E4ABE7300776EFC /* LevelTabContent.swift */; };
+		BB4A5F0B2E4C09EB00776EFC /* LevelChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4A5F0A2E4C09EB00776EFC /* LevelChartView.swift */; };
 		BB56C72C2B1596ED00B9C8F4 /* LexCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB56C72B2B1596ED00B9C8F4 /* LexCardView.swift */; };
 		BB56C72E2B159A0900B9C8F4 /* MemoryChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB56C72D2B159A0900B9C8F4 /* MemoryChartView.swift */; };
 		BB6253E12DACB37D001895F2 /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6253E02DACB37D001895F2 /* GoalModel.swift */; };
@@ -130,6 +132,8 @@
 		BBD930032B4776DD008AB3BC /* AlmostLearnedModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD930022B4776DD008AB3BC /* AlmostLearnedModal.swift */; };
 		BBDA33E32DCC352600606E9E /* QI_GoalReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDA33E22DCC352600606E9E /* QI_GoalReporter.swift */; };
 		BBE7F8B52C82740C00F056AE /* QuizDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE7F8B42C82740C00F056AE /* QuizDraft.swift */; };
+		BBEC78352E4AB8360044BD88 /* SimpleMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEC78342E4AB8360044BD88 /* SimpleMarquee.swift */; };
+		BBF43A9A2E47C45800E54014 /* Skeo Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF43A992E47C45800E54014 /* Skeo Button.swift */; };
 		BBFC18312DCFC6BC0007FDE0 /* QS_GoalReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC18302DCFC6BC0007FDE0 /* QS_GoalReporter.swift */; };
 /* End PBXBuildFile section */
 
@@ -226,6 +230,8 @@
 		BB4236342BE97A1300045630 /* QuizScoreChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizScoreChart.swift; sourceTree = "<group>"; };
 		BB4255142B46F4AB008370AB /* DailyConsistencyBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyConsistencyBadge.swift; sourceTree = "<group>"; };
 		BB4255162B46F674008370AB /* DailyConsistencyModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyConsistencyModal.swift; sourceTree = "<group>"; };
+		BB4A5EC52E4ABE7300776EFC /* LevelTabContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTabContent.swift; sourceTree = "<group>"; };
+		BB4A5F0A2E4C09EB00776EFC /* LevelChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelChartView.swift; sourceTree = "<group>"; };
 		BB56C72B2B1596ED00B9C8F4 /* LexCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexCardView.swift; sourceTree = "<group>"; };
 		BB56C72D2B159A0900B9C8F4 /* MemoryChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryChartView.swift; sourceTree = "<group>"; };
 		BB6253E02DACB37D001895F2 /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
@@ -252,10 +258,14 @@
 		BBD930022B4776DD008AB3BC /* AlmostLearnedModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlmostLearnedModal.swift; sourceTree = "<group>"; };
 		BBDA33E22DCC352600606E9E /* QI_GoalReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QI_GoalReporter.swift; sourceTree = "<group>"; };
 		BBE7F8B42C82740C00F056AE /* QuizDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDraft.swift; sourceTree = "<group>"; };
+		BBEC78342E4AB8360044BD88 /* SimpleMarquee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMarquee.swift; sourceTree = "<group>"; };
+		BBF43A992E47C45800E54014 /* Skeo Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeo Button.swift"; sourceTree = "<group>"; };
 		BBFC18302DCFC6BC0007FDE0 /* QS_GoalReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QS_GoalReporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		BB0BB9E02E288E2100629319 /* GoalList */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = GoalList; sourceTree = "<group>"; };
+		BB2773132E24A69800B462D1 /* Empty State */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Empty State"; sourceTree = "<group>"; };
 		BB843BE52DADEA3000CBE173 /* No Goals */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "No Goals"; sourceTree = "<group>"; };
 		BB843BE82DADEB4300CBE173 /* Goal 2 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Goal 2"; sourceTree = "<group>"; };
 		BB843BF52DBB03D800CBE173 /* Goal Toasts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Goal Toasts"; sourceTree = "<group>"; };
@@ -307,9 +317,9 @@
 				BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */,
 				85F1D4AD2C47151300B97D87 /* RootView.swift */,
 				858A53C12C0FBC5500725278 /* ContentView.swift */,
-				85F1D4B12C4716DE00B97D87 /* OnboardingThings */,
+				85F1D4B12C4716DE00B97D87 /* Onboarding */,
 				BB40B3512BE9504900E908BF /* QuizBranch Folder */,
-				BB40B34E2BE94FA300E908BF /* Naviagation */,
+				BB40B34E2BE94FA300E908BF /* Navigation */,
 				BB3D1A122B8FD67B00027DC4 /* GenericComponents */,
 				BB4236272BE9720C00045630 /* Reinforcement View */,
 				BB3D19F52B8E964C00027DC4 /* Quiz */,
@@ -448,6 +458,7 @@
 		855416AA2A99124A006DBC47 /* Dictionary View(s) */ = {
 			isa = PBXGroup;
 			children = (
+				BB2773132E24A69800B462D1 /* Empty State */,
 				855416AB2A991268006DBC47 /* DictionaryView.swift */,
 				BB0149282B210590009C1CF9 /* DictionaryHeaderView.swift */,
 				BB0149222B201D8B009C1CF9 /* DictionaryAlmostLearned.swift */,
@@ -492,15 +503,19 @@
 			path = "Login & Firebase";
 			sourceTree = "<group>";
 		};
-		85F1D4B12C4716DE00B97D87 /* OnboardingThings */ = {
+		85F1D4B12C4716DE00B97D87 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				BB0BB9E02E288E2100629319 /* GoalList */,
 				85EBE06D2C0E664F003E7F21 /* Login & Firebase */,
 				85EBE06E2C0E6664003E7F21 /* LoginWindow.swift */,
 				856D68E72C373E44009FBAC3 /* LanguageSelectionSheet.swift */,
 				858E87232C2A07DC00702C2C /* LevelSwitcherSheet.swift */,
+				BB4A5EC52E4ABE7300776EFC /* LevelTabContent.swift */,
+				BB4A5F0A2E4C09EB00776EFC /* LevelChartView.swift */,
+				BBEC78342E4AB8360044BD88 /* SimpleMarquee.swift */,
 			);
-			path = OnboardingThings;
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		85F4AA6D2B714BE400EFFA7B /* KnowledgeMap */ = {
@@ -613,6 +628,7 @@
 			children = (
 				BB3D1A132B8FD69300027DC4 /* CTAButton.swift */,
 				BB1394C12DBEAFF100F3D126 /* MockDonutChart.swift */,
+				BBF43A992E47C45800E54014 /* Skeo Button.swift */,
 			);
 			path = GenericComponents;
 			sourceTree = "<group>";
@@ -646,13 +662,13 @@
 			path = Haptics;
 			sourceTree = "<group>";
 		};
-		BB40B34E2BE94FA300E908BF /* Naviagation */ = {
+		BB40B34E2BE94FA300E908BF /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
 				BB92E5DF2C75463C00BDC754 /* NavBar */,
 				BB78F87F2BF67210001EB8C5 /* TabBar.swift */,
 			);
-			path = Naviagation;
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		BB40B3512BE9504900E908BF /* QuizBranch Folder */ = {
@@ -772,6 +788,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				BB0BB9E02E288E2100629319 /* GoalList */,
+				BB2773132E24A69800B462D1 /* Empty State */,
 				BB843BE52DADEA3000CBE173 /* No Goals */,
 				BB843BE82DADEB4300CBE173 /* Goal 2 */,
 				BB843BF52DBB03D800CBE173 /* Goal Toasts */,
@@ -854,7 +872,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB3D1A1D2B8FD8FC00027DC4 /* IncorrectAnswersNumber.swift in Sources */,
+				BBEC78352E4AB8360044BD88 /* SimpleMarquee.swift in Sources */,
 				BB3D19FF2B8FD40400027DC4 /* BeginnerSymbolView.swift in Sources */,
+				BB4A5F0B2E4C09EB00776EFC /* LevelChartView.swift in Sources */,
 				BB3D1A012B8FD41500027DC4 /* IntermediateSymbolView.swift in Sources */,
 				BB2A1B512CBCB204002ACFD9 /* QuizViewModel.swift in Sources */,
 				8527F1472A98C32600620A45 /* NewWordItem.swift in Sources */,
@@ -915,6 +935,7 @@
 				BB3D1A1F2B8FD93800027DC4 /* CorrectAnswersNumber.swift in Sources */,
 				BB78F8802BF67210001EB8C5 /* TabBar.swift in Sources */,
 				8527F1372A98C23200620A45 /* KnowSection.swift in Sources */,
+				BBF43A9A2E47C45800E54014 /* Skeo Button.swift in Sources */,
 				377D2D5E2A77E3E500A2D613 /* AppModel.swift in Sources */,
 				BB7A03822AE1EA53009EFDD5 /* DailyConsistencyViewModel.swift in Sources */,
 				BBE7F8B52C82740C00F056AE /* QuizDraft.swift in Sources */,
@@ -930,6 +951,7 @@
 				BB6253E12DACB37D001895F2 /* GoalModel.swift in Sources */,
 				BB40B3532BE9505E00E908BF /* QuizBranchFile.swift in Sources */,
 				376D1E8E2A880C77006385C2 /* ProgressView.swift in Sources */,
+				BB4A5EC62E4ABE7300776EFC /* LevelTabContent.swift in Sources */,
 				BB7A03792AE07E69009EFDD5 /* DailyConsistencyView.swift in Sources */,
 				BB7A03712ADE06D1009EFDD5 /* LearnedAtThisLevel.swift in Sources */,
 				BB0FD8FB2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift in Sources */,

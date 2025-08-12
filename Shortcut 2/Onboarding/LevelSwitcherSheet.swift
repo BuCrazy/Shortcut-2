@@ -1,293 +1,15 @@
 import SwiftUI
 import Charts
 import Marquee
-struct LevelSelectorData: Identifiable {
-    var id = UUID().uuidString
-    var hour: Double
-    var almostLearnedWords: Double
-    var animate: Bool = false
-}
-var level_selector_data: [LevelSelectorData] = [
-    LevelSelectorData(hour: 0, almostLearnedWords: 100),
-    LevelSelectorData(hour: 1, almostLearnedWords: 50),
-    LevelSelectorData(hour: 4, almostLearnedWords: 20),
-    LevelSelectorData(hour: 10, almostLearnedWords: 10),
-    LevelSelectorData(hour: 17, almostLearnedWords: 5),
-    LevelSelectorData(hour: 25, almostLearnedWords: 2),
-    LevelSelectorData(hour: 40, almostLearnedWords: 1)
-]
-struct MarqueeItem: Identifiable {
-    let id = UUID()
-    let word: String
-}
-var elementaryExamples = [
-    "society",
-    "heart",
-    "send",
-    "early",
-    "watch",
-    "father",
-    "like",
-    "place",
-    "something",
-    "very",
-    "people",
-    "thing",
-    "call",
-    "student",
-    "move",
-    "happen",
-    "next",
-    "book",
-    "important",
-    "air"
-]
-var elementaryExamples2 = [
-    "air",
-    "important",
-    "book",
-    "next",
-    "happen",
-    "move",
-    "student",
-    "call",
-    "thing",
-    "people",
-    "very",
-    "something",
-    "place",
-    "like",
-    "father",
-    "watch",
-    "early",
-    "send",
-    "heart",
-    "society"
-]
-var beginnerExamples = [
-    "mention",
-    "fight",
-    "peace",
-    "imagine",
-    "avoid",
-    "trip",
-    "owner",
-    "victim",
-    "responsibility",
-    "suffer",
-    "successful",
-    "achieve",
-    "improve",
-    "future",
-    "drive",
-    "justice",
-    "damage",
-    "disappear",
-    "fruit"
-]
-var beginnerExamples2 = [
-    "society",
-    "fruit",
-    "disappear",
-    "damage",
-    "justice",
-    "drive",
-    "future",
-    "improve",
-    "achieve",
-    "successful",
-    "suffer",
-    "responsibility",
-    "victim",
-    "owner",
-    "trip",
-    "avoid",
-    "imagine",
-    "peace",
-    "fight",
-    "mention"
-]
-var intermediateExamples = [
-    "depart",
-    "twin",
-    "tolerance",
-    "flood",
-    "hike",
-    "habit",
-    "flash",
-    "desire",
-    "genuine",
-    "consist",
-    "violation",
-    "possess",
-    "craft",
-    "innocent",
-    "blind",
-    "flat",
-    "award",
-    "whisper",
-    "agenda",
-    "launch"
-]
-var intermediateExamples2 = [
-    "launch",
-    "agenda",
-    "whisper",
-    "award",
-    "flat",
-    "blind",
-    "innocent",
-    "craft",
-    "possess",
-    "violation",
-    "consist",
-    "genuine",
-    "desire",
-    "flash",
-    "habit",
-    "hike",
-    "flood",
-    "tolerance",
-    "twin",
-    "depart"
-]
-var advancedExamples = [
-    "spine",
-    "pea",
-    "roar",
-    "erupt",
-    "lean",
-    "precede",
-    "fulfil",
-    "thrill",
-    "jerk",
-    "decisive",
-    "sleek",
-    "obesity",
-    "dusk",
-    "contaminate",
-    "sewer",
-    "bypass",
-    "damp",
-    "lizard",
-    "fasten",
-    "slate",
-]
-var advancedExamples2 = [
-    "slate",
-    "fasten",
-    "lizard",
-    "damp",
-    "bypass",
-    "sewer",
-    "contaminate",
-    "dusk",
-    "obesity",
-    "sleek",
-    "decisive",
-    "jerk",
-    "thrill",
-    "fulfil",
-    "precede",
-    "lean",
-    "erupt",
-    "roar",
-    "pea",
-    "spine",
-]
-var nativelikeExamples = [
-    "anticipated",
-    "bunk",
-    "misconduct",
-    "fern",
-    "dread",
-    "redeem",
-    "extinct",
-    "ascend",
-    "traverse",
-    "devoid",
-    "straddle",
-    "vineyard",
-    "thump",
-    "whim",
-    "sluggish",
-    "zeal",
-    "slug",
-    "cradle",
-    "hideous",
-    "shrewd"
-]
-var nativelikeExamples2 = [
-    "shrewd",
-    "hideous",
-    "cradle",
-    "slug",
-    "zeal",
-    "sluggish",
-    "whim",
-    "thump",
-    "vineyard",
-    "straddle",
-    "devoid",
-    "traverse",
-    "ascend",
-    "extinct",
-    "redeem",
-    "dread",
-    "fern",
-    "misconduct",
-    "bunk",
-    "anticipated"
-]
-var shakespeareExamples = [
-    "skid",
-    "spatula",
-    "spooky",
-    "intractable",
-    "maize",
-    "privy",
-    "flask",
-    "peck",
-    "courteous",
-    "crackle",
-    "lopsided",
-    "twinge",
-    "vagaries",
-    "trifle",
-    "grub",
-    "strut",
-    "gawk",
-    "cog",
-    "belch",
-    "dowry"
-]
-var shakespeareExamples2 = [
-    "dowry",
-    "belch",
-    "cog",
-    "gawk",
-    "strut",
-    "grub",
-    "trifle",
-    "vagaries",
-    "twinge",
-    "lopsided",
-    "crackle",
-    "courteous",
-    "peck",
-    "flask",
-    "privy",
-    "maize",
-    "intractable",
-    "spooky",
-    "spatula",
-    "skid"
-]
+
+
+
 struct LevelSwitcherSheet: View {
     @AppStorage("levelSwitchSheetLevelSelected_key") var levelSwitchSheetLevelSelected = 1
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
+    @State private var navigateGoalList: Bool = false
     // Тут код для графика
     @State var level_selector_Data: [LevelSelectorData] = level_selector_data
     @State private var animationAmount = 1.0
@@ -461,39 +183,39 @@ struct LevelSwitcherSheet: View {
                         // Бегущая строка
                         switch levelSwitchSheetLevelSelected {
                         case 1:
-                            SimpleMarquee(words: elementaryExamples, speed: 90, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.elementaryExamples, speed: 90, movementDirection: "left")
                                 .opacity(opacity1)
-                            SimpleMarquee(words: elementaryExamples2, speed: 70, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.elementaryExamples2, speed: 70, movementDirection: "left")
                                 .opacity(opacity1)
                         case 2:
-                            SimpleMarquee(words: beginnerExamples, speed: 90, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.beginnerExamples, speed: 90, movementDirection: "left")
                                 .opacity(opacity2)
-                            SimpleMarquee(words: beginnerExamples2, speed: 70, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.beginnerExamples2, speed: 70, movementDirection: "left")
                                 .opacity(opacity2)
                         case 3:
-                            SimpleMarquee(words: intermediateExamples, speed: 90, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.intermediateExamples, speed: 90, movementDirection: "left")
                                 .opacity(opacity3)
-                            SimpleMarquee(words: intermediateExamples2, speed: 70, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.intermediateExamples2, speed: 70, movementDirection: "left")
                                 .opacity(opacity3)
                         case 4:
-                            SimpleMarquee(words: advancedExamples, speed: 90, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.advancedExamples, speed: 90, movementDirection: "left")
                                 .opacity(opacity4)
-                            SimpleMarquee(words: advancedExamples2, speed: 70, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.advancedExamples2, speed: 70, movementDirection: "left")
                                 .opacity(opacity4)
                         case 5:
-                            SimpleMarquee(words: nativelikeExamples, speed: 90, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.nativelikeExamples, speed: 90, movementDirection: "left")
                                 .opacity(opacity5)
-                            SimpleMarquee(words: nativelikeExamples2, speed: 70, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.nativelikeExamples2, speed: 70, movementDirection: "left")
                                 .opacity(opacity5)
                         case 6:
-                            SimpleMarquee(words: shakespeareExamples, speed: 90, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.shakespeareExamples, speed: 90, movementDirection: "left")
                                 .opacity(opacity6)
-                            SimpleMarquee(words: shakespeareExamples2, speed: 70, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.shakespeareExamples2, speed: 70, movementDirection: "left")
                                 .opacity(opacity6)
                         default:
-                            SimpleMarquee(words: elementaryExamples, speed: 90, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.elementaryExamples, speed: 90, movementDirection: "left")
                                 .opacity(opacity1)
-                            SimpleMarquee(words: elementaryExamples2, speed: 70, movementDirection: "left")
+                            SimpleMarquee(words: LevelWords.elementaryExamples2, speed: 70, movementDirection: "left")
                                 .opacity(opacity1)
                         }
                         Spacer()
@@ -875,7 +597,8 @@ struct LevelSwitcherSheet: View {
                                         //                        currentLevelSelected = "elementary"
                                         //                        levelSwitchSheetShown = false
                                         basicOnboardingPassed = true
-                                        presentationMode.wrappedValue.dismiss()
+                                       // presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                        navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Elementary")
@@ -894,7 +617,8 @@ struct LevelSwitcherSheet: View {
                                         //                        currentLevelSelected = "beginner"
                                         //                        levelSwitchSheetShown = false
                                         basicOnboardingPassed = true
-                                        presentationMode.wrappedValue.dismiss()
+                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                         navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Beginner")
@@ -912,7 +636,8 @@ struct LevelSwitcherSheet: View {
                                         //                            currentLevelSelected = "intermediate"
                                         //                            levelSwitchSheetShown = false
                                         basicOnboardingPassed = true
-                                        presentationMode.wrappedValue.dismiss()
+                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                         navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Intermediate")
@@ -928,7 +653,8 @@ struct LevelSwitcherSheet: View {
                                     action: {
                                         //                        currentLevelSelected = "advanced"
                                         basicOnboardingPassed = true
-                                        presentationMode.wrappedValue.dismiss()
+                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                         navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Advanced")
@@ -944,7 +670,8 @@ struct LevelSwitcherSheet: View {
                                     action: {
                                         //                        currentLevelSelected = "nativelike"
                                         basicOnboardingPassed = true
-                                        presentationMode.wrappedValue.dismiss()
+                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                         navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Native-like")
@@ -960,7 +687,8 @@ struct LevelSwitcherSheet: View {
                                     action: {
                                         //                        currentLevelSelected = "borninengland"
                                         basicOnboardingPassed = true
-                                        presentationMode.wrappedValue.dismiss()
+                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                         navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Shakespeare")
@@ -976,6 +704,7 @@ struct LevelSwitcherSheet: View {
                                     action: {
                                         switchToLevel(level: "elementary")
                                         // currentLevelSelected = "elementary"
+                                        navigateGoalList = true
                                     },
                                     label: {
                                         Text("Switch to Elementary")
@@ -1187,6 +916,9 @@ struct LevelSwitcherSheet: View {
                 }
                 .background(Color("sheetColor"))
             }
+            .navigationDestination(isPresented: $navigateGoalList) {
+                GoalListView()
+            }
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
@@ -1220,68 +952,7 @@ struct LevelSwitcherSheet: View {
         }
     }
 }
-struct SimpleMarquee: View {
-    @State private var offset: CGFloat = 0
-    @State private var animate: Bool = false
 
-    let words: [String]
-    let speed: Double
-    let movementDirection: String
-    
-    var body: some View {
-            GeometryReader { geometry in
-                let wordWidth = geometry.size.width / CGFloat(words.count)
-                let totalWidth = wordWidth * CGFloat(words.count) + CGFloat(words.count - 1) * 60
-                var firstAnimationArgument: CGFloat {
-                    switch movementDirection {
-                    case "left":
-                        return -totalWidth
-                    case "right":
-                        return 0
-                    default:
-                        return -totalWidth
-                    }
-                }
-                var secondAnimationArgument: CGFloat {
-                    switch movementDirection {
-                    case "left":
-                        return 0
-                    case "right":
-                        return -totalWidth
-                    default:
-                        return 0
-                    }
-                }
-                HStack(spacing: 17) {
-                    ForEach(0..<2, id: \.self) { _ in
-                        ForEach(words, id: \.self) { word in
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 40)
-                                    .foregroundColor(Color("surface"))
-                                    .frame(height: 37)
-                                Text(word)
-                                    .fixedSize()
-                                    .foregroundColor(Color("secondaryFontColor"))
-                                    .font(.system(size: 14))
-                                    .fontWeight(.bold)
-                                    .padding(EdgeInsets(top: 1, leading: 16, bottom: 1, trailing: 16))
-                            }
-                        }
-                    }
-                }
-                .offset(
-                    x: animate ? firstAnimationArgument : secondAnimationArgument
-                )
-                .onAppear {
-                    withAnimation(Animation.linear(duration: speed).repeatForever(autoreverses: true)) {
-                        animate.toggle()
-                    }
-                }
-            }
-            .frame(height: 40)
-            .clipped()
-    }
-}
 
 struct LevelSwitcherSheet_Preview: PreviewProvider {
     static var previews: some View {

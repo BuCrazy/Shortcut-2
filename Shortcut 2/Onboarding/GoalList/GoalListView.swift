@@ -1,0 +1,92 @@
+//
+//  GoalListView.swift
+//  Shortcut-2
+//
+//  Created by Pavlo Bilashchuk on 7/28/25.
+//
+
+import SwiftUI
+
+struct GoalListView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var goalsManager: GoalsManager
+    @State var feedbackColor: Color = Color.clear
+    @Binding var isSheet: Bool
+    
+    private var buttonLable: String {
+        if isSheet {
+            "Continue Learning"
+        } else {
+            "Start Learning"
+        }
+    }
+    var body: some View {
+        NavigationStack {
+            ZStack {
+            
+              //  if !isSheet {
+                    P171_CircleAnimation(feedbackColor: feedbackColor)
+                        .blendMode(.screen)
+                        .blur(radius: 28)
+                        .offset(y: -450)
+                        .opacity(0.4)
+                        .allowsHitTesting(false)
+                        .zIndex(0)
+             //   } else {}
+                
+                VStack(alignment: .leading, spacing: 16) {
+                    GoalPreviewCard_1()
+                    GoalPreviewCard_2()
+                    Spacer()
+                    
+                    
+                //    if !isSheet {
+                        Skeo_Button(buttonLabel: buttonLable) {
+                            print("Skeo button tapped")
+                            let impact = UIImpactFeedbackGenerator(style: .medium)
+                            impact.impactOccurred()
+                            
+                        }
+                   // } else {}
+                    
+                }
+                .frame(maxHeight:.infinity)
+                .padding(.horizontal, 16)
+               // .padding(.top, 16)
+                
+
+                
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("BackgroundColor"))
+            
+        //    .navigationTitle(Text("Goal List"))
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.large)
+            .preferredColorScheme(.dark)
+            .toolbar() {
+                ToolbarItem(placement: .topBarLeading) {
+                    VStack(alignment: .leading) {
+                        Text("Goal List")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("The list of goals you need to complete to attain glory!")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .lineLimit(2)
+                    }
+                    .padding(.top, isSheet ? 64 : 32)
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    let mockStoredItems = storedNewWordItems()
+    let goalsManager = GoalsManager(storedItems: mockStoredItems)
+
+    
+    GoalListView(isSheet: .constant(false))
+        .environmentObject(goalsManager)
+}

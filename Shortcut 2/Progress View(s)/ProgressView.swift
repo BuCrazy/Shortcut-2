@@ -50,6 +50,7 @@ struct ProgressView: View {
     
     @State private var scrollOffset: CGFloat = 0
     @State var hasScrolled = false
+   
     
     let toolBarGradient = LinearGradient(
            stops: [
@@ -186,7 +187,9 @@ struct ProgressView: View {
                             }
                         )
                     )
-                ).environmentObject(goalsManager)
+                )
+                .environmentObject(goalsManager)
+                
             )
         }
     }

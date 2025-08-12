@@ -15,6 +15,8 @@ struct NavigationBar: View {
     @State var firstGoalIsCompleted = false
     @State var feedbackColor: Color = .green
     @State private var isGoalCompleted: Bool = false
+    @State private var showGoalList = false
+    @State var isSheet: Bool = false
     
     var greenGradient = LinearGradient(
         stops: [
@@ -207,7 +209,16 @@ struct NavigationBar: View {
                 }
 
                 ZStack {
-                    currentGoalView
+                    Button(action: {
+                    isSheet = true
+                    showGoalList.toggle()
+                    let impact = UIImpactFeedbackGenerator(style: .light)
+                    impact.impactOccurred()
+                    }) {
+                        
+                        currentGoalView
+                    }.buttonStyle(.plain)
+
                 }
               
 //                    HStack {
@@ -237,6 +248,10 @@ struct NavigationBar: View {
         
         .frame(height: height)
         .frame(maxHeight: .infinity, alignment: .top)
+        .sheet(isPresented: $showGoalList) {
+            GoalListView(isSheet: $isSheet)
+                    .presentationDetents([.large])
+        }
         .onAppear {
             isGoalCompleted = goalsManager.currentGoalIndex == 1 &&
                               goalsManager.currentGoal.status == .completed
@@ -255,7 +270,7 @@ struct NavigationBar: View {
             print("🔄 Goal index changed to: \(newIndex)")
             isGoalCompleted = newIndex == 1 && goalsManager.currentGoal.status == .completed
         }
-        
+       
     } //body ends
     
     
