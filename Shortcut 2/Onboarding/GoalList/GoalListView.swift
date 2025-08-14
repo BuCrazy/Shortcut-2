@@ -45,7 +45,7 @@ struct GoalListView: View {
                             print("Skeo button tapped")
                             let impact = UIImpactFeedbackGenerator(style: .medium)
                             impact.impactOccurred()
-                            
+                            presentationMode.wrappedValue.dismiss()
                         }
                    // } else {}
                     

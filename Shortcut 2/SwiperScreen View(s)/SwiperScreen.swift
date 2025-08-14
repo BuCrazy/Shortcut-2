@@ -5,6 +5,7 @@ struct SwiperScreen: View {
     @EnvironmentObject var activityLogDataLayer: ActivityCalendar
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var storedStatesDataLayer: storedStates
+    @EnvironmentObject var goalsManager: GoalsManager
     
     @AppStorage("wordsPerDiscoverySetting_key") var wordsPerDiscoverySetting: Int = 30
     @AppStorage("wordsPerRevisionSetting_key") var wordsPerRevisionSetting: Int = 30
@@ -16,34 +17,65 @@ struct SwiperScreen: View {
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     
     @AppStorage("isFirstAppLaunch") var isFirstAppLaunch: Bool = true
-    
+    @AppStorage("hasShownGoalListSheet_key") private var hasShownGoalListSheet: Bool = false
+
+    @State private var showGoalList: Bool = false
     var body: some View {
-        VStack{
-            if currentLearningMode == "discovery" {
-                SwiperMainView()
-            } else if currentLearningMode == "revision" {
-                //NOTE: Check if the quiz is in progress
-                if storedNewWordItemsDataLayer.isQuizInProgress() {
-                    //NOTE: If a quiz is in progress, skip the QuizIntroView
-                    QuizView(storedWords: storedNewWordItemsDataLayer)
+        NavigationStack {
+            VStack{
+                if currentLearningMode == "discovery" {
+                    SwiperMainView()
+                } else if currentLearningMode == "revision" {
+                    //NOTE: Check if the quiz is in progress
+                    if storedNewWordItemsDataLayer.isQuizInProgress() {
+                        //NOTE: If a quiz is in progress, skip the QuizIntroView
+                        QuizView(storedWords: storedNewWordItemsDataLayer)
                     } else {
                         QuizIntroView(storedNewWordItemsDataLayer: _storedNewWordItemsDataLayer)
                     }
-            } else if currentLearningMode == "revisionForever" {
-                QuizView(storedWords: storedNewWordItemsDataLayer)
-            } else if currentLearningMode == "reinforcement" {
-                //NOTE: Otherwise, show the QuizIntroView as usual
-                  ReinforcementView()
-              }
+                } else if currentLearningMode == "revisionForever" {
+                    QuizView(storedWords: storedNewWordItemsDataLayer)
+                } else if currentLearningMode == "reinforcement" {
+                    //NOTE: Otherwise, show the QuizIntroView as usual
+                    ReinforcementView()
+                }
+            }
         }
         .onAppear{
-//          try! activityLogDataLayer.loadDataFromJSON()
+            //          try! activityLogDataLayer.loadDataFromJSON()
+            
+            
+            if !hasShownGoalListSheet {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                print("=== SwiperScreen onAppear ===")
+                print("isFirstAppLaunch: \(isFirstAppLaunch)")
+                print("hasShownGoalListSheet: \(hasShownGoalListSheet)")
+                print("✅ Conditions met - will show goal list sheet in 1 second")
+                    
+                    
+                    if !hasShownGoalListSheet && !isFirstAppLaunch {
+                        print("🎯 Actually showing goal list sheet now")
+
+                        showGoalList = true
+                        hasShownGoalListSheet = true
+                    }
+                }
+            }
+
             if isFirstAppLaunch == false {
                 storedNewWordItemsDataLayer.saveData()
             }
+            
+          
+
+           
         }
+        .sheet(isPresented: $showGoalList) {
+          GoalListView(isSheet: $showGoalList)
+                .presentationDetents([.medium])
+        }
+        
     }
-    
 }
 
 #Preview {
