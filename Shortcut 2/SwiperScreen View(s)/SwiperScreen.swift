@@ -46,12 +46,13 @@ struct SwiperScreen: View {
             
             
             if !hasShownGoalListSheet {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 print("=== SwiperScreen onAppear ===")
                 print("isFirstAppLaunch: \(isFirstAppLaunch)")
                 print("hasShownGoalListSheet: \(hasShownGoalListSheet)")
                 print("✅ Conditions met - will show goal list sheet in 1 second")
-                    
+                    let impact = UIImpactFeedbackGenerator(style: .light)
+                    impact.impactOccurred()
                     
                     if !hasShownGoalListSheet && !isFirstAppLaunch {
                         print("🎯 Actually showing goal list sheet now")
@@ -72,7 +73,8 @@ struct SwiperScreen: View {
         }
         .sheet(isPresented: $showGoalList) {
           GoalListView(isSheet: $showGoalList)
-                .presentationDetents([.medium])
+                .presentationDetents([.large])
+            
         }
         
     }

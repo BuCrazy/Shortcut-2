@@ -78,6 +78,9 @@ struct GoalListView: View {
                     .padding(.top, isSheet ? 64 : 32)
                 }
             }
+            .onAppear {
+                print("1st Goal status is \(goalsManager.goals[0].status)")
+            }
         }
     }
 }
