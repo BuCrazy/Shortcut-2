@@ -14,7 +14,7 @@ struct LocalPlayer: UIViewControllerRepresentable {
     let player = AVPlayer()
     var hideControls: Bool = true
     var isLooping: Bool = true
-    var videoGravity: AVLayerVideoGravity = .resizeAspectFill
+    var videoGravity: AVLayerVideoGravity = .resizeAspectFill 
     var contentOffset: CGPoint = .zero
     
     func makeUIViewController(context: Context) -> AVPlayerViewController {

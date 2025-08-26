@@ -104,7 +104,7 @@ struct QuizView: View {
       }
     
     var body: some View {
-        NavigationStack {
+        //NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
                 
@@ -220,7 +220,7 @@ struct QuizView: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationTitle(Text ("Quiz"))
-        }
+     //   } // navigationStack ends
         .onAppear {
             print("onAppear. QuizView onAppear called")
             print("onAppear. Current quizItems count: \(quizItems.count)")

@@ -11,6 +11,8 @@ struct QuizSummaryView: View {
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var goalsManager: GoalsManager
+    @Environment(\.dismiss) private var dismiss
+
     
     @State var feedbackColor: Color = Color.clear
     @Binding var correctAnswerNumber: Int
@@ -41,7 +43,7 @@ struct QuizSummaryView: View {
     }
     
     var body: some View {
-        NavigationStack {
+       // NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
                 ScrollView {
@@ -69,16 +71,30 @@ struct QuizSummaryView: View {
                             //   Text("Total Average Score: \(quizHistory.wrappedValue.totalAverage, specifier: "%.1f")%")
                             
                             // CTA Button
-                            NavigationLink(destination:   ReinforcementView(), label: {
-                                CTAButton(buttonText: "To Reinforcement")
-                            })
-                            .padding(.horizontal, 16)
-                            .simultaneousGesture(TapGesture().onEnded {
+//                            NavigationLink(destination: ReinforcementView(), label: {
+//                                CTAButton(buttonText: "To Reinforcement")//{}
+//                            })
+//                            .padding(.horizontal, 16)
+//                            .simultaneousGesture(TapGesture().onEnded {
+//                                resetQuizState()
+//                                isQuizAlreadyStarted = false
+//                                isQuizFinished = false //test Oct 14 2024
+//                                currentLearningMode = "reinforcement"
+//                            })
+                            
+                            //TEST Aug 25
+                            Button(action: {
                                 resetQuizState()
                                 isQuizAlreadyStarted = false
-                                isQuizFinished = false //test Oct 14 2024
+                                isQuizFinished = false
                                 currentLearningMode = "reinforcement"
-                            })
+                                dismiss()
+                            }) {
+                                CTAButton(buttonText: "To Reinforcement")
+
+                            }
+                            .padding(.horizontal, 16)
+
                             
                             
                         }
@@ -99,7 +115,7 @@ struct QuizSummaryView: View {
             }
             .navigationTitle(Text ("Summary"))
             .toolbarBackground(.clear, for: .navigationBar)
-        }
+  //      } //NavigationStack ends
         .onAppear {
             goalsManager.updateStoredItems(storedNewWordItemsDataLayer)
             updateQuizHistoryWithScore(score: sessionScore, date: Date())

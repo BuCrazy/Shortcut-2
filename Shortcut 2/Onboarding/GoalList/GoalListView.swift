@@ -39,20 +39,25 @@ struct GoalListView: View {
                     GoalPreviewCard_2()
                     Spacer()
                     
-                    
+//                    CTAButton(buttonText: buttonLable) {
+//                        print("Skeo button tapped")
+//                        let impact = UIImpactFeedbackGenerator(style: .medium)
+//                        impact.impactOccurred()
+//                        presentationMode.wrappedValue.dismiss()
+//                    }
                 //    if !isSheet {
-                        Skeo_Button(buttonLabel: buttonLable) {
-                            print("Skeo button tapped")
-                            let impact = UIImpactFeedbackGenerator(style: .medium)
-                            impact.impactOccurred()
-                            presentationMode.wrappedValue.dismiss()
-                        }
+//                        Skeo_Button(buttonLabel: buttonLable) {
+//                            print("Skeo button tapped")
+//                            let impact = UIImpactFeedbackGenerator(style: .medium)
+//                            impact.impactOccurred()
+//                            presentationMode.wrappedValue.dismiss()
+//                        }
                    // } else {}
                     
                 }
                 .frame(maxHeight:.infinity)
                 .padding(.horizontal, 16)
-               // .padding(.top, 16)
+                .padding(.top, 8)
                 
 
                 
@@ -66,16 +71,17 @@ struct GoalListView: View {
             .preferredColorScheme(.dark)
             .toolbar() {
                 ToolbarItem(placement: .topBarLeading) {
-                    VStack(alignment: .leading) {
+                
+                    VStack(alignment: .leading, spacing: 4) {
                         Text("Goal List")
-                            .font(.largeTitle)
+                            .font(.system(size: 32))
                             .fontWeight(.bold)
                         Text("The list of goals you need to complete to attain glory!")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                            .font(.system(size: 14))
+                            .foregroundColor(Color("Textprimary"))
                             .lineLimit(2)
                     }
-                    .padding(.top, isSheet ? 64 : 32)
+                    .padding(.top, isSheet ? 72 : 32)
                 }
             }
             .onAppear {

@@ -40,10 +40,13 @@ struct SwiperScreen: View {
                     ReinforcementView()
                 }
             }
+            .navigationBarBackButtonHidden(true)
+
         }
         .onAppear{
             //          try! activityLogDataLayer.loadDataFromJSON()
-            
+            print("🔍 SwiperScreen onAppear - currentLearningMode: \(currentLearningMode)")
+
             
             if !hasShownGoalListSheet {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

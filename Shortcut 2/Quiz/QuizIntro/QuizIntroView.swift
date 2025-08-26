@@ -19,7 +19,7 @@ struct QuizIntroView: View {
     let screenHeight = UIScreen.main.bounds.height
     
     var body: some View {
-        NavigationStack {
+     //   NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
                 VStack {
@@ -66,7 +66,7 @@ struct QuizIntroView: View {
                     VStack {
                        // Spacer()
                         NavigationLink(destination:  QuizView(storedWords: storedNewWordItemsDataLayer)) {
-                            CTAButton(buttonText: "Let's Go!")
+                            CTAButton(buttonText: "Let's Go!")// {}
                                 .padding(.horizontal, 16)
                         }
                         .animation(.none, value: UUID())
@@ -78,7 +78,7 @@ struct QuizIntroView: View {
                 .navigationTitle(Text ("Discovery")).navigationBarBackButtonHidden(false)
               
             }
-        }
+    //    } //NavigationStack ends
     }
     @ViewBuilder
     func switchLevelSymbol() -> some View {

@@ -10,6 +10,7 @@ import Shiny
 
 struct CTAButton: View {
     var buttonText: String
+   // var action: () -> Void
     let ctaGradient = LinearGradient(
         stops: [
         Gradient.Stop(color: Color(red: 0.01, green: 0.01, blue: 0.01), location: 0.00),
@@ -26,6 +27,12 @@ struct CTAButton: View {
            startPoint: UnitPoint(x: 0, y: 0.5),
            endPoint: UnitPoint(x: 1, y: 0.5)
        )
+    
+//    init(buttonText: String, action: @escaping () -> Void) {
+//        self.buttonText = buttonText
+//        self.action = action
+//    }
+//    
     
     var body: some View {
        // ZStack {
@@ -65,5 +72,7 @@ struct CTAButton: View {
 }
 
 #Preview {
-    CTAButton(buttonText: "Button Name")
+    CTAButton(buttonText: "Button Name") //{
+   //     print("tapped")
+   // }
 }

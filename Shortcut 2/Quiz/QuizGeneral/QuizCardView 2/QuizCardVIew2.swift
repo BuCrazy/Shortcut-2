@@ -13,7 +13,7 @@ struct QuizCardVIew2: View {
 
     var word: String
     var question: String = "What is the translation of this word?"
-    var example: String = "The dexterous surgeon skillfully performed the intricate procedure with precision and   ease."
+    var example: String = "The dexterous surgeon skillfully performed the intricate procedure with precision and ease."
     
     
     
