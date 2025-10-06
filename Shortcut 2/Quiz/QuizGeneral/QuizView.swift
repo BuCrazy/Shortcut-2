@@ -104,7 +104,7 @@ struct QuizView: View {
       }
     
     var body: some View {
-        NavigationStack {
+        //NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
                 
@@ -115,9 +115,10 @@ struct QuizView: View {
                     //NOTE: Initial logic for switching views } else
                   if isQuizFinished {
                   
-                      QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, isQuizAlreadyStarted: $isQuizAlreadyStarted, isQuizFinished: $isQuizFinished)
-                           .opacity(isQuizFinished ? 1 : 0)
-                           .animation(.easeIn, value: isQuizFinished)
+                      //Test September 19 (uncommit QuizSummary)
+//                      QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, isQuizAlreadyStarted: $isQuizAlreadyStarted, isQuizFinished: $isQuizFinished)
+//                           .opacity(isQuizFinished ? 1 : 0)
+//                           .animation(.easeIn, value: isQuizFinished)
                 } else {
                     if showCircleAnimation {
                         AuraEffect(feedbackColor: feedbackColor)
@@ -126,6 +127,24 @@ struct QuizView: View {
                     
                     //UI Hierarchy
                     VStack {
+                         //HStack is to align text to the left
+                            VStack(alignment: .leading) {
+                                if showCircleAnimation {
+                                    Spacer()
+                                }
+
+                                Text("Quiz")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.primary)
+                                    .multilineTextAlignment(.leading)
+                            }
+                    
+                        .padding(.horizontal, 16)
+                        .padding(.top, 20)
+
                         if !showCircleAnimation {
                             
                         //NOTE: Quiz Card + Indicator
@@ -167,9 +186,9 @@ struct QuizView: View {
 
                             }
                         }
-                            .opacity(showQuizCard ? 1 : 0)
+                        .opacity(showQuizCard ? 1 : 0)
                         .offset(y: showQuizCard ? 0 : 15)
-                            .animation(.easeInOut(duration: 0.5).delay(0.0), value: showQuizCard)
+                        .animation(.easeInOut(duration: 0.5).delay(0.0), value: showQuizCard)
                             
                             Spacer().frame(height: 10)
 
@@ -220,7 +239,7 @@ struct QuizView: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationTitle(Text ("Quiz"))
-        }
+     //   } // navigationStack ends
         .onAppear {
             print("onAppear. QuizView onAppear called")
             print("onAppear. Current quizItems count: \(quizItems.count)")

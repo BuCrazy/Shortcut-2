@@ -76,7 +76,23 @@ struct LevelChartView: View {
 }
 
 #Preview {
-    LevelChartView()
+    //LevelChartView()
+    @Previewable @State var sampleData: [LevelSelectorData] = [
+            LevelSelectorData(hour: 0, almostLearnedWords: 100, animate: true),
+            LevelSelectorData(hour: 1, almostLearnedWords: 50, animate: true),
+            LevelSelectorData(hour: 4, almostLearnedWords: 20, animate: true),
+            LevelSelectorData(hour: 10, almostLearnedWords: 10, animate: true),
+            LevelSelectorData(hour: 17, almostLearnedWords: 5, animate: true),
+            LevelSelectorData(hour: 25, almostLearnedWords: 2, animate: true),
+            LevelSelectorData(hour: 40, almostLearnedWords: 1, animate: true)
+        ]
+        
+        return LevelChartView(
+            levelType: .intermediate,
+            levelSelectorData: $sampleData,
+            opacity: 1.0
+        )
+
 }
 
 enum LevelType: Int, CaseIterable {
@@ -91,17 +107,17 @@ enum LevelType: Int, CaseIterable {
 // MARK: - Chart Gradients
 struct ChartGradients {
     // Elementary
-    static let chartGradientAreaElementary = LinearGradient(
+    static let chartGradientAreaElementary = LinearGradient( //area
         stops: [
             Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.00),
             Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.35),
             Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.7),
         ],
-        startPoint: .top,
-        endPoint: .bottom
+        startPoint: /*.top,*/UnitPoint(x: 0.01, y: 0.55),
+        endPoint: /*.bottom*/UnitPoint(x: 0.01, y: 0.0)
     )
     
-    static let chartGradientLineElementary = LinearGradient(
+    static let chartGradientLineElementary = LinearGradient( //line
         stops: [
             Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.000),
             Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.0125),
@@ -112,17 +128,17 @@ struct ChartGradients {
     )
     
     // Beginner
-    static let chartGradientAreaBeginner = LinearGradient(
+    static let chartGradientAreaBeginner = LinearGradient( //area
         stops: [
             Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.35),
             Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.55),
             Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.9),
         ],
-        startPoint: .top,
-        endPoint: .bottom
+        startPoint: /*.top*/UnitPoint(x: 0.01, y: 1.0),
+        endPoint: /*.bottom*/ UnitPoint(x: -0.01, y: 0.45)
     )
     
-    static let chartGradientLineBeginner = LinearGradient(
+    static let chartGradientLineBeginner = LinearGradient( //line
         stops: [
             Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.0250),
             Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.0625),
@@ -133,24 +149,27 @@ struct ChartGradients {
     )
     
     // Intermediate
-    static let chartGradientAreaIntermediate = LinearGradient(
+    static let chartGradientAreaIntermediate = LinearGradient( //area
         stops: [
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.1000),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.1750),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.2500),
+        Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0), location: 0.10),
+        Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.07), location: 0.19),
+        Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.13), location: 0.28),
+        Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.15), location: 0.54),
+        Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.08), location: 0.64),
+        Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0), location: 0.74),
         ],
-        startPoint: .leading,
-        endPoint: .trailing
-    )
+        startPoint: UnitPoint(x: 0.30, y: 0.82),
+        endPoint: UnitPoint(x: -0.01, y: 0.77)
+        )
     
-    static let chartGradientLineIntermediate = LinearGradient(
+    static let chartGradientLineIntermediate = LinearGradient( //line
         stops: [
             Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.1000),
             Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.1750),
             Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.2500),
         ],
-        startPoint: .leading,
-        endPoint: .trailing
+        startPoint: /*.leading*/UnitPoint(x: 0.35, y: 0.82),
+        endPoint: /*.trailing*/ UnitPoint(x: -0.7, y: 0.77)
     )
     
     // Advanced
@@ -198,9 +217,10 @@ struct ChartGradients {
     // Shakespeare
     static let chartGradientAreaShakespeare = LinearGradient(
         stops: [
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.6250),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.8215),
             Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.1),
+            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.6250),
+            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.8215)
+           
         ],
         startPoint: .leading,
         endPoint: .trailing
@@ -208,9 +228,11 @@ struct ChartGradients {
     
     static let chartGradientLineShakespeare = LinearGradient(
         stops: [
+           
+            Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.1),
             Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.6250),
             Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.8125),
-            Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.1),
+            
         ],
         startPoint: .leading,
         endPoint: .trailing

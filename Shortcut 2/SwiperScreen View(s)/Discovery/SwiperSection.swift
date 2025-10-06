@@ -352,8 +352,11 @@ struct SwiperSection: View {
             if wordsDiscoveredDuringTheCurrentDiscoverySession >= wordsPerDiscoverySetting &&
                 wordsBeingLearnedCount >= wordsPerRevisionSetting /*&&
                 weeklySwipeCount >= 100*/ {
-                currentLearningMode = "revision"
-                wordsDiscoveredDuringTheCurrentDiscoverySession = 0
+               // currentLearningMode = "revision"
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                   // wordsDiscoveredDuringTheCurrentDiscoverySession = 0 //TEST September 9 uncommit this line to get back
+                    print("🎯 Counter reset after delay")
+                }
             }
         }
     

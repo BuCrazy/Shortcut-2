@@ -35,24 +35,40 @@ struct GoalListView: View {
              //   } else {}
                 
                 VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Goal List")
+                            .font(.system(size: 32))
+                            .fontWeight(.bold)
+                        Text("The list of goals you need to complete to attain glory!")
+                            .font(.system(size: 14))
+                            .foregroundColor(Color("Textprimary"))
+                            .lineLimit(2)
+                    }
+                    .padding(.top,/* isSheet ? 72 :*/ 16)
+                    
                     GoalPreviewCard_1()
                     GoalPreviewCard_2()
                     Spacer()
                     
-                    
+//                    CTAButton(buttonText: buttonLable) {
+//                        print("Skeo button tapped")
+//                        let impact = UIImpactFeedbackGenerator(style: .medium)
+//                        impact.impactOccurred()
+//                        presentationMode.wrappedValue.dismiss()
+//                    }
                 //    if !isSheet {
-                        Skeo_Button(buttonLabel: buttonLable) {
-                            print("Skeo button tapped")
-                            let impact = UIImpactFeedbackGenerator(style: .medium)
-                            impact.impactOccurred()
-                            
-                        }
+//                        Skeo_Button(buttonLabel: buttonLable) {
+//                            print("Skeo button tapped")
+//                            let impact = UIImpactFeedbackGenerator(style: .medium)
+//                            impact.impactOccurred()
+//                            presentationMode.wrappedValue.dismiss()
+//                        }
                    // } else {}
                     
                 }
                 .frame(maxHeight:.infinity)
                 .padding(.horizontal, 16)
-               // .padding(.top, 16)
+                .padding(.top, 8)
                 
 
                 
@@ -64,19 +80,23 @@ struct GoalListView: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
             .navigationBarTitleDisplayMode(.large)
             .preferredColorScheme(.dark)
-            .toolbar() {
-                ToolbarItem(placement: .topBarLeading) {
-                    VStack(alignment: .leading) {
-                        Text("Goal List")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                        Text("The list of goals you need to complete to attain glory!")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .lineLimit(2)
-                    }
-                    .padding(.top, isSheet ? 64 : 32)
-                }
+//            .toolbar() {
+//                ToolbarItem(placement: .topBarLeading) {
+//                
+//                    VStack(alignment: .leading, spacing: 4) {
+//                        Text("Goal List")
+//                            .font(.system(size: 32))
+//                            .fontWeight(.bold)
+//                        Text("The list of goals you need to complete to attain glory!")
+//                            .font(.system(size: 14))
+//                            .foregroundColor(Color("Textprimary"))
+//                            .lineLimit(2)
+//                    }
+//                    .padding(.top, isSheet ? 72 : 32)
+//                }
+//            }
+            .onAppear {
+                print("1st Goal status is \(goalsManager.goals[0].status)")
             }
         }
     }

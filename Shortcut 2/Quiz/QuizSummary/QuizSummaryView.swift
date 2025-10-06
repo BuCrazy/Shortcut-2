@@ -11,6 +11,8 @@ struct QuizSummaryView: View {
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var goalsManager: GoalsManager
+    @Environment(\.dismiss) private var dismiss
+
     
     @State var feedbackColor: Color = Color.clear
     @Binding var correctAnswerNumber: Int
@@ -32,16 +34,18 @@ struct QuizSummaryView: View {
     @Binding var isQuizFinished: Bool
     @State private var navigateToReinforcement = false
     // --- Code for saving Quiz historical data ends ---
+    @Binding var currentView: DiscoveryDesctination?
     
-    init(correctAnswerNumber: Binding<Int>, incorrectAnswerNumber: Binding<Int>, isQuizAlreadyStarted: Binding<Bool>, isQuizFinished: Binding<Bool>) {
+    init(correctAnswerNumber: Binding<Int>, incorrectAnswerNumber: Binding<Int>, isQuizAlreadyStarted: Binding<Bool>, isQuizFinished: Binding<Bool>, currentView: Binding<DiscoveryDesctination?>) {
         self._correctAnswerNumber = correctAnswerNumber
         self._incorrectAnswerNumber = incorrectAnswerNumber
         self._isQuizAlreadyStarted = isQuizAlreadyStarted
         self._isQuizFinished = isQuizFinished
+        self._currentView = currentView
     }
     
     var body: some View {
-        NavigationStack {
+       // NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
                 ScrollView {
@@ -68,17 +72,48 @@ struct QuizSummaryView: View {
                             
                             //   Text("Total Average Score: \(quizHistory.wrappedValue.totalAverage, specifier: "%.1f")%")
                             
-                            // CTA Button
-                            NavigationLink(destination:   ReinforcementView(), label: {
-                                CTAButton(buttonText: "To Reinforcement")
-                            })
-                            .padding(.horizontal, 16)
-                            .simultaneousGesture(TapGesture().onEnded {
-                                resetQuizState()
-                                isQuizAlreadyStarted = false
-                                isQuizFinished = false //test Oct 14 2024
-                                currentLearningMode = "reinforcement"
-                            })
+                            // CTA Button //TEST September 19 (uncommit this button to get back)
+//                            NavigationLink(destination: ReinforcementView(), label: {
+//                                CTAButton(buttonText: "To Reinforcement")//{}
+//                            })
+//                            .padding(.horizontal, 16)
+//                            .simultaneousGesture(TapGesture().onEnded {
+//                                resetQuizState()
+//                                isQuizAlreadyStarted = false
+//                                isQuizFinished = false //test Oct 14 2024
+//                                currentLearningMode = "reinforcement"
+//                            })
+                            
+                             // TEST September 19 delete button to get back
+                             Button (action: {
+                                 withAnimation(.easeInOut(duration: 0.3)) {
+                                     currentView = .reinforcement
+                                 }
+                                 resetQuizState()
+                                 isQuizAlreadyStarted = false
+                                 isQuizFinished = false //test Oct 14 2024
+                                 currentLearningMode = "reinforcement"
+                                 
+                             }) {
+                                 CTAButton(buttonText: "To Reinforcement")
+                                     .padding(.horizontal, 16)
+                             }
+                             .animation(.none, value: UUID())
+                             
+                            
+                            //TEST Aug 25
+//                            Button(action: {
+//                                resetQuizState()
+//                                isQuizAlreadyStarted = false
+//                                isQuizFinished = false
+//                                currentLearningMode = "reinforcement"
+//                                dismiss()
+//                            }) {
+//                                CTAButton(buttonText: "To Reinforcement")
+//
+//                            }
+//                            .padding(.horizontal, 16)
+
                             
                             
                         }
@@ -99,7 +134,7 @@ struct QuizSummaryView: View {
             }
             .navigationTitle(Text ("Summary"))
             .toolbarBackground(.clear, for: .navigationBar)
-        }
+  //      } //NavigationStack ends
         .onAppear {
             goalsManager.updateStoredItems(storedNewWordItemsDataLayer)
             updateQuizHistoryWithScore(score: sessionScore, date: Date())
@@ -150,7 +185,7 @@ struct QuizSummary_Previews: PreviewProvider {
     @State static var correctAnswerNumber: Int = 28
     @State static var incorrectAnswerNumber: Int = 2
     static var previews: some View {
-        QuizSummaryView(correctAnswerNumber: .constant(correctAnswerNumber), incorrectAnswerNumber: .constant(incorrectAnswerNumber), isQuizAlreadyStarted: .constant(false), isQuizFinished: .constant(false))
+        QuizSummaryView(correctAnswerNumber: .constant(correctAnswerNumber), incorrectAnswerNumber: .constant(incorrectAnswerNumber), isQuizAlreadyStarted: .constant(false), isQuizFinished: .constant(false), currentView: .constant(nil))
             .environmentObject(storedNewWordItems.shared)
             .environmentObject(GoalsManager.shared)
             

@@ -12,10 +12,17 @@ struct StripedBG: View {
     
     var body: some View {
         ZStack {
-            Color("BackgroundColor").ignoresSafeArea()
+            Color("BackgroundColor")//.ignoresSafeArea()  //TEST
+                .frame(maxWidth: .infinity) //TEST
+                .frame(height: 250)
+                .overlay (//TEST
             Image("stripedBG")
                 .resizable()
                 .scaledToFill()
+                .allowsHitTesting(false) //TEST
+            )
+            .clipped()//TEST
+                
         }
     }
 }

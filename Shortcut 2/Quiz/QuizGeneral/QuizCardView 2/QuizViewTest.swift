@@ -97,9 +97,10 @@ struct QuizViewTest: View {
                 Color("BackgroundColor").ignoresSafeArea()
                 
                 if isQuizFinished {
-                    QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, isQuizAlreadyStarted: $isQuizAlreadyStarted, isQuizFinished: $isQuizFinished)
-                        .opacity(isQuizFinished ? 1 : 0)
-                        .animation(.easeIn, value: isQuizFinished)
+                    //Test September 19 (uncommit QuizSummary)
+//                    QuizSummaryView(correctAnswerNumber: $correctAnswerNumber, incorrectAnswerNumber: $incorrectAnswerNumber, isQuizAlreadyStarted: $isQuizAlreadyStarted, isQuizFinished: $isQuizFinished)
+//                        .opacity(isQuizFinished ? 1 : 0)
+//                        .animation(.easeIn, value: isQuizFinished)
                 } else {
                     if showCircleAnimation {
                         AuraEffect(feedbackColor: feedbackColor)

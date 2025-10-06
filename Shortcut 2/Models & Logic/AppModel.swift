@@ -772,24 +772,154 @@ class storedNewWordItems: ObservableObject {
     
     func initialWordDataLoader() {
         print("Starting initialWordDataLoader")
-        try! elementaryWordsStorageLoad()
-        try! beginnerWordsStorageLoad()
-        try! intermediateWordsStorageLoad()
-        try! advancedWordsStorageLoad()
-        try! nativelikeWordsStorageLoad()
-        try! borninenglandWordsStorageLoad()
-        try! elementaryKnewAlreadyLoad()
-        try! elementaryBeingLearnedLoad()
-        try! beginnerKnewAlreadyLoad()
-        try! beginnerBeingLearnedLoad()
-        try! intermediateKnewAlreadyLoad()
-        try! intermediateBeingLearnedLoad()
-        try! advancedKnewAlreadyLoad()
-        try! advancedBeingLearnedLoad()
-        try! nativelikeKnewAlreadyLoad()
-        try! nativelikeBeingLearnedLoad()
-        try! borninenglandKnewAlreadyLoad()
-        try! borninenglandBeingLearnedLoad()
+        
+        // Load with error handling
+        do {
+            try  elementaryWordsStorageLoad()
+        } catch {
+            print("Error loading elementary words storage: \(error)")
+            elementaryWordsStorage = []
+        }
+        
+        do {
+            try beginnerWordsStorageLoad()
+        } catch {
+            print("Error loading beginner words storage: \(error)")
+            beginnerWordsStorage = []
+        }
+        
+        do {
+            try intermediateWordsStorageLoad()
+        } catch {
+            print("Failed to load intermediateWordsStorage: \(error)")
+            intermediateWordsStorage = []
+        }
+        
+        do {
+            try advancedWordsStorageLoad()
+        } catch {
+            print("Failed to load advancedWordsStorage: \(error)")
+            advancedWordsStorage = []
+        }
+        
+        do {
+            try nativelikeWordsStorageLoad()
+        } catch {
+            print("Failed to load nativelikeWordsStorage: \(error)")
+            nativelikeWordsStorage = []
+        }
+        
+        do {
+            try borninenglandWordsStorageLoad()
+        } catch {
+            print("Failed to load borninenglandWordsStorage: \(error)")
+            borninenglandWordsStorage = []
+        }
+        
+        // Load "Knew Already" arrays with error handling
+        
+        do {
+            try elementaryKnewAlreadyLoad()
+        } catch {
+            print("Failed to load elementaryKnewAlready: \(error)")
+            elementaryKnewAlready = []
+        }
+        
+        do {
+            try elementaryBeingLearnedLoad()
+        } catch {
+            print("Failed to load elementaryBeingLearned: \(error)")
+            elementaryBeingLearned = []
+        }
+        
+        do {
+            try beginnerKnewAlreadyLoad()
+        } catch {
+            print("Failed to load beginnerKnewAlready: \(error)")
+            beginnerKnewAlready = []
+        }
+        
+        do {
+            try beginnerBeingLearnedLoad()
+        } catch {
+            print("Failed to load beginnerBeingLearned: \(error)")
+            beginnerBeingLearned = []
+        }
+        
+        do {
+            try intermediateKnewAlreadyLoad()
+        } catch {
+            print("Failed to load intermediateKnewAlready: \(error)")
+            intermediateKnewAlready = []
+        }
+        
+        do {
+            try intermediateBeingLearnedLoad()
+        } catch {
+            print("Failed to load intermediateBeingLearned: \(error)")
+            intermediateBeingLearned = []
+        }
+        
+        do {
+            try advancedKnewAlreadyLoad()
+        } catch {
+            print("Failed to load advancedKnewAlready: \(error)")
+            advancedKnewAlready = []
+        }
+        
+        do {
+            try advancedBeingLearnedLoad()
+        } catch {
+            print("Failed to load advancedBeingLearned: \(error)")
+            advancedBeingLearned = []
+        }
+        
+        do {
+            try nativelikeKnewAlreadyLoad()
+        } catch {
+            print("Failed to load nativelikeKnewAlready: \(error)")
+            nativelikeKnewAlready = []
+        }
+        
+        do {
+            try nativelikeBeingLearnedLoad()
+        } catch {
+            print("Failed to load nativelikeBeingLearned: \(error)")
+            nativelikeBeingLearned = []
+        }
+        
+        do {
+            try borninenglandKnewAlreadyLoad()
+        } catch {
+            print("Failed to load borninenglandKnewAlready: \(error)")
+            borninenglandKnewAlready = []
+        }
+        
+        do {
+            try borninenglandBeingLearnedLoad()
+        } catch {
+            print("Failed to load borninenglandBeingLearned: \(error)")
+            borninenglandBeingLearned = []
+        }
+        
+//        try! elementaryWordsStorageLoad()
+//        try! beginnerWordsStorageLoad()
+//        try! intermediateWordsStorageLoad()
+//        try! advancedWordsStorageLoad()
+//        try! nativelikeWordsStorageLoad()
+//        try! borninenglandWordsStorageLoad()
+//        try! elementaryKnewAlreadyLoad()
+//        try! elementaryBeingLearnedLoad()
+//        try! beginnerKnewAlreadyLoad()
+//        try! beginnerBeingLearnedLoad()
+//        try! intermediateKnewAlreadyLoad()
+//        try! intermediateBeingLearnedLoad()
+//        try! advancedKnewAlreadyLoad()
+//        try! advancedBeingLearnedLoad()
+//        try! nativelikeKnewAlreadyLoad()
+//        try! nativelikeBeingLearnedLoad()
+//        try! borninenglandKnewAlreadyLoad()
+//        try! borninenglandBeingLearnedLoad()
         
         if elementaryWordsStorage.isEmpty {
             elementaryWordsStorage = elementaryWordsStorageSource
@@ -1166,6 +1296,7 @@ extension storedNewWordItems {
             case "intermediate":
             count = intermediateBeingLearned.count
             print("Checking what's going on \(intermediateBeingLearned)")
+            
             case "advanced":
                 count = advancedBeingLearned.count
             case "nativelike":

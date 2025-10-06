@@ -10,140 +10,34 @@ struct LevelSwitcherSheet: View {
     @AppStorage("levelSwitchSheetShown_key") var levelSwitchSheetShown: Bool = false
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
     @State private var navigateGoalList: Bool = false
-    // Тут код для графика
+    @State private var isGoalListSheet: Bool = false
+    
+    // Chart Data
     @State var level_selector_Data: [LevelSelectorData] = level_selector_data
     @State private var animationAmount = 1.0
     @State private var isAnimating: Bool = false
+    
+    // Opacity States
     @State var opacity1: Double = 0
     @State var opacity2: Double = 0
     @State var opacity3: Double = 0
     @State var opacity4: Double = 0
     @State var opacity5: Double = 0
     @State var opacity6: Double = 0
+    
     @State private var currentOffset: CGFloat = 0
     @State private var timer: Timer?
     @Environment(\.presentationMode) var presentationMode
     @AppStorage("basicOnboardingPassed_key") private var basicOnboardingPassed: Bool = false
+    
     // Отдельно переменная, откуда из предыдущего экрана передаётся выбранный код языка. Из неё берётся этот код и подставляется в languageCodeForUse по onAppear данного вью:
     var languageCodePassed: String
     @AppStorage("nativeLanguageSelectedID_key") var languageCodeForUse: String = ""
     var isShortVersion: Bool
-    // Настройки градиента графика для Elementary
-    let chartGradientAreaElementary = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.00),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.35),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.7),
-        ],
-        startPoint: .top,
-        endPoint: .bottom
-        )
-    let chartGradientLineElementary = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.000),
-            Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.0125),
-            Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.0250),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    // Настройки градиента графика для Beginner
-    let chartGradientAreaBeginner = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.35),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.55),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.9),
-        ],
-        startPoint: .top,
-        endPoint: .bottom
-        )
-    let chartGradientLineBeginner = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.0250),
-            Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.0625),
-            Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.0999),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    // Настройки градиента графика для Intermediate
-    let chartGradientAreaIntermediate = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.1000),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.1750),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.2500),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    let chartGradientLineIntermediate = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.1000),
-            Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.1750),
-            Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.2500),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    // Настройки градиента графика для Advanced
-    let chartGradientAreaAdvanced = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.2500),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.3450),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.4250),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    let chartGradientLineAdvanced = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.2500),
-            Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.3450),
-            Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.4250),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    // Настройки градиента графика для Nativelike
-    let chartGradientAreaNativelike = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.4250),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.5250),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.6250),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    let chartGradientLineNativelike = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.4250),
-            Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.5250),
-            Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.6250),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    // Настройки градиента графика для Shakespeare
-    let chartGradientAreaShakespeare = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.6250),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.24), location: 0.8215),
-            Gradient.Stop(color: Color(red: 1, green: 0.6, blue: 0).opacity(0.01), location: 0.1),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    let chartGradientLineShakespeare = LinearGradient(
-        stops: [
-            Gradient.Stop(color: Color(red: 0.157, green: 0.098, blue: 0.016).opacity(1), location: 0.6250),
-            Gradient.Stop(color: Color(red: 1, green: 0.569, blue: 0).opacity(1), location: 0.8125),
-            Gradient.Stop(color: Color(red: 0.161, green: 0.125, blue: 0.075).opacity(1), location: 0.1),
-        ],
-        startPoint: .leading,
-        endPoint: .trailing
-        )
-    // Конец кода для графика
+   
     @State var feedbackColor: Color = Color.clear
+    
+    
     var body: some View {
         NavigationStack{
             VStack {
@@ -153,272 +47,17 @@ struct LevelSwitcherSheet: View {
                         .blur(radius: 28)
                         .offset(y: -400)
                         .opacity(0.4)
+
                     VStack{
-                    }
-                    VStack{
-                        // Заголовок и подзаголовок
-                        VStack(alignment: .leading){
-                            Spacer()
-                                .frame(height:43)
-                            Text("Select Target Level")
-                                .font(.system(size: 32))
-                                .fontWeight(.bold)
-                                .foregroundStyle(Color("MainFontColor"))
-                            Spacer()
-                                .frame(height:8)
-                            if isShortVersion == false {
-                                Text("Swipe left or right to pick the one that suits your needs the most.")
-                                    .font(.system(size: 14))
-                                    .foregroundStyle(Color("MainFontColor"))
-                                Spacer()
-                                    .frame(height:12)
-                            }
-                            Spacer()
-                                .frame(height:12)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                        .padding(.top, 0)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 16)
-                        // Бегущая строка
-                        switch levelSwitchSheetLevelSelected {
-                        case 1:
-                            SimpleMarquee(words: LevelWords.elementaryExamples, speed: 90, movementDirection: "left")
-                                .opacity(opacity1)
-                            SimpleMarquee(words: LevelWords.elementaryExamples2, speed: 70, movementDirection: "left")
-                                .opacity(opacity1)
-                        case 2:
-                            SimpleMarquee(words: LevelWords.beginnerExamples, speed: 90, movementDirection: "left")
-                                .opacity(opacity2)
-                            SimpleMarquee(words: LevelWords.beginnerExamples2, speed: 70, movementDirection: "left")
-                                .opacity(opacity2)
-                        case 3:
-                            SimpleMarquee(words: LevelWords.intermediateExamples, speed: 90, movementDirection: "left")
-                                .opacity(opacity3)
-                            SimpleMarquee(words: LevelWords.intermediateExamples2, speed: 70, movementDirection: "left")
-                                .opacity(opacity3)
-                        case 4:
-                            SimpleMarquee(words: LevelWords.advancedExamples, speed: 90, movementDirection: "left")
-                                .opacity(opacity4)
-                            SimpleMarquee(words: LevelWords.advancedExamples2, speed: 70, movementDirection: "left")
-                                .opacity(opacity4)
-                        case 5:
-                            SimpleMarquee(words: LevelWords.nativelikeExamples, speed: 90, movementDirection: "left")
-                                .opacity(opacity5)
-                            SimpleMarquee(words: LevelWords.nativelikeExamples2, speed: 70, movementDirection: "left")
-                                .opacity(opacity5)
-                        case 6:
-                            SimpleMarquee(words: LevelWords.shakespeareExamples, speed: 90, movementDirection: "left")
-                                .opacity(opacity6)
-                            SimpleMarquee(words: LevelWords.shakespeareExamples2, speed: 70, movementDirection: "left")
-                                .opacity(opacity6)
-                        default:
-                            SimpleMarquee(words: LevelWords.elementaryExamples, speed: 90, movementDirection: "left")
-                                .opacity(opacity1)
-                            SimpleMarquee(words: LevelWords.elementaryExamples2, speed: 70, movementDirection: "left")
-                                .opacity(opacity1)
-                        }
+                        
+                        headerView
+                        
+                        marqueeSection
                         Spacer()
                             .frame(height: 22)
+                        
                         // Код графика
-                        VStack{
-                            HStack {
-                                VStack{
-                                    Text("Frequency")
-                                        .rotationEffect(Angle(degrees: 270))
-                                        .font(.system(size: 12))
-                                        .frame(width: 60)
-                                        .offset(x: -4)
-                                        .foregroundStyle(Color("secondaryFontColor"))
-                                }
-                                VStack {
-                                    // Отсюда начинается область отображения графика, со всеми присущими ей слоями
-                                    ZStack(alignment: .top) {
-                                        // Фоновые линии-разделители
-                                        Divider()
-                                            .overlay(Color("secondaryCardColor"))
-                                        Divider()
-                                            .overlay(Color("secondaryCardColor"))
-                                            .offset(y: 51)
-                                        Divider()
-                                            .overlay(Color("secondaryCardColor"))
-                                            .offset(y: 102)
-                                        Divider()
-                                            .overlay(Color("secondaryCardColor"))
-                                            .offset(y: 153)
-                                        // Первый чарт (Elementary)
-                                        VStack{
-                                            Chart {
-                                                ForEach(level_selector_Data) { item in
-                                                    AreaMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientAreaElementary)
-                                                    .interpolationMethod(.catmullRom)
-                                                    LineMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientLineElementary)
-                                                    .interpolationMethod(.catmullRom)
-                                                    .shadow(radius: 2, x: 0, y: 2)
-                                                }
-                                            }
-                                            .chartXAxis(.hidden)
-                                            .chartYAxis(.hidden)
-                                            .frame(height: 153)
-                                            .frame(width: 338)
-                                            .onAppear {
-                                                animateGraph()
-                                            }
-                                        }
-                                        .opacity(opacity1)
-                                        // Второй чарт (Beginner)
-                                        VStack{
-                                            Chart {
-                                                ForEach(level_selector_Data) { item in
-                                                    AreaMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientAreaBeginner)
-                                                    .interpolationMethod(.catmullRom)
-                                                    LineMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientLineBeginner)
-                                                    .interpolationMethod(.catmullRom)
-                                                    .shadow(radius: 2, x: 0, y: 2)
-                                                }
-                                            }
-                                            .chartXAxis(.hidden)
-                                            .chartYAxis(.hidden)
-                                            .frame(height: 153)
-                                            .frame(width: 338)
-                                            .onAppear {
-                                                animateGraph()
-                                            }
-                                        }
-                                        .opacity(opacity2)
-                                        // Третий чарт (Intermediate)
-                                        VStack{
-                                            Chart {
-                                                ForEach(level_selector_Data) { item in
-                                                    AreaMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientAreaIntermediate)
-                                                    .interpolationMethod(.catmullRom)
-                                                    LineMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientLineIntermediate)
-                                                    .interpolationMethod(.catmullRom)
-                                                    .shadow(radius: 2, x: 0, y: 2)
-                                                }
-                                            }
-                                            .chartXAxis(.hidden)
-                                            .chartYAxis(.hidden)
-                                            .frame(height: 153)
-                                            .frame(width: 338)
-                                            .onAppear {
-                                                animateGraph()
-                                            }
-                                        }
-                                        .opacity(opacity3)
-                                        // Четвёртый чарт (Advanced)
-                                        VStack{
-                                            Chart {
-                                                ForEach(level_selector_Data) { item in
-                                                    AreaMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientAreaAdvanced)
-                                                    .interpolationMethod(.catmullRom)
-                                                    LineMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientLineAdvanced)
-                                                    .interpolationMethod(.catmullRom)
-                                                    .shadow(radius: 2, x: 0, y: 2)
-                                                }
-                                            }
-                                            .chartXAxis(.hidden)
-                                            .chartYAxis(.hidden)
-                                            .frame(height: 153)
-                                            .frame(width: 338)
-                                            .onAppear {
-                                                animateGraph()
-                                            }
-                                        }
-                                        .opacity(opacity4)
-                                        // Пятый чарт (Nativelike)
-                                        VStack{
-                                            Chart {
-                                                ForEach(level_selector_Data) { item in
-                                                    AreaMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientAreaNativelike)
-                                                    .interpolationMethod(.catmullRom)
-                                                    LineMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientLineNativelike)
-                                                    .interpolationMethod(.catmullRom)
-                                                    .shadow(radius: 2, x: 0, y: 2)
-                                                }
-                                            }
-                                            .chartXAxis(.hidden)
-                                            .chartYAxis(.hidden)
-                                            .frame(height: 153)
-                                            .frame(width: 338)
-                                            .onAppear {
-                                                animateGraph()
-                                            }
-                                        }
-                                        .opacity(opacity5)
-                                        // Шестой чарт (Shakespeare)
-                                        VStack{
-                                            Chart {
-                                                ForEach(level_selector_Data) { item in
-                                                    AreaMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientAreaShakespeare)
-                                                    .interpolationMethod(.catmullRom)
-                                                    LineMark(
-                                                        x: .value("frequency", item.hour),
-                                                        y: .value("data", item.animate ? item.almostLearnedWords : 0)
-                                                    )
-                                                    .foregroundStyle(chartGradientLineShakespeare)
-                                                    .interpolationMethod(.catmullRom)
-                                                    .shadow(radius: 2, x: 0, y: 2)
-                                                }
-                                            }
-                                            .chartXAxis(.hidden)
-                                            .chartYAxis(.hidden)
-                                            .frame(height: 153)
-                                            .frame(width: 338)
-                                            .onAppear {
-                                                animateGraph()
-                                            }
-                                        }
-                                        .opacity(opacity6)
-                                    }
-                                    .offset(x: -26)
-                                }
-                            }
-                        }
+                        chartSection
                         // Тут заканчивается область Z-Stack со слоями
                         VStack{
                             Text("Word Ranking")
@@ -546,23 +185,25 @@ struct LevelSwitcherSheet: View {
                             }.tag(5)
                             VStack{
                                 VStack{
-                                    ZStack {}
+                                   Image("shakespeare")
+                                        .resizable()
                                         .frame(width: 42, height: 42)
-                                        .background(
-                                            LinearGradient(
-                                                stops: [
-                                                    Gradient.Stop(color: Color(red: 0.76, green: 0.99, blue: 0.96), location: 0.00),
-                                                    Gradient.Stop(color: Color(red: 0.71, green: 0.97, blue: 0.9), location: 0.60),
-                                                    Gradient.Stop(color: Color(red: 0.57, green: 0.92, blue: 0.78), location: 1.00),
-                                                ],
-                                                startPoint: UnitPoint(x: 0.5, y: 0),
-                                                endPoint: UnitPoint(x: 0.5, y: 1)
-                                            )
-                                        )
-                                        .cornerRadius(60)
-                                        .shadow(color: .black.opacity(0.11), radius: 21.86598, x: 9.71821, y: 9.71821)
-                                        .shadow(color: .black.opacity(0.09), radius: 8.50344, x: 4.85911, y: 4.85911)
-                                        .shadow(color: Color(red: 0.58, green: 0.89, blue: 0.76).opacity(0.5), radius: 11, x: 0, y: 0)
+//                                        .background(
+//                                            LinearGradient(
+//                                                stops: [
+//                                                    Gradient.Stop(color: Color(red: 0.76, green: 0.99, blue: 0.96), location: 0.00),
+//                                                    Gradient.Stop(color: Color(red: 0.71, green: 0.97, blue: 0.9), location: 0.60),
+//                                                    Gradient.Stop(color: Color(red: 0.57, green: 0.92, blue: 0.78), location: 1.00),
+//                                                ],
+//                                                startPoint: UnitPoint(x: 0.5, y: 0),
+//                                                endPoint: UnitPoint(x: 0.5, y: 1)
+//                                            )
+//                                        )
+//                                        .cornerRadius(60)
+  //                                      .shadow(color: .black.opacity(0.11), radius: 21.86598, x: 9.71821, y: 9.71821)
+//                                        .shadow(color: .black.opacity(0.09), radius: 8.50344, x: 4.85911, y: 4.85911)
+                                        .shadow(color: Color(red: 0.58, green: 0.89, blue: 0.76).opacity(0.5), radius: 6, x: 0, y: 2)
+                                       
                                     Spacer()
                                         .frame(height: 12)
                                     Text("Shakespeare")
@@ -597,8 +238,8 @@ struct LevelSwitcherSheet: View {
                                         //                        currentLevelSelected = "elementary"
                                         //                        levelSwitchSheetShown = false
                                         basicOnboardingPassed = true
-                                       // presentationMode.wrappedValue.dismiss() //TEST Aug 11
-                                        navigateGoalList = true
+                                        presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                        //navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Elementary")
@@ -616,9 +257,9 @@ struct LevelSwitcherSheet: View {
                                         switchToLevel(level: "beginner")
                                         //                        currentLevelSelected = "beginner"
                                         //                        levelSwitchSheetShown = false
-                                        basicOnboardingPassed = true
-                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
-                                         navigateGoalList = true
+                                         basicOnboardingPassed = true
+                                         presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                         //navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Beginner")
@@ -635,9 +276,9 @@ struct LevelSwitcherSheet: View {
                                         switchToLevel(level: "intermediate")
                                         //                            currentLevelSelected = "intermediate"
                                         //                            levelSwitchSheetShown = false
-                                        basicOnboardingPassed = true
-                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
-                                         navigateGoalList = true
+                                         basicOnboardingPassed = true
+                                         presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                        // navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Intermediate")
@@ -652,9 +293,10 @@ struct LevelSwitcherSheet: View {
                                 Button(
                                     action: {
                                         //                        currentLevelSelected = "advanced"
+                                        switchToLevel(level: "advanced")
                                         basicOnboardingPassed = true
-                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
-                                         navigateGoalList = true
+                                        presentationMode.wrappedValue.dismiss()
+                                        // navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Advanced")
@@ -669,9 +311,10 @@ struct LevelSwitcherSheet: View {
                                 Button(
                                     action: {
                                         //                        currentLevelSelected = "nativelike"
+                                        switchToLevel(level: "nativelike")
                                         basicOnboardingPassed = true
-                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
-                                         navigateGoalList = true
+                                         presentationMode.wrappedValue.dismiss()
+                                        // navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Native-like")
@@ -685,10 +328,11 @@ struct LevelSwitcherSheet: View {
                             case 6:
                                 Button(
                                     action: {
-                                        //                        currentLevelSelected = "borninengland"
+                                        //                        currentLevelSelected = "shaakespeare"
+                                        switchToLevel(level: "shaakespeare")
                                         basicOnboardingPassed = true
-                                        // presentationMode.wrappedValue.dismiss() //TEST Aug 11
-                                         navigateGoalList = true
+                                         presentationMode.wrappedValue.dismiss() //TEST Aug 11
+                                        // navigateGoalList = true
                                     },
                                     label: {
                                         Text("Choose Shakespeare")
@@ -916,17 +560,164 @@ struct LevelSwitcherSheet: View {
                 }
                 .background(Color("sheetColor"))
             }
-            .navigationDestination(isPresented: $navigateGoalList) {
-                GoalListView()
-            }
+//            .navigationDestination(isPresented: $navigateGoalList) {
+//                GoalListView(isSheet: $isGoalListSheet)
+//                    .navigationBarBackButtonHidden(true)
+//            }
+            .sheet(isPresented: $navigateGoalList) {
+                           GoalListView(isSheet: $navigateGoalList)
+                       }
+
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             .onAppear{
                 languageCodeForUse = languageCodePassed
+                animateGraph()
             }
         }
     }
+    
+    
+    // MARK: - View Components
+    private var headerView: some View {
+        VStack(alignment: .leading) {
+            Spacer()
+                .frame(height: 43)
+            Text("Select Target Level")
+                .font(.system(size: 32))
+                .fontWeight(.bold)
+                .foregroundStyle(Color("MainFontColor"))
+            Spacer()
+                .frame(height: 8)
+            if !isShortVersion {
+                Text("Swipe left or right to pick the one that suits your needs the most.")
+                    .font(.system(size: 14))
+                    .foregroundStyle(Color("MainFontColor"))
+                Spacer()
+                    .frame(height: 12)
+            }
+            Spacer()
+                .frame(height: 12)
+        }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(.top, 0)
+        .padding(.leading, 20)
+        .padding(.trailing, 16)
+    }
+    
+    private var marqueeSection: some View {
+            Group {
+                switch levelSwitchSheetLevelSelected {
+                case 1:
+                    SimpleMarquee(words: LevelWords.elementaryExamples, speed: 90, movementDirection: "left")
+                        .opacity(opacity1)
+                    SimpleMarquee(words: LevelWords.elementaryExamples2, speed: 70, movementDirection: "left")
+                        .opacity(opacity1)
+                case 2:
+                    SimpleMarquee(words: LevelWords.beginnerExamples, speed: 90, movementDirection: "left")
+                        .opacity(opacity2)
+                    SimpleMarquee(words: LevelWords.beginnerExamples2, speed: 70, movementDirection: "left")
+                        .opacity(opacity2)
+                case 3:
+                    SimpleMarquee(words: LevelWords.intermediateExamples, speed: 90, movementDirection: "left")
+                        .opacity(opacity3)
+                    SimpleMarquee(words: LevelWords.intermediateExamples2, speed: 70, movementDirection: "left")
+                        .opacity(opacity3)
+                case 4:
+                    SimpleMarquee(words: LevelWords.advancedExamples, speed: 90, movementDirection: "left")
+                        .opacity(opacity4)
+                    SimpleMarquee(words: LevelWords.advancedExamples2, speed: 70, movementDirection: "left")
+                        .opacity(opacity4)
+                case 5:
+                    SimpleMarquee(words: LevelWords.nativelikeExamples, speed: 90, movementDirection: "left")
+                        .opacity(opacity5)
+                    SimpleMarquee(words: LevelWords.nativelikeExamples2, speed: 70, movementDirection: "left")
+                        .opacity(opacity5)
+                case 6:
+                    SimpleMarquee(words: LevelWords.shakespeareExamples, speed: 90, movementDirection: "left")
+                        .opacity(opacity6)
+                    SimpleMarquee(words: LevelWords.shakespeareExamples2, speed: 70, movementDirection: "left")
+                        .opacity(opacity6)
+                default:
+                    SimpleMarquee(words: LevelWords.elementaryExamples, speed: 90, movementDirection: "left")
+                        .opacity(opacity1)
+                    SimpleMarquee(words: LevelWords.elementaryExamples2, speed: 70, movementDirection: "left")
+                        .opacity(opacity1)
+                }
+            }
+        }
+    
+    private var chartSection: some View {
+            VStack {
+                HStack {
+                    VStack {
+                        Text("Frequency")
+                            .rotationEffect(Angle(degrees: 270))
+                            .font(.system(size: 12))
+                            .frame(width: 60)
+                            .offset(x: -4)
+                            .foregroundStyle(Color("secondaryFontColor"))
+                    }
+                    VStack {
+                        ZStack(alignment: .top) {
+                            // Background dividers
+                            chartBackgroundDividers
+                            
+                            // Charts
+                            ForEach(LevelType.allCases, id: \.self) { levelType in
+                                LevelChartView(
+                                    levelType: levelType,
+                                    levelSelectorData: $level_selector_Data,
+                                    opacity: opacityForLevel(levelType)
+                                )
+                            }
+                        }
+                        .offset(x: -26)
+                    }
+                }
+            }
+        }
+    
+    private var chartBackgroundDividers: some View {
+            Group {
+                Divider()
+                    .overlay(Color("secondaryCardColor"))
+                Divider()
+                    .overlay(Color("secondaryCardColor"))
+                    .offset(y: 51)
+                Divider()
+                    .overlay(Color("secondaryCardColor"))
+                    .offset(y: 102)
+                Divider()
+                    .overlay(Color("secondaryCardColor"))
+                    .offset(y: 153)
+            }
+        }
+    
+    // MARK: - Helper Methods
+        private func updateOpacities() {
+            withAnimation(.easeIn(duration: 0.5)) {
+                opacity1 = levelSwitchSheetLevelSelected == 1 ? 1 : 0
+                opacity2 = levelSwitchSheetLevelSelected == 2 ? 1 : 0
+                opacity3 = levelSwitchSheetLevelSelected == 3 ? 1 : 0
+                opacity4 = levelSwitchSheetLevelSelected == 4 ? 1 : 0
+                opacity5 = levelSwitchSheetLevelSelected == 5 ? 1 : 0
+                opacity6 = levelSwitchSheetLevelSelected == 6 ? 1 : 0
+            }
+        }
+        
+        private func opacityForLevel(_ level: LevelType) -> Double {
+            switch level {
+            case .elementary: return opacity1
+            case .beginner: return opacity2
+            case .intermediate: return opacity3
+            case .advanced: return opacity4
+            case .nativelike: return opacity5
+            case .shakespeare: return opacity6
+            }
+        }
+    
     private func switchToLevel(level: String) {
             if currentLearningMode != "discovery" {
                 currentLearningMode = "discovery"

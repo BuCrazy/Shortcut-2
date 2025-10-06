@@ -13,26 +13,31 @@ struct QuizIntroView: View {
     
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var goalsManager: GoalsManager
+    @Binding var currentView: DiscoveryDesctination? //TEST September 4 (delete this var to get back)
     
     @State private var appeared: Bool = false
     @State private var rotationAmount: Double = 360
+   
+    
     let screenHeight = UIScreen.main.bounds.height
     
     var body: some View {
-        NavigationStack {
+     //   NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
                 VStack {
                 
-                    //NOTE: A-Spot
+//                    //NOTE: A-Spot
                     VStack {
                         Spacer()
                         ZStack{
                             Spacer()
                             StripedBG()
                                 .frame(maxHeight: 250)
-                            
+                                .clipped() //TEST September 14 (delete this line to get back)
                             switchLevelSymbol()
+                            
+                            
                             Spacer()
                         }
                     }
@@ -64,12 +69,23 @@ struct QuizIntroView: View {
                     
                     //NOTE: Button
                     VStack {
-                       // Spacer()
-                        NavigationLink(destination:  QuizView(storedWords: storedNewWordItemsDataLayer)) {
+                        //TEST September 4 (uncommit navigation link to get back)
+//                        NavigationLink(destination:  QuizView(storedWords: storedNewWordItemsDataLayer)) {
+//                            CTAButton(buttonText: "Let's Go!")// {}
+//                                .padding(.horizontal, 16)
+//                        }
+                        
+                        //TEST September 4 (delete button to get back)
+                        Button (action: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentView = .quizView
+                            }
+                        }) {
                             CTAButton(buttonText: "Let's Go!")
                                 .padding(.horizontal, 16)
                         }
                         .animation(.none, value: UUID())
+
                         Spacer()
                     }
                     .padding(.top, screenHeight > 700 ? 48 : 0)
@@ -78,8 +94,11 @@ struct QuizIntroView: View {
                 .navigationTitle(Text ("Discovery")).navigationBarBackButtonHidden(false)
               
             }
-        }
+
+        
+    //    } //NavigationStack ends
     }
+ 
     @ViewBuilder
     func switchLevelSymbol() -> some View {
         switch currentLevelSelected {
@@ -143,7 +162,7 @@ struct QuizIntroView_Previews: PreviewProvider {
         let mockStoredItems = storedNewWordItems()
         let mockGoalsManager = GoalsManager(storedItems: mockStoredItems)
         
-        return QuizIntroView()
+        return QuizIntroView(currentView: .constant(.quizIntro))
             .environmentObject(mockStoredItems)
             .environmentObject(mockGoalsManager)
     }
