@@ -36,6 +36,8 @@ struct QuizSummaryView: View {
     // --- Code for saving Quiz historical data ends ---
     @Binding var currentView: DiscoveryDesctination?
     
+    let deviceSize = LayoutSize.current()
+    
     init(correctAnswerNumber: Binding<Int>, incorrectAnswerNumber: Binding<Int>, isQuizAlreadyStarted: Binding<Bool>, isQuizFinished: Binding<Bool>, currentView: Binding<DiscoveryDesctination?>) {
         self._correctAnswerNumber = correctAnswerNumber
         self._incorrectAnswerNumber = incorrectAnswerNumber
@@ -48,6 +50,13 @@ struct QuizSummaryView: View {
        // NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
+                ZStack {
+                    BCircleAnimation(feedbackColor: feedbackColor)
+                        .blendMode(.screen)
+                        .blur(radius: 40)
+                        .offset(x: -51, y: -400)
+                }
+                
                 ScrollView {
                     VStack {
                         
@@ -57,8 +66,20 @@ struct QuizSummaryView: View {
                         
                         
                         VStack(spacing: 24) {
-                           SummaryMessage(goalsManager: goalsManager)
-                                .padding(.vertical, 32)
+                            VStack(alignment: .leading, spacing: 16) {
+                                Text("Summary")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.top, 20)
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color("Textprimary"))
+                                    .multilineTextAlignment(.leading)
+                                
+                               SummaryMessage(goalsManager: goalsManager)
+                                   
+                            }
+                            .padding(.horizontal, 16)
+                            
                            
                             QS_GoalReporter(goalsManager: goalsManager)
                                 .padding(.horizontal, 16)
@@ -83,7 +104,7 @@ struct QuizSummaryView: View {
 //                                isQuizFinished = false //test Oct 14 2024
 //                                currentLearningMode = "reinforcement"
 //                            })
-                            
+//Make this spacer conditional based on screen size AND on the parameter of weather we showing second goal status update on not
                              // TEST September 19 delete button to get back
                              Button (action: {
                                  withAnimation(.easeInOut(duration: 0.3)) {
@@ -97,39 +118,40 @@ struct QuizSummaryView: View {
                              }) {
                                  CTAButton(buttonText: "To Reinforcement")
                                      .padding(.horizontal, 16)
+                                   //  .padding(.bottom, 24)
                              }
                              .animation(.none, value: UUID())
-                             
-                            
-                            //TEST Aug 25
-//                            Button(action: {
-//                                resetQuizState()
-//                                isQuizAlreadyStarted = false
-//                                isQuizFinished = false
-//                                currentLearningMode = "reinforcement"
-//                                dismiss()
-//                            }) {
-//                                CTAButton(buttonText: "To Reinforcement")
-//
-//                            }
-//                            .padding(.horizontal, 16)
-
-                            
-                            
+  
                         }
-                        Spacer()
-                        
+//                        Spacer().frame(height: deviceSize.spacing)
+//                        Button (action: {
+//                            withAnimation(.easeInOut(duration: 0.3)) {
+//                                currentView = .reinforcement
+//                            }
+//                            resetQuizState()
+//                            isQuizAlreadyStarted = false
+//                            isQuizFinished = false //test Oct 14 2024
+//                            currentLearningMode = "reinforcement"
+//                            
+//                        }) {
+//                            CTAButton(buttonText: "To Reinforcement")
+//                                .padding(.horizontal, 16)
+//                              //  .padding(.bottom, 24)
+//                        }
+//                        .animation(.none, value: UUID())
+                    //    Spacer()
+                    
                         
                     }
-                    Spacer().frame(height: 50)
+                    Spacer().frame(height: 80)
                 }
                 
-                ZStack {
-                    BCircleAnimation(feedbackColor: feedbackColor)
-                        .blendMode(.screen)
-                        .blur(radius: 40)
-                        .offset(x: -50, y: -400)
-                }
+//                ZStack {
+//                    BCircleAnimation(feedbackColor: feedbackColor)
+//                        .blendMode(.screen)
+//                        .blur(radius: 40)
+//                        .offset(x: -50, y: -400)
+//                }
 
             }
             .navigationTitle(Text ("Summary"))
@@ -177,6 +199,19 @@ struct QuizSummaryView: View {
             
         } catch {
             print("Error resetting quiz state: \(error)")
+        }
+    }
+}
+
+extension LayoutSize {
+    var spacing: CGFloat {
+        switch self {
+        case .compact:
+            return 16
+        case .standard:
+            return 24
+        case .spacious:
+            return 24
         }
     }
 }

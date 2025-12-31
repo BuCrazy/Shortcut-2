@@ -49,7 +49,7 @@ struct Greeting: View {
     
   //  Timer to check for time period changes
     let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
-    
+  
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .center, spacing: 4) {

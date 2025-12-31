@@ -40,7 +40,8 @@ struct SwiperScreen: View {
             Group {
                 switch currentView {
                 case .quizIntro:
-                    QuizIntroView(currentView: $currentView)
+                  //  QuizIntroView(currentView: $currentView) //TEST Nov 24 2025
+                    QuizIntro_Alt(currentView: $currentView)
                 case .quizView:
                       //QuizView(storedWords: storedNewWordItemsDataLayer/*, currentView: $currentView*/)
                     QuizView_Alt(storedWords: storedNewWordItemsDataLayer, currentView: $currentView)
@@ -102,12 +103,7 @@ struct SwiperScreen: View {
             }
             
         }
-       
-
-    //    }
         .onAppear{
-         
-            //          try! activityLogDataLayer.loadDataFromJSON()
             print("🔍 SwiperScreen onAppear - currentLearningMode: \(currentLearningMode)")
             if currentDiscoveryViewString == "quizIntro" {
                 currentView = .quizIntro
@@ -126,7 +122,6 @@ struct SwiperScreen: View {
                 return
             }
           
-                
                 do {
                     if let quizState = try storedNewWordItemsDataLayer.loadQuizState() {
                         if quizState.isQuizFinished {
@@ -153,10 +148,6 @@ struct SwiperScreen: View {
                     currentView = .swiperMain
 
                 }
-           // }
-            
-            //TEST October 1
-            
             
             if !hasShownGoalListSheet {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -199,8 +190,11 @@ struct SwiperScreen: View {
 }
 
 #Preview {
+    let storedItems = storedNewWordItems()
+    
     SwiperScreen()
         .environmentObject(ActivityCalendar())
         .environmentObject(storedNewWordItems())
         .environmentObject(storedStates())
+        .environmentObject(GoalsManager(storedItems: storedItems))
 }

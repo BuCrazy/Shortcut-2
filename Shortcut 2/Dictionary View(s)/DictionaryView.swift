@@ -14,10 +14,22 @@ struct DictionaryView: View {
     @State private var chartData: [TotalWords] = []
     
     var body: some View {
-        NavigationStack {
+        //NavigationStack {
             ZStack {
                 ScrollView {
                     VStack(spacing: 0) {
+                        VStack(alignment: .leading) {
+                            Text("Dictionary")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 16)
+                                .padding(.top, 82)
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("Textprimary"))
+                                .multilineTextAlignment(.leading)
+                        }
+                        .background(Color("mainCardBG"))
+                        
                         DictionaryHeaderView(resetChartAnimation: $resetChartAnimation, animatedNumber: $animatedNumber, chartData: $chartData)
                         
                         //NOTE: Probably need to check if current leevel's selected .biengLearned file is empty and display empty state then
@@ -125,19 +137,25 @@ struct DictionaryView: View {
                
                     }
                     Spacer().frame(height: 50)
+                    .background(Color("dictionaryBGColor"))
                 }
+                
                 .navigationTitle(Text ("Dictionary")).navigationBarBackButtonHidden(false)
+               
                 .toolbarBackground(.visible, for: .navigationBar)
                 .toolbarBackground( Color("mainCardBG"), for: .navigationBar)
+                .background(Color("dictionaryBGColor"))
+                .ignoresSafeArea()
             } // ZStack Ends
+           
             .background(Color("dictionaryBGColor"))
+           
             .onAppear {
-               
                 animatedNumber = storedNewWordItemsDataLayer.totalWordCount(for: currentLevelSelected)
                 chartData = generateLast7DaysData(for: currentLevelSelected)
                 print("ChartData in DictionaryView: \(chartData)")
             }
-        }// NavigationStack Ends
+       // }// NavigationStack Ends
         
     }
     func generateLast7DaysData(for level: String) -> [TotalWords] {

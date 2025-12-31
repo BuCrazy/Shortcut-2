@@ -56,7 +56,7 @@ struct RoundedProgressBar: View {
             displayProgress = progress
             print("RoundedProgressBar appeared, progress: \(progress)")
         }
-        .onChange(of: goalsManager.currentGoal.progress) { newValue in
+        .onChange(of: goalsManager.currentGoal.progress) {_,  newValue in
             print("📈 Progress bar detected change: \(newValue)")
         }
     }

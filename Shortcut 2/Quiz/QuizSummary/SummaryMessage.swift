@@ -29,7 +29,7 @@ struct SummaryMessage: View {
                 .font(.system(size: 14))
                 .foregroundColor(Color.white).opacity(0.88)
         }
-        .padding(.horizontal, 16)
+       // .padding(.horizontal, 16)
     }
 }
 

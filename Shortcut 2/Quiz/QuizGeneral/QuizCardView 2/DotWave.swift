@@ -22,8 +22,8 @@ struct DotWave: View {
         endPoint: UnitPoint(x: 0.67, y: 0.5)
     )
 
-    let spacing: CGFloat = 13.0
-    var stackDistance: CGFloat {!isTapped ? spacing : spacing * 1.8}
+    let spacing: CGFloat = 13.5
+    var stackDistance: CGFloat {!isTapped ? spacing : spacing * 1.9}
     var body: some View {
         Button(action: {
             guard !isDisabled else { return }
@@ -40,9 +40,9 @@ struct DotWave: View {
                 ZStack {
                     //Color.black.ignoresSafeArea()
                     VStack(spacing: stackDistance) {
-                        ForEach(0..<26) { rowIndex in
+                        ForEach(0..<25) { rowIndex in
                             HStack(spacing: stackDistance) {
-                                ForEach(0..<24) {colIndex in
+                                ForEach(0..<27) {colIndex in
                                     
                                     Circle()
                                     //         .shiny()

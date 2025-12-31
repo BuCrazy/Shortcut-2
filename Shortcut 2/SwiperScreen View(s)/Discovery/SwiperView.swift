@@ -14,11 +14,21 @@ struct SwiperView: View {
     @State private var know = false
     @State private var selectedWordItem: NewWordItem?
     @State var discoveryWordsStorageToWorkOn: [WordItemStruct] = []
-    
+    let deviceSize = LayoutSize.current()
     var body: some View {
         ZStack {
-            NavigationStack {
+           // NavigationStack {
                 VStack(alignment: .leading) {
+                    Spacer().frame(height: 20)
+                    Text("Discovery")
+                        .padding(.horizontal, 16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("Textprimary"))
+                        .multilineTextAlignment(.leading)
+                    
+                    Spacer().frame(height: deviceSize.titleBottomSpacing)
                     
                     //KNOW SECTION
                     KnowSectionLabel()
@@ -113,7 +123,7 @@ struct SwiperView: View {
                     .presentationDetents([.fraction(0.25), .medium, .large])
                 }   
             }
-        }
+      //  }
         .onAppear{
             switch currentLevelSelected {
             case "elementary":
@@ -129,13 +139,25 @@ struct SwiperView: View {
     }
     
 }
+extension LayoutSize {
+    var titleBottomSpacing: CGFloat {
+        switch self {
+        case .compact:
+            return 16
+        case .standard:
+            return 24
+        case .spacious:
+            return 24
+        }
+    }
+}
 
 struct SwiperView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        let wordItem = WordItemStruct(
-            
+        let wordItem =
+        WordItemStruct(
             id: 1,
             position_now: 1,
             pos: "pos",
@@ -175,12 +197,14 @@ struct SwiperView_Previews: PreviewProvider {
             spanish: "spanish",
             swedish: "swedish",
             turkish: "turkish"
-            
         )
         
-        return SwiperView(discoveryWordsStorageToWorkOn: [wordItem])
+        let previewStoredWords = storedNewWordItems()
+        previewStoredWords.elementaryWordsStorage = [wordItem]
+        
+        return SwiperView(/*discoveryWordsStorageToWorkOn: [wordItem]*/)
             .environmentObject(ActivityCalendar())
-            .environmentObject(storedNewWordItems())
+            .environmentObject(/*storedNewWordItems()*/previewStoredWords)
             .environmentObject(storedStates())
         
     }

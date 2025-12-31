@@ -238,7 +238,7 @@ struct QuizView: View {
                 }
             }
             .navigationBarBackButtonHidden(true)
-            .navigationTitle(Text ("Quiz"))
+         //   .navigationTitle(Text ("Quiz"))
      //   } // navigationStack ends
         .onAppear {
             print("onAppear. QuizView onAppear called")

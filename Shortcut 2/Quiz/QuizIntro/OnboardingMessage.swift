@@ -20,11 +20,13 @@ struct OnboardingMessage: View {
                 .fontWeight(.medium)
                 .padding(.bottom,8)
                 .multilineTextAlignment(.center)
+                .lineLimit(2...2)
             
             Text(bodyText)
                 .font(.system(size: 14))
                 .foregroundColor(Color("weakSecondaryDark"))
                 .multilineTextAlignment(.center)
+                .lineLimit(2...2)
         }
         .padding(.horizontal, 16)
     }

@@ -6,6 +6,55 @@
 //
 
 import SwiftUI
+import AVFoundation
+
+
+
+extension LayoutSize {
+    var bottomCardSpacing: CGFloat {
+            switch self {
+            case .compact:
+                return 32
+            case .standard:
+                return 72
+            case .spacious:
+                return 98
+            }
+        }
+    
+        var topCardSpacing: CGFloat {
+            switch self {
+            case .compact:
+                return 32
+            case .standard:
+                return 72
+            case .spacious:
+                return 80
+            }
+        }
+    
+        var cardHeight: CGFloat {
+            switch self {
+            case .compact:
+                return 290 //310 previous value
+            case .standard:
+                return 335
+            case .spacious:
+                return 380
+            }
+        }
+    
+    var progrressIndicatorTopSpacing: CGFloat {
+        switch self {
+        case .compact:
+            return 16
+        case .standard:
+            return 20
+        case .spacious:
+            return 32
+        }
+    }
+}
 
 struct QuizView_Alt: View {
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
@@ -20,6 +69,7 @@ struct QuizView_Alt: View {
     @State var feedbackColor: Color = Color.clear
     @State var percent: CGFloat = 0.0
     let screenHeight = UIScreen.main.bounds.height
+    let deviceSize = LayoutSize.current() //TEST Oct 19 (delete this to get back)
     @State var selectedAnswerCorrectness: (word: String, isCorrect: Bool)? = nil
     @State private var currentVideo: URL?
     @State private var showCircleAnimation: Bool = false
@@ -35,6 +85,10 @@ struct QuizView_Alt: View {
     @State var showAnswerOptions = false
     @State private var isViewLoaded = false
     @State var hasNavigatedAway = false
+    
+    var correctHaptic = SuccessHaptics()
+    var incorrectHaptic = FailHaptics()
+    @State private var audioPlayer: AVAudioPlayer?
     
     @Binding var currentView: DiscoveryDesctination?
     
@@ -95,14 +149,40 @@ struct QuizView_Alt: View {
               return (1, min(wordsPerRevisionSetting, 10))
           }
       }
+//    var quizCardxAnswerOptionsSpacong: Int {
+//        switch iPhoneVerticalSize
+//    }
+    
+    
     
     var body: some View {
         ZStack(alignment: .top) {
             Color("BackgroundColor").ignoresSafeArea()
             
+            AuraEffect(feedbackColor: feedbackColor)
+                    .scaleEffect(auraEffectScale)
+                    .opacity(showCircleAnimation ? 1 : 0) // Control visibility with opacity
+                    .animation(.easeInOut(duration: 0.3), value: showCircleAnimation)
+                    .onChange(of: showCircleAnimation) {oldValue, newValue in
+                        if newValue && feedbackColor != .clear {
+                            if feedbackColor == .green {
+                                playSound(filename: "CorrectSound", fileExtension: "mp3")
+                                correctHaptic.playCustomHapticPatter()
+                            } else {
+                                if feedbackColor == .red {
+                                    playSound(filename: "IncorrectSound", fileExtension: "mp3")
+                                    incorrectHaptic.playCustomHapticPatter()
+
+                                }
+                            }
+                        }
+                        
+                    }
+            
             //General VStack
             VStack {
-                Spacer().frame(height: screenHeight > 852 ? 20 : 0)
+                Spacer().frame(height: 20)
+                
                // View Title + Indicator
                 VStack(alignment: .leading) {
                     Text("Quiz")
@@ -111,6 +191,8 @@ struct QuizView_Alt: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color("Textprimary"))
                         .multilineTextAlignment(.leading)
+                    
+                    Spacer().frame(height: deviceSize.progrressIndicatorTopSpacing)
                     
                     //Progress Indicator
                     VStack(spacing: 16) {
@@ -135,55 +217,28 @@ struct QuizView_Alt: View {
                     .animation(.easeInOut(duration: 0.5).delay(0.0), value: showIndicators)
                 }
                 .padding(.horizontal, 16)
-                Spacer().frame(height: screenHeight > 852 ? 72 : (screenHeight > 650 ? 24 : 10))
-                
+               // Spacer().frame(height: screenHeight > 848 ? 64 : (screenHeight > 650 ? 24 : 10))
+                Spacer().frame(height: deviceSize.topCardSpacing)
              
                 
                 //NOTE: Quiz Card
                 VStack {
-//                    //Progress Indicator
-//                    VStack(spacing: 16) {
-//                        //NOTE: Generate rows
-//                        ForEach(0..<indicatorsLayout.rows, id: \.self) { rowIndex in
-//                            //NOTE: Generate indicators for each row
-//                            HStack(spacing: 0) {
-//                                ForEach(0..<indicatorsLayout.indicatorsPerRow, id: \.self) { indicatorIndex in
-//                                    let globalIndex = rowIndex * indicatorsLayout.indicatorsPerRow + indicatorIndex
-//                                    if globalIndex < questionStatuses.count {
-//                                        Indicator(status: questionStatuses[globalIndex])
-//                                    }
-//                                    if indicatorIndex < indicatorsLayout.indicatorsPerRow - 1 {
-//                                        Spacer()
-//                                    }
-//                                }
-//                            }
-//                        }
-//                        .padding(.horizontal, 16)
-//                    }
-//                    .padding(.top, screenHeight > 700 ? 32 : 16)
-//                    .opacity(showIndicators ? 1 : 0)
-//                    .animation(.easeInOut(duration: 0.5).delay(0.0), value: showIndicators)
-                    
-                 //   Spacer().frame(height: screenHeight > 852 ? 48 : (screenHeight > 700 ? 32 : 10))
-                    
-                    //Quiz Card
-                    VStack {
-                        if currentQuizIndex < quizItems.count {
-                            QuizCardVIew2(word: quizItems[currentQuizIndex].quizWord)
-                                .id(quizItems[currentQuizIndex].quizWord)
-                                .layoutPriority(1)
-                        }
+                    if currentQuizIndex < quizItems.count {
+                        QuizCardVIew2(word: quizItems[currentQuizIndex].quizWord)
+                        .id(quizItems[currentQuizIndex].quizWord)
+                        .layoutPriority(1)
                     }
-                    .opacity(showQuizCard ? 1 : 0)
-                    .opacity(showCircleAnimation ? 0 : 1)
-                    .offset(y: showQuizCard ? 0 : 15)
-                    .animation(.easeInOut(duration: 0.5).delay(0.0), value: showQuizCard)
                 }
+                .opacity(showQuizCard ? 1 : 0)
+                .offset(y: showQuizCard ? 0 : 20)
+                .animation(.easeInOut(duration: 0.3), value: showQuizCard)
                 
-               Spacer().frame(height: screenHeight > 852 ? 76 : (screenHeight > 650 ? 16 : 10))
-              //  Spacer()
+              // Spacer().frame(height: screenHeight > 848 ? 64 : (screenHeight > 650 ? 16 : 10))
+                Spacer().frame(height: deviceSize.bottomCardSpacing)
+                
                 //NOTE: Answer Options
                 VStack(spacing: 10) {
+                    
                     //First Answer Row
                     HStack {
                         ForEach(currentPossibleAnswers.prefix(2), id: \.self) { answer in
@@ -211,16 +266,11 @@ struct QuizView_Alt: View {
                 .padding(.horizontal, 16)
                 .opacity(showAnswerOptions ? 1 : 0)
                 .offset(y: showAnswerOptions ? 0 : 15)
-                .animation(.easeInOut(duration: 0.5).delay(0.0), value: showAnswerOptions)
+                .animation(.easeInOut(duration: 0.3).delay(0.0), value: showAnswerOptions)
                 
                 Spacer().frame(height: 44)
             }
             
-            // Overlay the AuraEffect when needed
-            if showCircleAnimation {
-                AuraEffect(feedbackColor: feedbackColor)
-                    .scaleEffect(auraEffectScale)
-            }
         }
         .onAppear {
 //            print("onAppear. QuizView onAppear called")
@@ -337,9 +387,21 @@ struct QuizView_Alt: View {
         
         selectedAnswerCorrectness = (word, isCorrect)
         feedbackColor = isCorrect ? .green : .red
-        withAnimation(Animation.easeInOut(duration: 0.5)) {
-            showCircleAnimation = true
-            auraEffectScale = 1.0
+        
+        //TEST October 6 (Delete withanimation block to get back)
+     //   withAnimation(Animation.easeInOut(duration: 0.3)) {
+                   showQuizCard = false
+       //     }
+
+        
+        //TEST October 6 (Delete Dispatch Quue to get back)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+
+          //  withAnimation(Animation.easeInOut(duration: 0.3)) {
+                showCircleAnimation = true
+                auraEffectScale = 1.0
+           // }
+            
         }
         
         //NOTE: Logic for the counters on the QuizSummary Screen
@@ -356,13 +418,13 @@ struct QuizView_Alt: View {
             print("Error: Tried to access questionStatuses at out-of-range index \(currentQuizIndex).")
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            withAnimation(Animation.easeInOut(duration: 0.5)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+            withAnimation(Animation.easeInOut(duration: 0.3)) {
                 showCircleAnimation = false
                 auraEffectScale = 0.0
                 feedbackColor = Color.clear
                 selectedAnswerCorrectness = nil
-                
+            }
                 if currentQuizIndex < quizItems.count - 1 {
                     currentQuizIndex += 1
                     currentVideo = quizItems[currentQuizIndex].videoExample
@@ -377,16 +439,17 @@ struct QuizView_Alt: View {
                     finishQuiz()
                     showQuizSummary = true
                     
-                    withAnimation(.easeInOut(duration: 0.3)) { //TEST September 2 (delete this  to get back)
+                    withAnimation(.easeInOut(duration: 0.3)) { //TEST September 2  (delete this  to get back)
                         currentView = .quizSummary(correctAnswers: correctAnswerNumber, incorrectAnswers: incorrectAnswerNumber)
                     }
                 }
                 if !isQuizFinished {
                     resetAndAnimateUIComponents()
                 }
-            }
+           // }
             saveCurrentQuizState()
         }
+        
         //NOTE: Update the status for the current question
             questionStatuses[currentQuizIndex] = isCorrect ? .correct : .incorrect
         print("Updated questionStatuses at index \(currentQuizIndex) to \(isCorrect ? "correct" : "incorrect").")
@@ -414,7 +477,7 @@ struct QuizView_Alt: View {
     func resetAndAnimateUIComponents() {
         // Reset visibility states
         showIndicators = false
-        showQuizCard = false
+      //  showQuizCard = false //TEST October 6 (uncommit to get back)
 
         
         // Apply animations with a slight delay
@@ -449,6 +512,17 @@ struct QuizView_Alt: View {
         }
     }
     
+    func playSound(filename: String, fileExtension: String) {
+        guard let url = Bundle.main.url(forResource: filename, withExtension: fileExtension) else { return }
+
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch {
+            print("Error playing sound: \(error)")
+        }
+    }
+    
 }
 
 #Preview {
@@ -465,3 +539,58 @@ struct QuizView_Alt: View {
         return QuizView_Alt(storedWords: mockStoredWords, currentView: .constant(nil))
 
 }
+
+
+
+
+//enum layoutSize { //TEST Oct 19 (delete this to get back)
+//case compact  // SE, mini (< 700pt)
+//case standard   // Regular iPhones (700-900pt)
+//case spacious   // Plus/Max models (> 900pt)
+//
+//    var bottomCardSpacing: CGFloat {
+//        switch self {
+//        case .compact:
+//            return 32
+//        case .standard:
+//            return 72
+//        case .spacious:
+//            return 128
+//        }
+//    }
+//
+//    var topCardSpacing: CGFloat {
+//        switch self {
+//        case .compact:
+//            return 32
+//        case .standard:
+//            return 72
+//        case .spacious:
+//            return 80
+//        }
+//    }
+//
+//    var cardHeight: CGFloat {
+//        switch self {
+//        case .compact:
+//            return 310
+//        case .standard:
+//            return 335
+//        case .spacious:
+//            return 380
+//        }
+//    }
+//
+//    static func current() -> layoutSize {
+//        let height = UIScreen.main.bounds.height
+//
+//        switch height {
+//        case ...700:
+//            return .compact
+//        case 701...900:
+//            return .standard
+//        default:
+//            return .spacious
+//        }
+//    }
+//}

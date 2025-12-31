@@ -15,30 +15,41 @@ struct QuizHistoryBarChart: View {
         Chart {
             ForEach(quizHistory.recentSessions) { session in
                 BarMark(
-                    x: .value("Date", formatDate(session.date)),
-                  //  x: .value("Date", session.date),
+               //     x: .value("Date", formatDate(session.date)), // TEST Dec 8 (uncommit to get back)
+                    x: .value("Date", session.date, unit: .hour), // TEST Dec 8 (delete to get back)
                     y: .value("Score", session.score)
                 )
                 .foregroundStyle(Color.blue)
                 .cornerRadius(4)
+                .annotation(position: .bottom, alignment: .center, spacing: 4) {
+                    Text(formatDateForLabel(session.date))
+                        .font(.system(size: 10)).opacity(0.5)
+                }
             }
         }
         .chartYScale(domain: 0...100)
-//        .chartXAxis {
-//            AxisMarks(values: .automatic) { value in
-//                if let date = value.as(Date.self) {
-//                    AxisValueLabel(formatDateForLabel(date), orientation: .horizontal)
-//                }
-//              //  AxisValueLabel(orientation: .horizontal)
-//
-//            }
-//        }
+        .chartXAxis(.hidden)
         .chartYAxis {
             AxisMarks(position: .leading)
         }
         .frame(height: 200)
-      //  .padding()
+        
+//        .chartXAxis { // TEST Dec 8 (delete to get back)
+//            AxisMarks(values: .stride(by: .hour, count: 1)) { value in
+//                if let date = value.as(Date.self) {
+////AxisValueLabel(formatDateForLabel(date))
+//                    AxisValueLabel {
+//                        Text(formatDateForLabel(date))
+//                            .multilineTextAlignment(.center)
+//                    }
+////AxisGridLine()
+//                   // AxisTick()
+//                }
+//            }
+//        }
     }
+    
+
     
     private func formatDateForLabel(_ date: Date) -> String {
             let outputFormatter = DateFormatter()
@@ -48,10 +59,12 @@ struct QuizHistoryBarChart: View {
     
     private func formatDate(_ date: Date) -> String {
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "MM/dd HH:mm"
+        outputFormatter.dateFormat = "MM/dd" // TEST Dec 8 (return HH:mm to get back)
         return outputFormatter.string(from: date)
     }
 }
+
+
 
 struct QuizHistoryBarChart_Previews: PreviewProvider {
     static var sampleQuizHistory: QuizHistory {

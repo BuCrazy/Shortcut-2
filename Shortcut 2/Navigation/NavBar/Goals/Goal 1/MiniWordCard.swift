@@ -132,7 +132,7 @@ struct MiniWordCard: View {
                 // Cancel the timer when the view disappears
                 timer?.invalidate()
             }
-            .onChange(of: topCard) { newValue in
+            .onChange(of: topCard) {_,  newValue in
                if index == newValue {
                 let width = 156 * sizeScale(topCard: newValue, index: index)
                 let height = 98 * sizeScale(topCard: newValue, index: index)
