@@ -71,13 +71,13 @@ struct Goal_1: View {
             print("🎯 Goal_1 appeared")
             print("storedItems count: \(storedNewWordItemsDataLayer.elementaryBeingLearned.count)")
         }
-        .onChange(of: storedNewWordItemsDataLayer.elementaryBeingLearned.count) { _ in
+        .onChange(of: storedNewWordItemsDataLayer.elementaryBeingLearned.count) { _, _ in
             goalsManager.updateStoredItems(storedNewWordItemsDataLayer)
         }
-        .onChange(of: storedNewWordItemsDataLayer.beginnerBeingLearned.count) { _ in
+        .onChange(of: storedNewWordItemsDataLayer.beginnerBeingLearned.count) { _, _ in
             goalsManager.updateStoredItems(storedNewWordItemsDataLayer)
         }
-        .onChange(of: storedNewWordItemsDataLayer.intermediateBeingLearned.count) { _ in
+        .onChange(of: storedNewWordItemsDataLayer.intermediateBeingLearned.count) { _, _ in
             goalsManager.updateStoredItems(storedNewWordItemsDataLayer)
         }
     }

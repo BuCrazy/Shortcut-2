@@ -13,8 +13,8 @@ struct QuizCardVIew2: View {
 
     var word: String
     var question: String = "What is the translation of this word?"
-    var example: String = "The dexterous surgeon skillfully performed the intricate procedure with precision and   ease."
-    
+    var example: String = "The dexterous surgeon skillfully performed the intricate procedure with precision and ease."
+    var cardheight = LayoutSize.current()
     
     
     var body: some View {
@@ -22,20 +22,19 @@ struct QuizCardVIew2: View {
             
             //NOTE: Quiz Card itself
             ZStack(alignment: .bottom) {
-                Rectangle()
-                    .fill(Color("Surface-component-primary"))
-                    .frame(minHeight: 173, maxHeight: 355)
-                    .blendMode(.luminosity)
+                Color("Surface-component-primary").ignoresSafeArea()
                 
-                VStack(alignment: .leading, spacing: 48) {
+                VStack(alignment: .leading, spacing: 16) {
+                    
+                    //QuizQuestion + Word
                     VStack(alignment: .leading, spacing: 4) {
+                        
                         //NOTE: Quiz Question
                         Text(question)
                             .font(.system(size: 16))
                             .fontWeight(.medium)
                             .foregroundColor(Color("secondaryFontColor"))
                             .padding(.top, 20)
-                          //  .padding(.bottom, 0.15)
                             .padding(.horizontal, 16)
                             .fixedSize(horizontal: false, vertical: true)
                         
@@ -51,11 +50,7 @@ struct QuizCardVIew2: View {
                     
                     //NOTE: Interactive bottom half of card
                     ZStack(alignment: .center) {
-                        Rectangle()
-                            .fill(Color("sheetColor"))
-                            .frame(minHeight: 173, maxHeight: 210)
-                            .padding(.horizontal, 2)
-                            .padding(.bottom, 1)
+                        Color("sheetColor").ignoresSafeArea()
                             .overlay {
                                 DotWave(showExample: $showExample)
                             }
@@ -68,11 +63,12 @@ struct QuizCardVIew2: View {
                             .opacity(showExample ? 1 : 0)
                             .animation(showExample ? .easeInOut(duration: 0.3).delay(0.5)/*, value: showExample*/ : .easeInOut(duration: 0.25).delay(0.15)/*, value: showExample*/)
                             .padding(.horizontal, 16)
-                        
                     }
+                    .frame(maxHeight: .infinity)
                    
                 }
             }
+            .frame(maxHeight: /*355*/ cardheight.cardHeight)
             .overlay(
                 RoundedRectangle(cornerRadius: 24)
                     .stroke(Color("mainCardBorderColor"), lineWidth: 2)
@@ -81,28 +77,6 @@ struct QuizCardVIew2: View {
             .onChange(of: showExample) { _, newValue in
                 animationTrigger = newValue
             }
-
-            //Header (Question + Word)
-//            VStack(alignment: .leading, spacing: 4) {
-//                //NOTE: Quiz Question
-//                Text(question)
-//                    .font(.system(size: 16))
-//                    .fontWeight(.medium)
-//                    .foregroundColor(Color("secondaryFontColor"))
-//                    .padding(.top, 20)
-//                  //  .padding(.bottom, 0.15)
-//                    .padding(.horizontal, 16)
-//                    .fixedSize(horizontal: false, vertical: true)
-//                
-//                //NOTE: Quiz Word
-//                Text(word)
-//                    .font(.system(size: 34))
-//                    .fontWeight(.semibold)
-//                    .foregroundColor(.white)
-//                    .padding(.horizontal, 16)
-//                    
-//                //Spacer().frame(height: 32)
-//            }
         }
         .padding(.horizontal, 16)
     }

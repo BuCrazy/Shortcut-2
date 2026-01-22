@@ -24,7 +24,7 @@ struct TestBarChart: View {
                 .padding()
               //  .navigationTitle("Swift Charts")
                 // MARK. LEARN THIS
-                .onChange(of: currentTab) { newValue in
+                .onChange(of: currentTab) {_, newValue in
                     sampleAnalytics = sample_Aalytics
                     if newValue != "7Days" {
                         for (index,_) in sampleAnalytics.enumerated(){

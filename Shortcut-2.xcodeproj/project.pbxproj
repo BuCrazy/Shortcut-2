@@ -59,6 +59,8 @@
 		BB0149252B201FEA009C1CF9 /* DictionaryTotalWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149242B201FEA009C1CF9 /* DictionaryTotalWords.swift */; };
 		BB0149272B21004F009C1CF9 /* TotalWordsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149262B21004F009C1CF9 /* TotalWordsChart.swift */; };
 		BB0149292B210590009C1CF9 /* DictionaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0149282B210590009C1CF9 /* DictionaryHeaderView.swift */; };
+		BB02C5E52EB043A300F0DF72 /* LayoutSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB02C5E42EB043A300F0DF72 /* LayoutSize.swift */; };
+		BB07EEFD2E7A1ADC0085EB10 /* QuizView_Alt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07EEFC2E7A1ADC0085EB10 /* QuizView_Alt.swift */; };
 		BB0FD8FB2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FD8FA2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift */; };
 		BB0FD8FD2B44CED100D62B25 /* LearnedAtThisLvlModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FD8FC2B44CED100D62B25 /* LearnedAtThisLvlModal.swift */; };
 		BB1394C22DBEAFF100F3D126 /* MockDonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1394C12DBEAFF100F3D126 /* MockDonutChart.swift */; };
@@ -123,6 +125,7 @@
 		BB92E5E72C754B3B00BDC754 /* MiniWordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92E5E62C754B3A00BDC754 /* MiniWordCard.swift */; };
 		BB92E5E92C754B7300BDC754 /* Goal 1 Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92E5E82C754B7300BDC754 /* Goal 1 Animation.swift */; };
 		BBA904F72CA5F0C700985BA3 /* QuizHistoryBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */; };
+		BBB842E42ECA83F500CD15E8 /* QuizIntro_Alt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB842E32ECA83F500CD15E8 /* QuizIntro_Alt.swift */; };
 		BBBC75C52C865FC1005857CF /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C42C865FC1005857CF /* AppState.swift */; };
 		BBBC75C72C86690B005857CF /* Shortvut_2AppDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */; };
 		BBD92FF82B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */; };
@@ -185,6 +188,8 @@
 		BB0149242B201FEA009C1CF9 /* DictionaryTotalWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTotalWords.swift; sourceTree = "<group>"; };
 		BB0149262B21004F009C1CF9 /* TotalWordsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalWordsChart.swift; sourceTree = "<group>"; };
 		BB0149282B210590009C1CF9 /* DictionaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryHeaderView.swift; sourceTree = "<group>"; };
+		BB02C5E42EB043A300F0DF72 /* LayoutSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSize.swift; sourceTree = "<group>"; };
+		BB07EEFC2E7A1ADC0085EB10 /* QuizView_Alt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView_Alt.swift; sourceTree = "<group>"; };
 		BB0FD8FA2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedAtThisLvlBadge.swift; sourceTree = "<group>"; };
 		BB0FD8FC2B44CED100D62B25 /* LearnedAtThisLvlModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedAtThisLvlModal.swift; sourceTree = "<group>"; };
 		BB1394C12DBEAFF100F3D126 /* MockDonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDonutChart.swift; sourceTree = "<group>"; };
@@ -249,6 +254,7 @@
 		BB92E5E62C754B3A00BDC754 /* MiniWordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniWordCard.swift; sourceTree = "<group>"; };
 		BB92E5E82C754B7300BDC754 /* Goal 1 Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal 1 Animation.swift"; sourceTree = "<group>"; };
 		BBA904F62CA5F0C700985BA3 /* QuizHistoryBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHistoryBarChart.swift; sourceTree = "<group>"; };
+		BBB842E32ECA83F500CD15E8 /* QuizIntro_Alt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIntro_Alt.swift; sourceTree = "<group>"; };
 		BBBC75C42C865FC1005857CF /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		BBBC75C62C86690B005857CF /* Shortvut_2AppDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortvut_2AppDraft.swift; sourceTree = "<group>"; };
 		BBD92FF72B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredThisWeekBadge.swift; sourceTree = "<group>"; };
@@ -554,6 +560,7 @@
 				BB3D19F92B8FD3A800027DC4 /* QuizGeneral */,
 				BB3D19FA2B8FD3C100027DC4 /* QuizSummary */,
 				BB2A1B502CBCB204002ACFD9 /* QuizViewModel.swift */,
+				BB02C5E42EB043A300F0DF72 /* LayoutSize.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -564,6 +571,7 @@
 				BB843BF52DBB03D800CBE173 /* Goal Toasts */,
 				BBDA33E12DCC34A200606E9E /* Counter */,
 				BB3D1A102B8FD57900027DC4 /* QuizIntroView.swift */,
+				BBB842E32ECA83F500CD15E8 /* QuizIntro_Alt.swift */,
 				BBDA33E22DCC352600606E9E /* QI_GoalReporter.swift */,
 				BB3D1A0E2B8FD55900027DC4 /* StripedBG.swift */,
 				BB3D1A0C2B8FD52E00027DC4 /* OnboardingMessage.swift */,
@@ -576,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				BB3D19F62B8E965C00027DC4 /* QuizView.swift */,
+				BB07EEFC2E7A1ADC0085EB10 /* QuizView_Alt.swift */,
 				BB3D1A3C2B8FDD2300027DC4 /* QuizCardView.swift */,
 				BBBFA9CA2E076F6F00948710 /* QuizCardView 2 */,
 				BB3D1A3A2B8FDCEE00027DC4 /* AnswerOptionView.swift */,
@@ -892,6 +901,7 @@
 				850251AE2BBDC6BC00F446CA /* LevelProgress.swift in Sources */,
 				8527F1292A98C0F300620A45 /* SwiperView.swift in Sources */,
 				BBD92FF82B476FF9008AB3BC /* DiscoveredThisWeekBadge.swift in Sources */,
+				BBB842E42ECA83F500CD15E8 /* QuizIntro_Alt.swift in Sources */,
 				BBDA33E32DCC352600606E9E /* QI_GoalReporter.swift in Sources */,
 				BB42362F2BE9795F00045630 /* SessionStats.swift in Sources */,
 				85A67FCA2A98D145006A1DF7 /* SwiperScreen.swift in Sources */,
@@ -957,6 +967,7 @@
 				BB0FD8FB2B44CD0600D62B25 /* LearnedAtThisLvlBadge.swift in Sources */,
 				BB4236292BE9724500045630 /* ReinforcementView.swift in Sources */,
 				3765E4892A8A5D9E00FE735C /* ConsistencyCircleView.swift in Sources */,
+				BB07EEFD2E7A1ADC0085EB10 /* QuizView_Alt.swift in Sources */,
 				BB3D1A052B8FD42C00027DC4 /* NativeLikeSymbolView.swift in Sources */,
 				8527F1312A98C1B000620A45 /* BottomEmptyView.swift in Sources */,
 				BBD930032B4776DD008AB3BC /* AlmostLearnedModal.swift in Sources */,
@@ -971,6 +982,7 @@
 				85F4AA6F2B714C2100EFFA7B /* KnowledgeMapView.swift in Sources */,
 				BB3D1A072B8FD43900027DC4 /* BornInEnglandSymbolView.swift in Sources */,
 				BB7A03752ADE33E8009EFDD5 /* AlmostLearned.swift in Sources */,
+				BB02C5E52EB043A300F0DF72 /* LayoutSize.swift in Sources */,
 				BB4255172B46F674008370AB /* DailyConsistencyModal.swift in Sources */,
 				BB3D1A142B8FD69300027DC4 /* CTAButton.swift in Sources */,
 				BB7A037D2AE08724009EFDD5 /* CalendarLegendView.swift in Sources */,

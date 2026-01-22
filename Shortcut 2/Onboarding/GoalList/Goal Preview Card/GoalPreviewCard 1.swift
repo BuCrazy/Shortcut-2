@@ -171,8 +171,8 @@ struct GoalPreviewCard_1: View {
 
 //    goalsManager.currentGoal.progress = 0.0
 //    goalsManager.currentGoal.status = .notStarted
-    goalsManager.goals[0].progress = 1.0
-    goalsManager.goals[0].status = .completed
+    goalsManager.goals[0].progress = 0.8
+    goalsManager.goals[0].status = .inProgress
 
     
     return GoalPreviewCard_1()

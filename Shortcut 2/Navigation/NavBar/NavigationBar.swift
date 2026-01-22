@@ -262,11 +262,11 @@ struct NavigationBar: View {
             print("isGoalCompleted: \(isGoalCompleted)")
             
         }
-        .onChange(of: goalsManager.currentGoal.status) { newStatus in
+        .onChange(of: goalsManager.currentGoal.status) {_, newStatus in
             print("🔔 Goal status changed to: \(newStatus)")
             isGoalCompleted = goalsManager.currentGoalIndex == 1 && newStatus == .completed
         }
-        .onChange(of: goalsManager.currentGoalIndex) { newIndex in
+        .onChange(of: goalsManager.currentGoalIndex) {_, newIndex in
             print("🔄 Goal index changed to: \(newIndex)")
             isGoalCompleted = newIndex == 1 && goalsManager.currentGoal.status == .completed
         }

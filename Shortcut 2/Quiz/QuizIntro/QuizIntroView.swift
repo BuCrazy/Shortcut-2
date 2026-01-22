@@ -7,32 +7,73 @@
 
 import SwiftUI
 
+extension LayoutSize {
+    
+    var topPadding: CGFloat {
+        switch self {
+            case .compact:
+            return 32
+        case .standard:
+            return 48
+        case .spacious:
+            return 72  //48
+        }
+    }
+    
+    var bottomPadding: CGFloat {
+            switch self {
+            case .compact:
+                return 0
+            case .standard:
+                return 96
+            case .spacious:
+                return 96
+            }
+        }
+    }
+
 struct QuizIntroView: View {
     @AppStorage("currentLevelSelected_key") var currentLevelSelected: String = "elementary"
     @AppStorage("weeklySwipeCount") var weeklySwipeCount: Int = 0
     
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var goalsManager: GoalsManager
+    @Binding var currentView: DiscoveryDesctination? //TEST September 4 (delete this var to get back)
     
     @State private var appeared: Bool = false
     @State private var rotationAmount: Double = 360
+   
+    let deviceSize = LayoutSize.current()
     let screenHeight = UIScreen.main.bounds.height
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
-                VStack {
                 
-                    //NOTE: A-Spot
+                //Outer VStack
+                VStack() {
+                    Spacer().frame(height: screenHeight > 848 ? 20 : 0)
+                    //View Title
+                    VStack(alignment: .leading) {
+                        Text("Discovery")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("Textprimary"))
+                            .multilineTextAlignment(.leading)
+                    }
+                    .padding(.horizontal, 16)
+                
+//                    //NOTE: A-Spot
                     VStack {
                         Spacer()
                         ZStack{
                             Spacer()
                             StripedBG()
-                                .frame(maxHeight: 250)
-                            
+                              //  .frame(maxHeight: 250)
+                                .clipped() //TEST September 14 (delete this line to get back)
                             switchLevelSymbol()
+                        
                             Spacer()
                         }
                     }
@@ -42,44 +83,48 @@ struct QuizIntroView: View {
                         OnboardingMessage()
                         Spacer().frame(height: screenHeight > 700 ? 40 : 24)
                     }
+              // Spacer()
                     
                     //NOTE: Counter
                     VStack {
-                       // Spacer()
-                        
+        
                         ZStack(alignment: .center) {
-//                            GoalToast_2(goalsManager: goalsManager)
-//                                .padding(.horizontal, 32)
-//                                .offset(x: 0, y: -16)
-//                            
-//                            GoalToast_1()
-//                                .padding(.horizontal, 16)
-//                            DiscoveryCounter(discoveredThisWeek: $weeklySwipeCount)
                             QI_GoalReporter(goalsManager: goalsManager)
+                           
+                           
                         }
                         .padding(.top, 24)
-                       // Spacer()
+                       .padding(.bottom, 10)
+                   
                     }
-                   // .padding(.bottom, 16)
+                    Spacer().frame(height: deviceSize.topPadding)
+                  
                     
-                    //NOTE: Button
+//                    //NOTE: Button
                     VStack {
-                       // Spacer()
-                        NavigationLink(destination:  QuizView(storedWords: storedNewWordItemsDataLayer)) {
+                        
+                        Button (action: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                currentView = .quizView
+                            }
+                        }) {
                             CTAButton(buttonText: "Let's Go!")
                                 .padding(.horizontal, 16)
                         }
                         .animation(.none, value: UUID())
-                        Spacer()
+
+                     
                     }
-                    .padding(.top, screenHeight > 700 ? 48 : 0)
-                    Spacer()
+                 
+                  //  .padding(.top, deviceSize.topPadding)
+                    .padding(.bottom, deviceSize.bottomPadding)
                 }
-                .navigationTitle(Text ("Discovery")).navigationBarBackButtonHidden(false)
+               
+                //.navigationTitle(Text ("Discovery")).navigationBarBackButtonHidden(false)
               
             }
-        }
     }
+ 
     @ViewBuilder
     func switchLevelSymbol() -> some View {
         switch currentLevelSelected {
@@ -143,7 +188,7 @@ struct QuizIntroView_Previews: PreviewProvider {
         let mockStoredItems = storedNewWordItems()
         let mockGoalsManager = GoalsManager(storedItems: mockStoredItems)
         
-        return QuizIntroView()
+        return QuizIntroView(currentView: .constant(.quizIntro))
             .environmentObject(mockStoredItems)
             .environmentObject(mockGoalsManager)
     }

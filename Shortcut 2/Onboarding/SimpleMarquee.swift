@@ -165,3 +165,12 @@ struct LevelWords {
         "maize", "intractable", "spooky", "spatula", "skid"
     ]
 }
+
+#Preview {
+    SimpleMarquee(words: ["air", "important", "book", "next", "happen",
+                          "move", "student", "call", "thing", "people",
+                          "very", "something", "place", "like", "father",
+                          "watch", "early", "send", "heart", "society"],
+                  speed: 70,
+                  movementDirection: "left" )
+}

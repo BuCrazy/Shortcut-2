@@ -112,6 +112,7 @@ struct ContentView: View {
                 Text ("Loading")
             }
         }
+        
     }
     
     func dismissModal() {

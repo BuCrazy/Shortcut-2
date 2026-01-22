@@ -32,7 +32,7 @@ struct SwiperSection: View {
         
         let displayedWords = Array(discoveryWordsStorageToWorkOn.prefix(2)).reversed()
         
-        return ZStack {
+        return ZStack (alignment: .center) {
             
             Color("BackgroundColor").ignoresSafeArea()
             
@@ -40,15 +40,16 @@ struct SwiperSection: View {
                 .blendMode(.screen)
                 .blur(radius: 28)
             
-            ForEach(Array(displayedWords), id: \.id) { (word: WordItemStruct) in
-                
-                let isFirst = discoveryWordsStorageToWorkOn.first?.id == word.id
-                
-                // Внутри этого цикла создаём переменную, которая всегда подгружает в себя слово из исходной базы, которое соответствует текущему слову в зависимости от уровня по параметру position_now. Из неё потом будем брать перевод слова в зависимости от выбранного языка:
-                
-                var currentCardWordObject: WordItemStruct? {
+            ZStack {
+                ForEach(Array(displayedWords), id: \.id) { (word: WordItemStruct) in
                     
-                    switch currentLevelSelected {
+                    let isFirst = discoveryWordsStorageToWorkOn.first?.id == word.id
+                    
+                    // Внутри этого цикла создаём переменную, которая всегда подгружает в себя слово из исходной базы, которое соответствует текущему слову в зависимости от уровня по параметру position_now. Из неё потом будем брать перевод слова в зависимости от выбранного языка:
+                    
+                    var currentCardWordObject: WordItemStruct? {
+                        
+                        switch currentLevelSelected {
                         case "elementary":
                             return elementaryWordsStorageSource.first(where: { $0.position_now == word.position_now })
                         case "beginner":
@@ -57,14 +58,14 @@ struct SwiperSection: View {
                             return intermediateWordsStorageSource.first(where: { $0.position_now == word.position_now })
                         default:
                             return elementaryWordsStorageSource.first(where: { $0.position_now == word.position_now })
+                        }
+                        
                     }
                     
-                }
-                
-                // И теперь уже из переменной currentCardWordObject вытаскиваем перевод для отображения карточки в зависимости от выбранного языка, делая его доступным сomputed variable "currentCardTranslation":
-                
-                var currentCardTranslation: String {
-                    switch languageCodeForUse {
+                    // И теперь уже из переменной currentCardWordObject вытаскиваем перевод для отображения карточки в зависимости от выбранного языка, делая его доступным сomputed variable "currentCardTranslation":
+                    
+                    var currentCardTranslation: String {
+                        switch languageCodeForUse {
                         case "ukranian": return currentCardWordObject?.ukranian ?? ""
                         case "russian": return currentCardWordObject?.russian ?? ""
                         case "bulgarian": return currentCardWordObject?.bulgarian ?? ""
@@ -94,45 +95,47 @@ struct SwiperSection: View {
                         case "swedish": return currentCardWordObject?.swedish ?? ""
                         case "turkish": return currentCardWordObject?.turkish ?? ""
                         default: return currentCardWordObject?.ukranian ?? ""
-                    }
-                }
-                
-                VerticalCard(
-                    word: word.word,
-                    flippedWord: currentCardTranslation,
-                    phonetics: word.phonetics,
-                    cardColor: isFirst ? .black : Color("secondaryCardColor"),
-                    onRemove: {
-                        withAnimation {
-                            discoveryWordsStorageToWorkOn.removeAll(where: { $0.id == word.id })
-                            switch currentLevelSelected {
-                            case "elementary":
-                                storedNewWordItemsDataLayer.elementaryWordsStorage.removeAll(where: { $0.id == word.id })
-                            case "beginner":
-                                storedNewWordItemsDataLayer.beginnerWordsStorage.removeAll(where: { $0.id == word.id })
-                            case "intermediate":
-                                storedNewWordItemsDataLayer.intermediateWordsStorage.removeAll(where: { $0.id == word.id })
-                            case "advanced":
-                                storedNewWordItemsDataLayer.advancedWordsStorage.removeAll(where: { $0.id == word.id })
-                            case "nativelike":
-                                storedNewWordItemsDataLayer.nativelikeWordsStorage.removeAll(where: { $0.id == word.id })
-                            case "borninengland":
-                                storedNewWordItemsDataLayer.borninenglandWordsStorage.removeAll(where: { $0.id == word.id })
-                            default:
-                                print("Default...")
-                            }
                         }
-                    }, onSwipe: { direction in
-                        handleSwipe(direction: direction, word: word)
                     }
-                )
-                .offset(y: isFirst ? 24 : 0)
-                .shadow(radius: isFirst ? 4 : 0)
-                .scaleEffect(isFirst ? 1 : 0.95)
-                .allowsHitTesting(isFirst)
-                
+                    
+                    VerticalCard(
+                        word: word.word,
+                        flippedWord: currentCardTranslation,
+                        phonetics: word.phonetics,
+                        cardColor: isFirst ? .black : Color("secondaryCardColor"),
+                        onRemove: {
+                            withAnimation {
+                                discoveryWordsStorageToWorkOn.removeAll(where: { $0.id == word.id })
+                                switch currentLevelSelected {
+                                case "elementary":
+                                    storedNewWordItemsDataLayer.elementaryWordsStorage.removeAll(where: { $0.id == word.id })
+                                case "beginner":
+                                    storedNewWordItemsDataLayer.beginnerWordsStorage.removeAll(where: { $0.id == word.id })
+                                case "intermediate":
+                                    storedNewWordItemsDataLayer.intermediateWordsStorage.removeAll(where: { $0.id == word.id })
+                                case "advanced":
+                                    storedNewWordItemsDataLayer.advancedWordsStorage.removeAll(where: { $0.id == word.id })
+                                case "nativelike":
+                                    storedNewWordItemsDataLayer.nativelikeWordsStorage.removeAll(where: { $0.id == word.id })
+                                case "borninengland":
+                                    storedNewWordItemsDataLayer.borninenglandWordsStorage.removeAll(where: { $0.id == word.id })
+                                default:
+                                    print("Default...")
+                                }
+                            }
+                        }, onSwipe: { direction in
+                            handleSwipe(direction: direction, word: word)
+                        }
+                    )
+                    .offset(y: isFirst ? 24 : 0)
+                    .shadow(radius: isFirst ? 4 : 0)
+                    .scaleEffect(isFirst ? 1 : 0.95)
+                    .allowsHitTesting(isFirst)
+                    
+                    
+                }
             }
-            
+            .offset(y: -24)
         }
         .frame(height: 300)
 
@@ -352,8 +355,11 @@ struct SwiperSection: View {
             if wordsDiscoveredDuringTheCurrentDiscoverySession >= wordsPerDiscoverySetting &&
                 wordsBeingLearnedCount >= wordsPerRevisionSetting /*&&
                 weeklySwipeCount >= 100*/ {
-                currentLearningMode = "revision"
-                wordsDiscoveredDuringTheCurrentDiscoverySession = 0
+               // currentLearningMode = "revision"
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                   // wordsDiscoveredDuringTheCurrentDiscoverySession = 0 //TEST September 9 uncommit this line to get back
+                    print("🎯 Counter reset after delay")
+                }
             }
         }
     
@@ -369,49 +375,89 @@ struct SwiperSection: View {
 
 struct SwiperSection_Previews: PreviewProvider {
     
-    @State static var wordItem = [WordItemStruct(
-    
-        id: 1,
-        position_now: 1,
-        pos: "pos",
-        word: "word",
-        phonetics: "phonetics",
-        definition: "definition",
-        collocations: "collocations",
-        sentence: "sentence",
-        video: "video",
-        movie: "movie",
-        movie_quote: "movie_quote",
-        ukranian: "ukranian",
-        russian: "russian",
-        bulgarian: "bulgarian",
-        chinese: "chinese",
-        czech: "czech",
-        danish: "danish",
-        dutch: "dutch",
-        estonian: "estonian",
-        finnish: "finnish",
-        french: "french",
-        german: "german",
-        greek: "greek",
-        hungarian: "hungarian",
-        indonesian: "indonesian",
-        italian: "italian",
-        japanese: "japanese",
-        korean: "korean",
-        latvian: "latvian",
-        lithuanian: "lithuanian",
-        norwegian: "norwegian",
-        polish: "polish",
-        portuguese: "portuguese",
-        romanian: "romanian",
-        slovak: "slovak",
-        slovenian: "slovenian",
-        spanish: "spanish",
-        swedish: "swedish",
-        turkish: "turkish"
-        
-    )]
+    @State static var wordItem = [
+        WordItemStruct(
+            id: 1,
+            position_now: 1,
+            pos: "pos",
+            word: "word",
+            phonetics: "phonetics",
+            definition: "definition",
+            collocations: "collocations",
+            sentence: "sentence",
+            video: "video",
+            movie: "movie",
+            movie_quote: "movie_quote",
+            ukranian: "ukranian",
+            russian: "russian",
+            bulgarian: "bulgarian",
+            chinese: "chinese",
+            czech: "czech",
+            danish: "danish",
+            dutch: "dutch",
+            estonian: "estonian",
+            finnish: "finnish",
+            french: "french",
+            german: "german",
+            greek: "greek",
+            hungarian: "hungarian",
+            indonesian: "indonesian",
+            italian: "italian",
+            japanese: "japanese",
+            korean: "korean",
+            latvian: "latvian",
+            lithuanian: "lithuanian",
+            norwegian: "norwegian",
+            polish: "polish",
+            portuguese: "portuguese",
+            romanian: "romanian",
+            slovak: "slovak",
+            slovenian: "slovenian",
+            spanish: "spanish",
+            swedish: "swedish",
+            turkish: "turkish"
+        ),
+        WordItemStruct(
+            id: 2,
+            position_now: 2,
+            pos: "pos",
+            word: "apple",
+            phonetics: "phonetics",
+            definition: "definition",
+            collocations: "collocations",
+            sentence: "sentence",
+            video: "video",
+            movie: "movie",
+            movie_quote: "movie_quote",
+            ukranian: "ukranian",
+            russian: "russian",
+            bulgarian: "bulgarian",
+            chinese: "chinese",
+            czech: "czech",
+            danish: "danish",
+            dutch: "dutch",
+            estonian: "estonian",
+            finnish: "finnish",
+            french: "french",
+            german: "german",
+            greek: "greek",
+            hungarian: "hungarian",
+            indonesian: "indonesian",
+            italian: "italian",
+            japanese: "japanese",
+            korean: "korean",
+            latvian: "latvian",
+            lithuanian: "lithuanian",
+            norwegian: "norwegian",
+            polish: "polish",
+            portuguese: "portuguese",
+            romanian: "romanian",
+            slovak: "slovak",
+            slovenian: "slovenian",
+            spanish: "spanish",
+            swedish: "swedish",
+            turkish: "turkish"
+        )]
 
     @State static var topWords = [NewWordItem]()
     @State static var bottomWords = [NewWordItem]()

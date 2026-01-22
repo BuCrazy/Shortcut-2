@@ -166,8 +166,8 @@ class Goal: ObservableObject {
         self.id = id
         self.title = title
         self.description = description
-        self.progress = 0.0
-        self.status = .notStarted
+        self.progress = progress //0.0 TEST AUG 20
+        self.status = status // .notStarted TEST AUG 20
         self.progressCalculator = progressCalculator
         self.configuration = configuration
        // self.isCompletable = isCompletable
@@ -293,7 +293,8 @@ class GoalsManager: ObservableObject {
                 title: "Discover 30 unknown words",
                 description: "Swipe down the cards with unknown words.",
                 progress: initialProgress,
-                status: initialProgress > 0 ? .inProgress : .notStarted,
+              //  status: initialProgress > 0 ? .inProgress : .notStarted,
+                status: .inProgress, //Always start first goal in the .inProgress status
                 progressCalculator: FirstGoalProgress(),
                 configuration: .cardSwipeConfig(
                     level: savedLevel,
@@ -372,8 +373,20 @@ class GoalsManager: ObservableObject {
                 case 2: status = .completed
                 default: status = .notStarted
                 }
+                // special handling for the first goal Aug 20
                 
-                goals[index].status = status
+                if index == 0 {
+                    if status == .notStarted {
+                        // Never allow the first goal to be .notStarted
+                        goals[index].status = .inProgress
+                        print("🔄 First goal forced to .inProgress (was .notStarted)")
+                    } else {
+                        goals[index].status = status
+                    }
+                } else {
+                    // For all other goals, apply the saved status normally
+                    goals[index].status = status
+                }
                 // If completed, ensure progress is 1.0
                 if status == .completed {
                     goals[index].progress = 1.0

@@ -15,10 +15,11 @@ struct TabBar: View {
     @EnvironmentObject var storedStatesDataLayer: storedStates
     
     @Binding var selectedTab: ContentView.Tab
+    
    // @State private var selectedTab: Tab = .second
   //  @State var activeModal: ActiveModal = .none
     @Binding var activeModal: ActiveModal
-    
+    let deviceSize = LayoutSize.current()
     enum Tab {
         case first, second, third, fourth
     }
@@ -71,7 +72,7 @@ struct TabBar: View {
                             selectedTab = .fourth
                         }
                     }
-                Spacer().frame(height: 34)
+                Spacer().frame(height: deviceSize.tabBarHeight)
          //       }
                 
             }.background(tabBarGradient)
@@ -81,9 +82,25 @@ struct TabBar: View {
     }
 }
 
+extension LayoutSize {
+    var tabBarHeight: CGFloat {
+        switch self {
+        case .compact:
+            return 12
+        case .standard:
+            return 24
+        case .spacious:
+           return 32
+        }
+    }
+}
+
 #Preview {
-    TabBar(selectedTab: .constant(.second), activeModal: .constant(.none))
+    let storedItems = storedNewWordItems()
+    
+   return  TabBar(selectedTab: .constant(.second), activeModal: .constant(.none))
         .environmentObject(ActivityCalendar())
         .environmentObject(storedNewWordItems())
         .environmentObject(storedStates())
+        .environmentObject(GoalsManager(storedItems: storedItems))
 }

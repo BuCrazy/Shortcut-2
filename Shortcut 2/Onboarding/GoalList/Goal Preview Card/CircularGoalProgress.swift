@@ -80,7 +80,7 @@ struct CircularGoalProgress: View {
  
                   print("RoundedProgressBar appeared, progress: \(progress)")
               }
-              .onChange(of: /* goalsManager.currentGoal.progress */ progress) { newValue in
+              .onChange(of: /* goalsManager.currentGoal.progress */ progress) { _,  newValue in
                   print("📈 Progress bar detected change: \(newValue)")
                   displayProgress = newValue
               }

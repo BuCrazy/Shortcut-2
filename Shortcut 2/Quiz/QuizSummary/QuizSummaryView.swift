@@ -11,6 +11,8 @@ struct QuizSummaryView: View {
     @AppStorage("currentLearningMode_key") var currentLearningMode: String = "discovery"
     @EnvironmentObject var storedNewWordItemsDataLayer: storedNewWordItems
     @EnvironmentObject var goalsManager: GoalsManager
+    @Environment(\.dismiss) private var dismiss
+
     
     @State var feedbackColor: Color = Color.clear
     @Binding var correctAnswerNumber: Int
@@ -32,18 +34,29 @@ struct QuizSummaryView: View {
     @Binding var isQuizFinished: Bool
     @State private var navigateToReinforcement = false
     // --- Code for saving Quiz historical data ends ---
+    @Binding var currentView: DiscoveryDesctination?
     
-    init(correctAnswerNumber: Binding<Int>, incorrectAnswerNumber: Binding<Int>, isQuizAlreadyStarted: Binding<Bool>, isQuizFinished: Binding<Bool>) {
+    let deviceSize = LayoutSize.current()
+    
+    init(correctAnswerNumber: Binding<Int>, incorrectAnswerNumber: Binding<Int>, isQuizAlreadyStarted: Binding<Bool>, isQuizFinished: Binding<Bool>, currentView: Binding<DiscoveryDesctination?>) {
         self._correctAnswerNumber = correctAnswerNumber
         self._incorrectAnswerNumber = incorrectAnswerNumber
         self._isQuizAlreadyStarted = isQuizAlreadyStarted
         self._isQuizFinished = isQuizFinished
+        self._currentView = currentView
     }
     
     var body: some View {
-        NavigationStack {
+       // NavigationStack {
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
+                ZStack {
+                    BCircleAnimation(feedbackColor: feedbackColor)
+                        .blendMode(.screen)
+                        .blur(radius: 40)
+                        .offset(x: -51, y: -400)
+                }
+                
                 ScrollView {
                     VStack {
                         
@@ -53,8 +66,20 @@ struct QuizSummaryView: View {
                         
                         
                         VStack(spacing: 24) {
-                           SummaryMessage(goalsManager: goalsManager)
-                                .padding(.vertical, 32)
+                            VStack(alignment: .leading, spacing: 16) {
+                                Text("Summary")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.top, 20)
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color("Textprimary"))
+                                    .multilineTextAlignment(.leading)
+                                
+                               SummaryMessage(goalsManager: goalsManager)
+                                   
+                            }
+                            .padding(.horizontal, 16)
+                            
                            
                             QS_GoalReporter(goalsManager: goalsManager)
                                 .padding(.horizontal, 16)
@@ -68,38 +93,70 @@ struct QuizSummaryView: View {
                             
                             //   Text("Total Average Score: \(quizHistory.wrappedValue.totalAverage, specifier: "%.1f")%")
                             
-                            // CTA Button
-                            NavigationLink(destination:   ReinforcementView(), label: {
-                                CTAButton(buttonText: "To Reinforcement")
-                            })
-                            .padding(.horizontal, 16)
-                            .simultaneousGesture(TapGesture().onEnded {
-                                resetQuizState()
-                                isQuizAlreadyStarted = false
-                                isQuizFinished = false //test Oct 14 2024
-                                currentLearningMode = "reinforcement"
-                            })
-                            
-                            
+                            // CTA Button //TEST September 19 (uncommit this button to get back)
+//                            NavigationLink(destination: ReinforcementView(), label: {
+//                                CTAButton(buttonText: "To Reinforcement")//{}
+//                            })
+//                            .padding(.horizontal, 16)
+//                            .simultaneousGesture(TapGesture().onEnded {
+//                                resetQuizState()
+//                                isQuizAlreadyStarted = false
+//                                isQuizFinished = false //test Oct 14 2024
+//                                currentLearningMode = "reinforcement"
+//                            })
+//Make this spacer conditional based on screen size AND on the parameter of weather we showing second goal status update on not
+                             // TEST September 19 delete button to get back
+                             Button (action: {
+                                 withAnimation(.easeInOut(duration: 0.3)) {
+                                     currentView = .reinforcement
+                                 }
+                                 resetQuizState()
+                                 isQuizAlreadyStarted = false
+                                 isQuizFinished = false //test Oct 14 2024
+                                 currentLearningMode = "reinforcement"
+                                 
+                             }) {
+                                 CTAButton(buttonText: "To Reinforcement")
+                                     .padding(.horizontal, 16)
+                                   //  .padding(.bottom, 24)
+                             }
+                             .animation(.none, value: UUID())
+  
                         }
-                        Spacer()
-                        
+//                        Spacer().frame(height: deviceSize.spacing)
+//                        Button (action: {
+//                            withAnimation(.easeInOut(duration: 0.3)) {
+//                                currentView = .reinforcement
+//                            }
+//                            resetQuizState()
+//                            isQuizAlreadyStarted = false
+//                            isQuizFinished = false //test Oct 14 2024
+//                            currentLearningMode = "reinforcement"
+//                            
+//                        }) {
+//                            CTAButton(buttonText: "To Reinforcement")
+//                                .padding(.horizontal, 16)
+//                              //  .padding(.bottom, 24)
+//                        }
+//                        .animation(.none, value: UUID())
+                    //    Spacer()
+                    
                         
                     }
-                    Spacer().frame(height: 50)
+                    Spacer().frame(height: 80)
                 }
                 
-                ZStack {
-                    BCircleAnimation(feedbackColor: feedbackColor)
-                        .blendMode(.screen)
-                        .blur(radius: 40)
-                        .offset(x: -50, y: -400)
-                }
+//                ZStack {
+//                    BCircleAnimation(feedbackColor: feedbackColor)
+//                        .blendMode(.screen)
+//                        .blur(radius: 40)
+//                        .offset(x: -50, y: -400)
+//                }
 
             }
             .navigationTitle(Text ("Summary"))
             .toolbarBackground(.clear, for: .navigationBar)
-        }
+  //      } //NavigationStack ends
         .onAppear {
             goalsManager.updateStoredItems(storedNewWordItemsDataLayer)
             updateQuizHistoryWithScore(score: sessionScore, date: Date())
@@ -146,11 +203,24 @@ struct QuizSummaryView: View {
     }
 }
 
+extension LayoutSize {
+    var spacing: CGFloat {
+        switch self {
+        case .compact:
+            return 16
+        case .standard:
+            return 24
+        case .spacious:
+            return 24
+        }
+    }
+}
+
 struct QuizSummary_Previews: PreviewProvider {
     @State static var correctAnswerNumber: Int = 28
     @State static var incorrectAnswerNumber: Int = 2
     static var previews: some View {
-        QuizSummaryView(correctAnswerNumber: .constant(correctAnswerNumber), incorrectAnswerNumber: .constant(incorrectAnswerNumber), isQuizAlreadyStarted: .constant(false), isQuizFinished: .constant(false))
+        QuizSummaryView(correctAnswerNumber: .constant(correctAnswerNumber), incorrectAnswerNumber: .constant(incorrectAnswerNumber), isQuizAlreadyStarted: .constant(false), isQuizFinished: .constant(false), currentView: .constant(nil))
             .environmentObject(storedNewWordItems.shared)
             .environmentObject(GoalsManager.shared)
             
